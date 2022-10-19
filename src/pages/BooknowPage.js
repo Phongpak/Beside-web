@@ -1,6 +1,4 @@
 import booknow from "../images/booknow.jpeg";
-import { Carousel } from "flowbite-react";
-import Slider from "react-slick";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import ggmap from "../images/ggmap.jpeg";
