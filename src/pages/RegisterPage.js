@@ -14,7 +14,7 @@ function RegisterPage() {
                     type="firstName"
                     name="firstName"
                     id="firstName"
-                    className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white text-white bg-[#9AC0B5]"
+                    className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5]"
                     placeholder="First name"
                     required=""
                   />
@@ -24,7 +24,7 @@ function RegisterPage() {
                     type="lastName"
                     name="lastName"
                     id="lastName"
-                    className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white text-white bg-[#9AC0B5]"
+                    className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5]"
                     placeholder="Last name"
                     required=""
                   />
@@ -35,7 +35,7 @@ function RegisterPage() {
                   type="email"
                   name="email"
                   id="email"
-                  className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white text-white bg-[#9AC0B5]"
+                  className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5]"
                   placeholder="E-mail"
                   required=""
                 />
@@ -45,7 +45,7 @@ function RegisterPage() {
                   type="phoneNumber"
                   name="phoneNumber"
                   id="phoneNumber"
-                  className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white text-white bg-[#9AC0B5]"
+                  className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5]"
                   placeholder="Phone number"
                   required=""
                 />
@@ -53,7 +53,7 @@ function RegisterPage() {
               <div className="flex space-x-10">
                 <div>
                   <input
-                    className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white text-white bg-[#9AC0B5] "
+                    className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] "
                     type="date"
                     id="birthDate"
                     name="birthDate"
@@ -65,7 +65,7 @@ function RegisterPage() {
                     type="gender"
                     name="gender"
                     id="gender"
-                    className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white text-white bg-[#9AC0B5] text-date"
+                    className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] text-date"
                     placeholder="Gender"
                     required=""
                   />
@@ -76,7 +76,7 @@ function RegisterPage() {
                   type="password"
                   name="password"
                   id="password"
-                  className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white text-white bg-[#9AC0B5]"
+                  className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5]"
                   placeholder="Password"
                   required=""
                 />
@@ -86,7 +86,7 @@ function RegisterPage() {
                   type="confirmPassword"
                   name="confirmPassword"
                   id="confirmPassword"
-                  className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white text-white bg-[#9AC0B5]"
+                  className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white  bg-[#9AC0B5]"
                   placeholder="Confirm Password"
                   required=""
                 />

@@ -48,8 +48,8 @@ function HomePage() {
         It doesn't matter where you're going, it's who you have beside you.
       </h1>
 
-      <div className="flex flex space-x-[100px] pt-[80px] px-[180px]">
-        <div className="border-l pl-10 border-l-[7px] border-[#9AC0B5] ">
+      <div className="flex  space-x-[100px] pt-[80px] px-[180px]">
+        <div className="pl-10 border-l-[7px] border-[#9AC0B5] ">
           <h1 className="text-[60px] text-[#9AC0B5] pt-[50px] pl-[50px]">
             About us
           </h1>
