@@ -1,10 +1,10 @@
 import logo from "./logo.svg";
 import "./App.css";
+// import Loading from "./context/Loading";
+import Routers from "./routes/Routers";
 
 function App() {
-  return (
-    <button className="bg-[#809590] text-white font-bold">BOOK NOW</button>
-  );
+  return <Routers />;
 }
 
 export default App;
