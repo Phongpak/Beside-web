@@ -1,0 +1,21 @@
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import HomePage from '../pages/HomePage';
+import Layout from '../layouts/Layout';
+import VerifyPage from '../pages/VerifyPage';
+import LoginPage from '../pages/LoginPage';
+import ProfilePage from '../pages/ProfilePage';
+function Routers() {
+	return (
+		<Routes>
+			<Route path='/' element={<Layout />}>
+				<Route path='/' element={<HomePage />} />
+				<Route path='/verify' element={<VerifyPage />} />
+				<Route path='/login' element={<LoginPage />} />
+				<Route path='/profile' element={<ProfilePage />} />
+			</Route>
+		</Routes>
+	);
+}
+
+export default Routers;
