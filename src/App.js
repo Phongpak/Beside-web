@@ -1,8 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+// import Loading from "./context/Loading";
 import Routers from './routes/Routers';
-import LoginPage from './pages/LoginPage';
-import ProfilePage from './pages/ProfilePage';
 
 function App() {
 	return <Routers />;
