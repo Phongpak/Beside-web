@@ -1,9 +1,15 @@
-import logo from "./logo.svg";
 import "./App.css";
+import BooknowPage from "./pages/BooknowPage";
+import HomePage from "./pages/HomePage";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   return (
-    <button className="bg-[#809590] text-white font-bold">BOOK NOW</button>
+    <div className=" max-w-[1280px] mx-auto border">
+      <RegisterPage />
+      <HomePage />
+      <BooknowPage />
+    </div>
   );
 }
 
