@@ -12,7 +12,6 @@ function Routers() {
         <Route path="/" element={<HomePage />} />
         <Route path="/verify" element={<VerifyPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/homepage" element={<HomePage />} />
         <Route path="/booknow" element={<BooknowPage />} />
       </Route>
     </Routes>
