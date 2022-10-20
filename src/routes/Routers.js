@@ -7,6 +7,11 @@ import LoginPage from '../pages/LoginPage';
 import ProfilePage from '../pages/ProfilePage';
 import RegisterPage from '../pages/RegisterPage';
 import BooknowPage from '../pages/BooknowPage';
+import PendingConfirmation from '../pages/PendingConfirmation';
+import CompletedPage from '../pages/CompletedPage';
+import UpcomingPage from '../pages/UpcomingPage';
+import WalletHistoryPage from '../pages/WalletHistoryPage';
+
 function Routers() {
   return (
     <Routes>
@@ -18,6 +23,10 @@ function Routers() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/booknow" element={<BooknowPage />} />
+        <Route path="/pending" element={<PendingConfirmation />} />
+        <Route path="/completed" element={<CompletedPage />} />
+        <Route path="upcoming" element={<UpcomingPage />} />
+        <Route path="wallethistory" element={<WalletHistoryPage />} />
       </Route>
     </Routes>
   );

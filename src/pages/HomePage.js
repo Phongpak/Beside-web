@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import bg from "../images/bg1.jpeg";
 import clock from "../images/clock.jpeg";
 import logo1 from "../images/logo1.png";
@@ -8,13 +9,13 @@ function HomePage() {
       <div className="px-40 py-2 flex w-full justify-between items-center absolute z-10  ">
         <img className="scale-75" src={logo1} alt="logo" />
         <div className=" w-1/3 gap-10 flex flex-row-reverse">
-          <a className="text-[#809490] font-bold text-2xl hover:text-[#98ABA7] ">
+          <a className="text-[#809490] font-bold lg:text-2xl text-xl hover:text-[#98ABA7] ">
             Home
           </a>
-          <a className="text-[#809490] font-bold text-2xl hover:text-[#98ABA7] ">
+          <a className="text-[#809490] font-bold lg:text-2xl text-xl hover:text-[#98ABA7] ">
             About us
           </a>
-          <a className="text-[#809490] font-bold text-2xl hover:text-[#98ABA7] ">
+          <a className="text-[#809490] font-bold lg:text-2xl text-xl hover:text-[#98ABA7] ">
             How to booking
           </a>
         </div>
@@ -36,9 +37,12 @@ function HomePage() {
           rates.
         </p>
 
-        <button className="bg-[#9AC0B5] absolute text-[30px] rounded-[20px] text-white top-[650px] left-1/2 -translate-x-1/2 -translate-y-1/2 p-[20px] ">
+        <Link
+          to="/booknow"
+          className="bg-[#9AC0B5] absolute text-[30px] rounded-[20px] text-white top-[650px] left-1/2 -translate-x-1/2 -translate-y-1/2 p-[20px] "
+        >
           Book now
-        </button>
+        </Link>
 
         <p className="scale-800 absolute top-[770px] left-[1220px] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[100px] text-[30px] text-white">
           Scroll

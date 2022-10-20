@@ -137,7 +137,6 @@ function RegisterPage() {
                       input.birthDate ? '' : 'border-red-500 border-2'
                     }`}
                     type="date"
-                    id="birthDate"
                     name="birthDate"
                     placeholder="Birth date"
                     onChange={handleChangeInput}
