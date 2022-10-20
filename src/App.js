@@ -1,10 +1,10 @@
-import logo from "./logo.svg";
-import "./App.css";
+import logo from './logo.svg';
+import './App.css';
 // import Loading from "./context/Loading";
-import Routers from "./routes/Routers";
+import Routers from './routes/Routers';
 
 function App() {
-  return <Routers />;
+	return <Routers />;
 }
 
 export default App;
