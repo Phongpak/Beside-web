@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import DropdownNav from "../../components/dropdownNav";
-import logo1 from "../../image/logo1.png";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import DropdownNav from '../../components/dropdownNav';
+import logo1 from '../../image/logo1.png';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Header() {
@@ -29,7 +29,7 @@ function Header() {
         <DropdownNav />
       </div>
       <div className="scale-125 lg:hidden flex border p-2 rounded hover:bg-white ">
-        <i class="fa-solid fa-bars"></i>
+        <i className="fa-solid fa-bars"></i>
       </div>
     </div>
   );

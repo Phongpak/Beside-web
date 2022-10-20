@@ -1,4 +1,55 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+
 function RegisterPage() {
+  const { register } = useAuth();
+  const [input, setInput] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    mobile: '',
+    birthDate: '',
+    gender: 'NOT_SPECIFIC',
+    password: '',
+    nationality: '',
+  });
+  const [isPasswordMatched, setIsPasswordMatched] = useState(false);
+  const [passwordInput, setPasswordInput] = useState({
+    password: '',
+    confirmPassword: '',
+  });
+  const handleChangeInput = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+  const handleSubmitForm = async (e) => {
+    e.preventDefault();
+    try {
+      await register(input);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const validatePassword = () => {
+    if (
+      passwordInput.password === passwordInput.confirmPassword &&
+      passwordInput.password !== '' &&
+      passwordInput.confirmPassword !== ''
+    ) {
+      setIsPasswordMatched(true);
+      setInput({ ...input, password: passwordInput.password });
+    } else {
+      setIsPasswordMatched(false);
+      setInput({ ...input, password: '' });
+    }
+  };
+  const handlePasswordInput = (e) => {
+    setPasswordInput({ ...passwordInput, [e.target.name]: e.target.value });
+  };
+  useEffect(() => {
+    validatePassword();
+  }, [passwordInput]);
+
   return (
     <>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
@@ -7,16 +58,23 @@ function RegisterPage() {
             <h1 className="text-[50px] font-bold text-[#224957]  text-center">
               Sign up
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form
+              className="space-y-4 md:space-y-6"
+              action="#"
+              onSubmit={handleSubmitForm}
+            >
               <div className="flex space-x-6">
                 <div>
                   <input
                     type="firstName"
                     name="firstName"
                     id="firstName"
-                    className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5]"
+                    className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] ${
+                      input.firstName ? '' : 'border-red-500 border-2'
+                    }`}
                     placeholder="First name"
                     required=""
+                    onChange={handleChangeInput}
                   />
                 </div>
                 <div>
@@ -24,9 +82,12 @@ function RegisterPage() {
                     type="lastName"
                     name="lastName"
                     id="lastName"
-                    className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5]"
+                    className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] ${
+                      input.lastName ? '' : 'border-red-500 border-2'
+                    }`}
                     placeholder="Last name"
                     required=""
+                    onChange={handleChangeInput}
                   />
                 </div>
               </div>
@@ -35,40 +96,70 @@ function RegisterPage() {
                   type="email"
                   name="email"
                   id="email"
-                  className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5]"
+                  className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] ${
+                    input.email ? '' : 'border-red-500 border-2'
+                  }`}
                   placeholder="E-mail"
                   required=""
+                  onChange={handleChangeInput}
                 />
               </div>
               <div>
                 <input
-                  type="phoneNumber"
-                  name="phoneNumber"
-                  id="phoneNumber"
-                  className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5]"
+                  type="mobile"
+                  name="mobile"
+                  id="mobile"
+                  className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] ${
+                    input.mobile ? '' : 'border-red-500 border-2'
+                  }`}
                   placeholder="Phone number"
+                  required="required"
+                  onChange={handleChangeInput}
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="nationality"
+                  id="nationality"
+                  className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] ${
+                    input.nationality ? '' : 'border-red-500 border-2'
+                  }`}
+                  placeholder="Nationality"
                   required=""
+                  onChange={handleChangeInput}
                 />
               </div>
               <div className="flex space-x-10">
                 <div>
                   <input
-                    className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] "
+                    className={` text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] ${
+                      input.birthDate ? '' : 'border-red-500 border-2'
+                    }`}
                     type="date"
                     id="birthDate"
                     name="birthDate"
                     placeholder="Birth date"
+                    onChange={handleChangeInput}
                   />
                 </div>
                 <div>
-                  <input
+                  <select
                     type="gender"
                     name="gender"
                     id="gender"
-                    className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] text-date"
+                    defaultValue="NOT_SPECIFIC"
+                    className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] text-date ${
+                      input.gender ? '' : 'border-red-500 border-2'
+                    }`}
                     placeholder="Gender"
                     required=""
-                  />
+                    onChange={handleChangeInput}
+                  >
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                    <option value="NOT_SPECIFIC">Not specific</option>
+                  </select>
                 </div>
               </div>
               <div>
@@ -76,19 +167,29 @@ function RegisterPage() {
                   type="password"
                   name="password"
                   id="password"
-                  className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5]"
+                  className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white  bg-[#9AC0B5] ${
+                    passwordInput.password && isPasswordMatched
+                      ? ''
+                      : 'border-red-500 border-2'
+                  }`}
                   placeholder="Password"
                   required=""
+                  onChange={handlePasswordInput}
                 />
               </div>
               <div>
                 <input
-                  type="confirmPassword"
+                  type="password"
                   name="confirmPassword"
                   id="confirmPassword"
-                  className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white  bg-[#9AC0B5]"
+                  className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white  bg-[#9AC0B5] ${
+                    passwordInput.confirmPassword && isPasswordMatched
+                      ? ''
+                      : 'border-red-500 border-2'
+                  }`}
                   placeholder="Confirm Password"
                   required=""
+                  onChange={handlePasswordInput}
                 />
               </div>
 
@@ -107,27 +208,38 @@ function RegisterPage() {
                     for="terms"
                     className="font-light text-gray-500 dark:text-gray-300"
                   >
-                    I accept the{" "}
-                    <a
+                    I accept the
+                    <Link
                       className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                       href="#"
                     >
                       Terms and Conditions
-                    </a>
+                    </Link>
                   </label>
                 </div>
               </div>
               <button
                 type="submit"
-                className="w-full text-[#224957] bg-[#F5F5F5] hover:bg-[3bg-[#9AC0B5] rounded-lg text-[20px] px-5 py-2.5 text-center shadow-lg"
+                className={`w-full text-[#224957] ${
+                  isPasswordMatched ||
+                  (passwordInput.password !== '' &&
+                    passwordInput.confirmPassword !== '')
+                    ? ' bg-[#F5F5F5] '
+                    : 'bg-gray-300 '
+                } hover:bg-[3bg-[#9AC0B5] rounded-lg text-[20px] px-5 py-2.5 text-center shadow-lg`}
+                disabled={
+                  !isPasswordMatched ||
+                  passwordInput.password === '' ||
+                  passwordInput.confirmPassword === ''
+                }
               >
                 Submit
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Already have an account?{" "}
-                <a href="#" className="font-medium text-primary-600">
+                Already have an account?{' '}
+                <Link href="#" className="font-medium text-primary-600">
                   Login here
-                </a>
+                </Link>
               </p>
             </form>
           </div>
