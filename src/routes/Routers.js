@@ -8,6 +8,12 @@ import ProfilePage from "../pages/ProfilePage";
 import RegisterPage from "../pages/RegisterPage";
 import BooknowPage from "../pages/BooknowPage";
 import ExplorePage from "../pages/ExplorePage";
+import User from "../pages/admin/User";
+import UserDetails from "../pages/admin/UserDetails";
+import OrderItem from "../pages/admin/OrderItem";
+import ProviderUser from "../pages/admin/ProviderUser";
+import Transaction from "../pages/admin/Transaction";
+
 function Routers() {
   return (
     <Routes>
@@ -19,6 +25,11 @@ function Routers() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/booknow" element={<BooknowPage />} />
         <Route path="/explore" element={<ExplorePage />} />
+        <Route path="/adminUser" element={<User />} />
+        <Route path="/adminProviderUser" element={<ProviderUser />} />
+        <Route path="/adminTransaction" element={<Transaction />} />
+        <Route path="/adminUserDetails" element={<UserDetails />} />
+        <Route path="/adminOrderItem" element={<OrderItem />} />
       </Route>
     </Routes>
   );

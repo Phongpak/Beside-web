@@ -29,7 +29,7 @@ function Header() {
         <DropdownNav />
       </div>
       <div className="scale-125 lg:hidden flex border p-2 rounded hover:bg-white ">
-        <i class="fa-solid fa-bars"></i>
+        <i className="fa-solid fa-bars"></i>
       </div>
     </div>
   );

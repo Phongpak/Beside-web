@@ -19,9 +19,9 @@ function HomePage() {
           </a>
         </div>
       </div>
-      <div class="relative">
+      <div className="relative">
         <img src={bg} />
-        <h1 class="absolute text-[60px] text-black top-[200px] left-[380px] -translate-x-1/2 -translate-y-1/2">
+        <h1 className="absolute text-[60px] text-black top-[200px] left-[380px] -translate-x-1/2 -translate-y-1/2">
           WELCOME TO
         </h1>
 
