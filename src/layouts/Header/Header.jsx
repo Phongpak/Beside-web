@@ -13,7 +13,10 @@ function Header() {
         alt="logo"
       />
       <div className=" w-3/5 gap-10 lg:flex items-center hidden justify-end">
-        <Link className="text-[#D9D9D9] font-bold lg:text-xl  hover:underline hover:underline-offset-2 text-sm  hover:text-white ">
+        <Link
+          to="/"
+          className="text-[#D9D9D9] font-bold lg:text-xl  hover:underline hover:underline-offset-2 text-sm  hover:text-white "
+        >
           Home
         </Link>
         <Link className="text-[#D9D9D9] font-bold lg:text-xl hover:underline hover:underline-offset-2 text-sm hover:text-white ">
@@ -22,9 +25,12 @@ function Header() {
         <Link className="text-[#D9D9D9] font-bold lg:text-xl hover:underline hover:underline-offset-2 text-sm hover:text-white ">
           How to booking
         </Link>
-        {/* <Link className="text-[#D9D9D9] hover:text-[#506369] font-bold border lg:text-xl rounded-md   text-sm hover:bg-white p-2 ">
+        <Link
+          to="/login"
+          className="text-[#D9D9D9] hover:text-[#506369] font-bold border lg:text-xl rounded-md   text-sm hover:bg-white p-2 "
+        >
           Sign in
-        </Link> */}
+        </Link>
 
         <DropdownNav />
       </div>

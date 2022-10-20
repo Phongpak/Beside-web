@@ -55,9 +55,10 @@ function RegisterPage() {
                   <input
                     className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] "
                     type="date"
-                    id="birthDate"
                     name="birthDate"
-                    placeholder="Birth date"
+                    data-placeholder="Birth date"
+                    required
+                    aria-required="true"
                   />
                 </div>
                 <div>
