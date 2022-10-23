@@ -5,15 +5,13 @@ import Layout from "../layouts/Layout";
 import VerifyPage from "../pages/VerifyPage";
 import LoginPage from "../pages/LoginPage";
 import ProfilePage from "../pages/ProfilePage";
-import LoginPage from "../pages/LoginPage";
-import ProfilePage from "../pages/ProfilePage";
+
 import RegisterPage from "../pages/RegisterPage";
 import BooknowPage from "../pages/BooknowPage";
 import PendingConfirmation from "../pages/PendingConfirmation";
 import CompletedPage from "../pages/CompletedPage";
 import UpcomingPage from "../pages/UpcomingPage";
 import WalletHistoryPage from "../pages/WalletHistoryPage";
-
 import ExplorePage from "../pages/ExplorePage";
 import User from "../pages/admin/User";
 import UserDetails from "../pages/admin/UserDetails";

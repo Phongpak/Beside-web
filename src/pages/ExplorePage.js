@@ -39,7 +39,7 @@ function ExplorePage() {
         </div>
 
         <div className="flex flex-col gap-10">
-          <div className="flex flex-row justify-between items-center border-4 p-10 border-[#9AC0B5] rounded-[15px] ">
+          <div className="flex flex-row justify-evenly items-center border-4 p-10 border-[#9AC0B5] rounded-[15px] gap-1">
             <div className="flex justify-center items-center border w-[400px] h-[300px] overflow-hidden ">
               <img className="h-full" src={suzy} />
             </div>
