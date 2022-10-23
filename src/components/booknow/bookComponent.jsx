@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import ggmap from "../../images/ggmap.jpeg";
 
@@ -52,9 +53,12 @@ function BookComponent() {
           />
         </div>
 
-        <button className="bg-[#9AC0B5] text-[20px] rounded-xl text-white  px-20 py-2  ">
+        <Link
+          to="/explore"
+          className="bg-[#9AC0B5] text-[20px] rounded-xl text-white  px-20 py-2 text-center "
+        >
           SEARCH
-        </button>
+        </Link>
       </div>
     </div>
   );

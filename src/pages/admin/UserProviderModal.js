@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-function UserModal({ isOpen, closeModal }) {
+function UserProviderModal({ isOpen, closeModal }) {
   return (
     <>
       {isOpen ? (
@@ -20,29 +20,29 @@ function UserModal({ isOpen, closeModal }) {
                     <FontAwesomeIcon icon={faXmark} onClick={closeModal} />
                   </button>
                   <div className="text-[50px]  text-[#224957]  text-center">
-                    Identity Verification
+                    Provider Verification
                   </div>
                   <div className="w-full h-96 flex justify-center items-center  bg-slate-300  ">
                     <img
                       className="w-2/3"
-                      src="https://support.huaweicloud.com/intl/en-us/api-ocr/en-us_image_0288050121.png"
+                      src="http://www.thaitechno.net/uploadedimages/dbd/page/images/Page40891_20120915110011_199604320_fullsize.jpg"
                     />
                   </div>
                   <div className="flex flex-row gap-5  text-[#224957] mx-auto ">
                     <div className="flex flex-col justify-between  font-medium">
                       <div>First name:</div>
                       <div>Last name:</div>
-                      <div>Birth date:</div>
+                      <div>Bank:</div>
+                      <div>Account No.:</div>
                       <div>Date:</div>
-                      <div>Time:</div>
                     </div>
                     <div className="flex flex-col justify-between ">
                       <div>wowwww</div>
                       <div>@gmail.com</div>
 
-                      <div>Monday 10 September 1989</div>
-                      <div>Monday 10 September 2022</div>
-                      <div>10:34 am. </div>
+                      <div>SCB</div>
+                      <div>572-259234-1</div>
+                      <div>10/10/22 </div>
                     </div>
                   </div>
                   <div className="flex flex-row justify-center gap-[20px] my-10">
@@ -64,4 +64,4 @@ function UserModal({ isOpen, closeModal }) {
   );
 }
 
-export default UserModal;
+export default UserProviderModal;
