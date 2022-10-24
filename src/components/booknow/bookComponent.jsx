@@ -1,19 +1,16 @@
 import React from "react";
-
+import PlacesAutocomplete from "../PlacesAutoComplete";
 import ggmap from "../../images/ggmap.jpeg";
+import GoogleMapContainer from "../GoogleMapContainer";
 
 function BookComponent() {
   return (
-    <div className="flex flex-col items-center justify-center  pt-8 mx-auto absolute top-[20%] w-full ">
-      <div className=" bg-[#F5F5F5] rounded-2xl shadow flex gap-4 flex-col h-[75vh] w-2/3 p-10 ">
-        <input
-          type=""
-          name="destination"
-          className="text-[#98ABA7] text-sm rounded-lg form-control w-full p-4 placeholder-[#98ABA7] bg-white"
-          placeholder="Enter a destination"
-        />
-
-        <img src={ggmap} className="h-1/3 w-full" />
+    <div className="flex flex-col items-center justify-center  pt-8 mx-auto absolute top-[10%] w-full ">
+      <div className=" bg-[#F5F5F5] rounded-2xl shadow flex gap-4 flex-col h-[80vh] w-2/3 px-10 py-6 justify-center">
+        <div className="h-full w-full">
+          <GoogleMapContainer />
+          {/* <PlacesAutocomplete /> */}
+        </div>
         <div className="flex gap-[10px]">
           <div className="flex space-x-6">
             <input
@@ -43,11 +40,11 @@ function BookComponent() {
         </div>
 
         <div className="flex space-x-6">
-          <input
+          <textarea
             type="text"
             name="description"
             id="description"
-            className="text-[#98ABA7] text-sm rounded-lg h-[25vh] w-full placeholder-[#98ABA7] bg-white"
+            className="text-[#98ABA7] text-sm rounded-lg h-[20vh] w-full placeholder-[#98ABA7] bg-white"
             placeholder="Description"
           />
         </div>
