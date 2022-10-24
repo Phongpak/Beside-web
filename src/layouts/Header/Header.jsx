@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import DropdownNav from '../../components/dropdownNav';
-import logo1 from '../../image/logo1.png';
+import React from "react";
+import { Link } from "react-router-dom";
+import DropdownNav from "../../components/dropdownNav";
+import logo1 from "../../image/logo1.png";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Header() {
@@ -25,12 +25,12 @@ function Header() {
         <Link className="text-[#D9D9D9] font-bold lg:text-xl hover:underline hover:underline-offset-2 text-sm hover:text-white ">
           How to booking
         </Link>
-        <Link
+        {/* <Link
           to="/login"
           className="text-[#D9D9D9] hover:text-[#506369] font-bold border lg:text-xl rounded-md   text-sm hover:bg-white p-2 "
         >
           Sign in
-        </Link>
+        </Link> */}
 
         <DropdownNav />
       </div>
