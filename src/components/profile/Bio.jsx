@@ -3,7 +3,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import ModalWallet from "../modals/ModalWallet";
 import { useState } from "react";
 import ModalAvailable from "../modals/ModalAvailable";
-import { useReducer } from "react";
+// import { useReducer } from "react";
 import ProfileImg from "./ProfileImg";
 
 function Bio({ toggleEditing, isEditing, user, handleChangeInput, input }) {
