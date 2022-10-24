@@ -12,7 +12,6 @@ import PendingConfirmation from "../pages/PendingConfirmation";
 import CompletedPage from "../pages/CompletedPage";
 import UpcomingPage from "../pages/UpcomingPage";
 import WalletHistoryPage from "../pages/WalletHistoryPage";
-
 import ExplorePage from "../pages/ExplorePage";
 import User from "../pages/admin/User";
 import UserDetails from "../pages/admin/UserDetails";
