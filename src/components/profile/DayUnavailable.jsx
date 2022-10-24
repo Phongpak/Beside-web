@@ -34,6 +34,7 @@ function DayUnavailable() {
               onChange={(e) => setUnavailableDate(e.target.value)}
               className="text-center w-[125px] rounded-[15px] h-[22px]"
               type="date"
+              min="2022-10-24"
             />
             <div className="flex flex-row gap-[5px]">
               <div>

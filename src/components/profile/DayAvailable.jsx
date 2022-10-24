@@ -49,10 +49,15 @@ function DayAvailable({ weekDay, weekDayNumber }) {
                   className="w-[70px] rounded-[15px] text-center"
                   name="fromTime"
                   id="fromTime"
-                  onChange={async (e) => {
-                    const fromTime = (await e.target.value) + ":00:00";
+                  onChange={(e) => {
+                    const newFromTime = e.target.value + ":00:00";
                     console.log(e.target.value);
-                    setFromTime(fromTime);
+                    setFromTime(newFromTime);
+                    if (e.target.value >= "10") {
+                      setToTime(+e.target.value + 1 + ":00:00");
+                    } else {
+                      setToTime("0" + (+e.target.value + 1) + ":00:00");
+                    }
                   }}
                 >
                   <option value="00">00:00</option>
@@ -88,9 +93,8 @@ function DayAvailable({ weekDay, weekDayNumber }) {
                   className="w-[70px] rounded-[15px] text-center"
                   name="toTime"
                   id="toTime"
-                  onChange={async (e) => {
-                    const toTime = (await e.target.value) + ":00:00";
-
+                  onChange={(e) => {
+                    const toTime = e.target.value + ":00:00";
                     setToTime(toTime);
                   }}
                 >
