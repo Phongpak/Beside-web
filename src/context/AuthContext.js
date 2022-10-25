@@ -4,7 +4,7 @@ import * as userService from "../api/userApi";
 import {
   addAccessToken,
   getAccessToken,
-  removeAccessToken
+  removeAccessToken,
 } from "../utilities/localStorage";
 
 const AuthContext = createContext();
@@ -62,7 +62,7 @@ function AuthContextProvider({ children }) {
         logout,
         getUser,
         updateUser,
-        deleteProfileImage
+        deleteProfileImage,
       }}
     >
       {children}
