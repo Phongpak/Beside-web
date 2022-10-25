@@ -31,8 +31,8 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
     }
   };
 
-  const handleClickDeleteProPic = async () => {
-    await deleteProfileImage(user.id);
+  const handleClickDeleteProPic = async (id) => {
+    await deleteProfileImage(id);
     window.location.reload();
   };
 
@@ -88,7 +88,9 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 
                       <button
                         className="relative pl-80 mt-[-50px]"
-                        onClick={handleClickDeleteProPic}
+                        onClick={() => {
+                          handleClickDeleteProPic(pics[0]?.id);
+                        }}
                       >
                         <i className="fa-solid fa-xmark" />
                       </button>
@@ -126,7 +128,9 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 
                       <button
                         className="relative pl-80 mt-[-50px]"
-                        onClick={handleClickDeleteProPic}
+                        onClick={() => {
+                          handleClickDeleteProPic(pics[1]?.id);
+                        }}
                       >
                         <i className="fa-solid fa-xmark" />
                       </button>
@@ -163,7 +167,9 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 
                       <button
                         className="relative pl-80 mt-[-50px]"
-                        onClick={handleClickDeleteProPic}
+                        onClick={() => {
+                          handleClickDeleteProPic(pics[2]?.id);
+                        }}
                       >
                         <i className="fa-solid fa-xmark" />
                       </button>
