@@ -1,21 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "../../context/AuthContext";
 import { useReducer } from "react";
 import ProfileImg from "./ProfileImg";
 
-function Bio({
-  toggleEditing,
-  isEditing,
-  user,
-  handleChangeInput,
-  input,
-  getProfileImages,
-  id
-}) {
+function Bio() {
+  const { user, toggleEditing, isEditing, input, handleChangeInput } =
+    useAuth();
   return (
     <div className="flex items-center bg-[#F4F2F2] h-[300px] w-[100vw] px-60">
       <div className="flex items-center justify-between h-[250px] w-[1000px]">
-        <ProfileImg input={input} getProfileImages={getProfileImages} id={id} />
+        <ProfileImg input={input} />
 
         <div className="flex flex-col justify-center w-[500px] gap-[10px]">
           <div>

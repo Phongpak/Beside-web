@@ -2,7 +2,7 @@ import Bio from "../components/profile/Bio";
 import TabBar from "../components/TabBar";
 import Informatio from "../components/profile/Informatio";
 import ReviewCard from "../components/ReviewCard";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
 function ProfilePage() {

@@ -10,7 +10,8 @@ import "swiper/css/navigation";
 // import "swiper/css/scrollbar ";
 import { Pagination, Navigation } from "swiper";
 
-function ProfileImg({ input, getProfileImages }) {
+function ProfileImg() {
+  const { input } = useAuth();
   const [prevEl, setPrevEl] = useState(null);
   const [nextEl, setNextEl] = useState(null);
 
@@ -24,26 +25,7 @@ function ProfileImg({ input, getProfileImages }) {
     setIsOpen(false);
   };
 
-  const { user } = useAuth();
-
-  // const handleClickSaveProPic = async (e) => {
-  //   try {
-  //     e.preventDefault();
-  //     const formData = new FormData();
-  //     formData.append("image", file);
-
-  //     await updateUser(formData, user.id);
-  //     setFile(null);
-  //     window.location.reload();
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // const handleClickDeleteProPic = async () => {
-  //   await deleteProfileImage(user.id);
-  //   window.location.reload();
-  // };
+  const { user, getProfileImages } = useAuth();
 
   const [pics, setPics] = useState([]);
 
@@ -103,8 +85,6 @@ function ProfileImg({ input, getProfileImages }) {
         user={user}
       />
     </>
-
-    // </div>
   );
 }
 

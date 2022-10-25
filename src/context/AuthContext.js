@@ -58,6 +58,29 @@ function AuthContextProvider({ children }) {
     return res;
   };
 
+  const [isEditing, setIsEditing] = useState(false);
+  const toggleEditing = () => {
+    setIsEditing((prevIsEditing) => !prevIsEditing);
+  };
+
+  const [input, setInput] = useState({});
+  const handleChangeInput = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+
+  const [pics, setPics] = useState([]);
+  useEffect(() => {
+    const fetchPics = async () => {
+      try {
+        const res = await getProfileImages(user.id);
+        setPics(res.data.profileImages);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchPics();
+  }, [user.id]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -69,7 +92,12 @@ function AuthContextProvider({ children }) {
         getUser,
         updateUser,
         deleteProfileImage,
-        getProfileImages
+        getProfileImages,
+        toggleEditing,
+        isEditing,
+        input,
+        handleChangeInput,
+        pics
       }}
     >
       {children}
