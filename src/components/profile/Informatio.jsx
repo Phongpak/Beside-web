@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
   faAddressCard,
   faPhone
 } from "@fortawesome/free-solid-svg-icons";
-// import {
-//   faSquareFacebook,
-//   faSquareInstagram
-// } from "@fortawesome/free-brands-svg-icons";
-function Informatio({ isEditing, handleChangeInput, input, user }) {
+import { useAuth } from "../../context/AuthContext";
+
+function Informatio() {
+  const { isEditing, user } = useAuth();
+
+  const [input, setInput] = useState({});
+  useEffect(() => {
+    setInput((p) => {
+      return {
+        gender: user?.gender,
+        sexuallyInterested: user?.sexuallyInterested,
+        language: user?.language,
+        hobby: user?.hobby,
+        lat: user?.lat,
+        lng: user?.lng
+      };
+    });
+  }, [user]);
+
+  const handleChangeInput = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+
   return (
     <div className="flex flex-col w-[350px] h-[700px] gap-[12px] text-[#224957]">
       <div className="flex flex-row justify-center items-center w-[350px] h-[150px] border-2 border-[#224957] rounded-[10px]">
@@ -45,14 +63,6 @@ function Informatio({ isEditing, handleChangeInput, input, user }) {
               icon={faPhone}
               className="text-[#809590] text-[25px]"
             ></FontAwesomeIcon>
-            {/* <FontAwesomeIcon
-              icon={faSquareFacebook}
-              className="text-[#809590] text-[25px]"
-            ></FontAwesomeIcon>
-            <FontAwesomeIcon
-              icon={faSquareInstagram}
-              className="text-[#809590] text-[25px]"
-            ></FontAwesomeIcon> */}
           </div>
         </div>
       </div>

@@ -26,7 +26,7 @@ function ProfilePage() {
         language: user?.language,
         hobby: user?.hobby,
         lat: user?.lat,
-        lng: user?.lng,
+        lng: user?.lng
       };
     });
   }, [user]);
@@ -46,23 +46,11 @@ function ProfilePage() {
   };
   return (
     <div>
-      <Bio
-        toggleEditing={toggleEditing}
-        isEditing={isEditing}
-        user={user}
-        handleChangeInput={handleChangeInput}
-        input={input}
-        getProfileImages={getProfileImages}
-      />
+      <Bio />
       <div className="w-[100vw] h-[650px] flex flex-col gap-10 px-60">
         <UserTabBar />
         <div className="flex flex-row gap-10">
-          <Informatio
-            isEditing={isEditing}
-            handleChangeInput={handleChangeInput}
-            input={input}
-            user={user}
-          />
+          <Informatio />
           <div className="flex flex-col   h-[650px]">
             <div className="flex flex-col gap-[10px]">
               <div className="text-[20px] text-[#224957] font-medium">

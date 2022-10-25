@@ -63,10 +63,10 @@ function AuthContextProvider({ children }) {
     setIsEditing((prevIsEditing) => !prevIsEditing);
   };
 
-  const [input, setInput] = useState({});
-  const handleChangeInput = (e) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-  };
+  // const [input, setInput] = useState({});
+  // const handleChangeInput = (e) => {
+  //   setInput({ ...input, [e.target.name]: e.target.value });
+  // };
 
   const [pics, setPics] = useState([]);
   useEffect(() => {
@@ -95,8 +95,9 @@ function AuthContextProvider({ children }) {
         getProfileImages,
         toggleEditing,
         isEditing,
-        input,
-        handleChangeInput,
+        // input,
+        // setInput,
+        // handleChangeInput,
         pics
       }}
     >

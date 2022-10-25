@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import ProfileImg from "./ProfileImg";
 import { useAuth } from "../../context/AuthContext";
 import ModalWallet from "../modals/ModalWallet";
@@ -10,8 +10,23 @@ import { useLocation } from "react-router-dom";
 
 function Bio() {
   const { pathname } = useLocation();
-  const { user, toggleEditing, isEditing, input, handleChangeInput } =
-    useAuth();
+  const { user, toggleEditing, isEditing } = useAuth();
+
+  const [input, setInput] = useState({});
+  useEffect(() => {
+    setInput((p) => {
+      return {
+        penName: user?.penName || user?.firstName,
+        description: user?.description,
+        rate: user?.rate
+      };
+    });
+  }, [user]);
+
+  const handleChangeInput = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+
   const [isOpenModalWallet, setIsOpenModalWallet] = useState(false);
   const [isOpenModalAvailable, setIsOpenModalAvailable] = useState(false);
 
