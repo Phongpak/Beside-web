@@ -1,7 +1,7 @@
 import Bio from "../components/profile/Bio";
 import Informatio from "../components/profile/Informatio";
 import ReviewCard from "../components/ReviewCard";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import UserTabBar from "../components/UserTabBar";
 
@@ -12,7 +12,7 @@ function ProfilePage() {
     setIsEditing((prevIsEditing) => !prevIsEditing);
   };
 
-  const { user, updateUser } = useAuth();
+  const { user, updateUser, getProfileImages } = useAuth();
   const [input, setInput] = useState({});
 
   useEffect(() => {
@@ -52,6 +52,7 @@ function ProfilePage() {
         user={user}
         handleChangeInput={handleChangeInput}
         input={input}
+        getProfileImages={getProfileImages}
       />
       <div className="w-[100vw] h-[650px] flex flex-col gap-10 px-60">
         <UserTabBar />
