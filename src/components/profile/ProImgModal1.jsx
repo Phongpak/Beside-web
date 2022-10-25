@@ -54,12 +54,6 @@ function ProImgModal1({
                         }
                         alt="Img"
                       />
-
-                      {/* <img
-                        src="https://dudeplace.co/wp-content/uploads/2021/04/joy-1.jpg"
-                        className="block w-96 h-60"
-                        alt="Camera"
-                      /> */}
                     </div>
                   </div>
                   <div className="flex flex-row justify-center gap-[20px]">
