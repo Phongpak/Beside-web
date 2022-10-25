@@ -12,7 +12,7 @@ function ProfilePage() {
     setIsEditing((prevIsEditing) => !prevIsEditing);
   };
 
-  const { user, updateUser } = useAuth();
+  const { user, updateUser, getProfileImages } = useAuth();
   const [input, setInput] = useState({});
 
   useEffect(() => {
@@ -53,6 +53,7 @@ function ProfilePage() {
         user={user}
         handleChangeInput={handleChangeInput}
         input={input}
+        getProfileImages={getProfileImages}
       />
       <div className="w-[100vw] h-[650px] px-60">
         <TabBar />

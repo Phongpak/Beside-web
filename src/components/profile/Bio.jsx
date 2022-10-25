@@ -3,20 +3,19 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useReducer } from "react";
 import ProfileImg from "./ProfileImg";
 
-function Bio({ toggleEditing, isEditing, user, handleChangeInput, input }) {
+function Bio({
+  toggleEditing,
+  isEditing,
+  user,
+  handleChangeInput,
+  input,
+  getProfileImages,
+  id
+}) {
   return (
     <div className="flex items-center bg-[#F4F2F2] h-[300px] w-[100vw] px-60">
       <div className="flex items-center justify-between h-[250px] w-[1000px]">
-        {/* <div className="flex justify-center w-[500px]">
-          <img
-            className="rounded-[5px]"
-            src={
-              "https://preview.redd.it/i13zau5gs1j51.jpg?auto=webp&s=77ac0d41d59d1e9aa774f218ad5f9f3ff18e905a"
-            }
-            width="325"
-          />
-        </div> */}
-        <ProfileImg input={input} />
+        <ProfileImg input={input} getProfileImages={getProfileImages} id={id} />
 
         <div className="flex flex-col justify-center w-[500px] gap-[10px]">
           <div>
