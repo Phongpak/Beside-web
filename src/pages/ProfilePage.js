@@ -6,34 +6,34 @@ import { useAuth } from "../context/AuthContext";
 import UserTabBar from "../components/UserTabBar";
 
 function ProfilePage() {
-  const [isEditing, setIsEditing] = useState(false);
+  // const [isEditing, setIsEditing] = useState(false);
 
-  const toggleEditing = () => {
-    setIsEditing((prevIsEditing) => !prevIsEditing);
-  };
+  // const toggleEditing = () => {
+  //   setIsEditing((prevIsEditing) => !prevIsEditing);
+  // };
 
-  const { user, updateUser, getProfileImages } = useAuth();
+  const { user, updateUser, isEditing, setIsEditing } = useAuth();
   const [input, setInput] = useState({});
 
-  useEffect(() => {
-    setInput((p) => {
-      return {
-        penName: user?.penName || user?.firstName,
-        description: user?.description,
-        rate: user?.rate,
-        gender: user?.gender,
-        sexuallyInterested: user?.sexuallyInterested,
-        language: user?.language,
-        hobby: user?.hobby,
-        lat: user?.lat,
-        lng: user?.lng
-      };
-    });
-  }, [user]);
+  // useEffect(() => {
+  //   setInput((p) => {
+  //     return {
+  //       penName: user?.penName || user?.firstName,
+  //       description: user?.description,
+  //       rate: user?.rate,
+  //       gender: user?.gender,
+  //       sexuallyInterested: user?.sexuallyInterested,
+  //       language: user?.language,
+  //       hobby: user?.hobby,
+  //       lat: user?.lat,
+  //       lng: user?.lng
+  //     };
+  //   });
+  // }, [user]);
 
-  const handleChangeInput = (e) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-  };
+  // const handleChangeInput = (e) => {
+  //   setInput({ ...input, [e.target.name]: e.target.value });
+  // };
 
   const handleClickSave = async (e) => {
     try {
