@@ -10,6 +10,8 @@ import "swiper/css/navigation";
 // import "swiper/css/scrollbar ";
 import { Pagination, Navigation } from "swiper";
 
+import ProfilePic from "../../image/profileImg.png";
+
 function ProfileImg() {
   const { input } = useAuth();
   const [prevEl, setPrevEl] = useState(null);
@@ -48,42 +50,61 @@ function ProfileImg() {
 
   return (
     <>
-      <Swiper
-        breakpoints={{
-          1280: {
-            slidesPerView: 1,
-            spaceBetween: 1,
-            slidesPerGroup: 1
-          },
-          1440: {
-            slidesPerView: 1,
-            spaceBetween: 1,
-            slidesPerGroup: 1
-          }
-        }}
-        loop={true}
-        modules={[Pagination, Navigation]}
-      >
-        {pics.map((item) => {
-          return (
-            <SwiperSlide className="my-20 ">
-              <div
-                className="flex flex-col  justify-center overflow-hidden"
-                onClick={openModal}
-              >
-                <img src={item.Image} alt="..." className="block w-96 h-60" />
-              </div>
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
-      <ProImgModal1
-        isOpen={isOpen}
-        closeModal={closeModal}
-        input={input}
-        getProfileImages={getProfileImages}
-        user={user}
-      />
+      {pics.length ? (
+        <>
+          <Swiper
+            breakpoints={{
+              1280: {
+                slidesPerView: 1,
+                spaceBetween: 1,
+                slidesPerGroup: 1,
+              },
+              1440: {
+                slidesPerView: 1,
+                spaceBetween: 1,
+                slidesPerGroup: 1,
+              },
+            }}
+            loop={true}
+            modules={[Pagination, Navigation]}
+          >
+            {pics.map((item, index) => {
+              return (
+                <SwiperSlide className="my-20 " key={index}>
+                  <div
+                    className="flex flex-col  justify-center overflow-hidden"
+                    onClick={openModal}
+                  >
+                    <img
+                      src={item.Image}
+                      alt="..."
+                      className="block w-96 h-60"
+                    />
+                  </div>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+          <ProImgModal1
+            isOpen={isOpen}
+            closeModal={closeModal}
+            input={input}
+            getProfileImages={getProfileImages}
+            user={user}
+          />
+        </>
+      ) : (
+        <>
+          <img src={ProfilePic} className="w-96 h-60" onClick={openModal} />
+          <ProImgModal1
+            isOpen={isOpen}
+            closeModal={closeModal}
+            input={input}
+            getProfileImages={getProfileImages}
+            user={user}
+          />
+        </>
+      )}
     </>
   );
 }

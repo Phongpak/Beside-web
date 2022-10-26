@@ -7,11 +7,7 @@ import UserTabBar from "../components/UserTabBar";
 import { useLoading } from "../context/LoadingContext";
 
 function ProfilePage() {
-  const [isEditing, setIsEditing] = useState(false);
-
-  const toggleEditing = () => {
-    setIsEditing((prevIsEditing) => !prevIsEditing);
-  };
+  const { isEditing, setIsEditing } = useAuth();
 
   const { user, updateUser, getProfileImages } = useAuth();
   const [input, setInput] = useState({});
@@ -28,7 +24,8 @@ function ProfilePage() {
         language: user?.language,
         hobby: user?.hobby,
         lat: user?.lat,
-        lng: user?.lng
+        lng: user?.lng,
+        location: user?.location,
       };
     });
   }, [user]);
@@ -47,16 +44,24 @@ function ProfilePage() {
     } catch (err) {
       console.log(err);
     } finally {
-      // stopLoading();
+      stopLoading();
     }
   };
   return (
     <div>
-      <Bio />
+      <Bio
+        input={input}
+        handleChangeInput={handleChangeInput}
+        setInput={setInput}
+      />
       <div className="w-[100vw] h-[650px] flex flex-col gap-10 px-60">
         <UserTabBar />
         <div className="flex flex-row gap-10">
-          <Informatio />
+          <Informatio
+            input={input}
+            handleChangeInput={handleChangeInput}
+            setInput={setInput}
+          />
           <div className="flex flex-col   h-[650px]">
             <div className="flex flex-col gap-[10px]">
               <div className="text-[20px] text-[#224957] font-medium">

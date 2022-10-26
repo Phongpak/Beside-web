@@ -4,7 +4,7 @@ import * as userService from "../api/userApi";
 import {
   addAccessToken,
   getAccessToken,
-  removeAccessToken
+  removeAccessToken,
 } from "../utilities/localStorage";
 
 const AuthContext = createContext();
@@ -73,19 +73,24 @@ function AuthContextProvider({ children }) {
   // const handleChangeInput = (e) => {
   //   setInput({ ...input, [e.target.name]: e.target.value });
   // };
+  const getTransactionByUserId = async () => {
+    const res = await userService.getTransactionByUserId();
+    // setUser(res.data.transactions);
+    return res;
+  };
 
   const [pics, setPics] = useState([]);
   useEffect(() => {
     const fetchPics = async () => {
       try {
-        const res = await getProfileImages(user.id);
+        const res = await getProfileImages(user?.id);
         setPics(res.data.profileImages);
       } catch (err) {
         console.log(err);
       }
     };
     fetchPics();
-  }, [user.id]);
+  }, [user?.id]);
 
   return (
     <AuthContext.Provider
@@ -98,6 +103,12 @@ function AuthContextProvider({ children }) {
         getUser,
         updateUser,
         deleteProfileImage,
+        getProfileImages,
+        toggleEditing,
+        isEditing,
+        setIsEditing,
+        pics,
+        getTransactionByUserId,
         initialLoading,
       }}
     >
