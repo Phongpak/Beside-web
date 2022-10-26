@@ -39,13 +39,18 @@ img {
 /* .slide-track {
   animation: scroll 40% linear infinite;
 }
-* .slide-track:hover {
+.slide-track:hover {
   animation-play-state: paused;
 } */
-* .slide-track {
-  animation-duration: 10s;
+
+/* * .slide-track {
+  animation-duration: 5s;
   animation-name: scroll;
   animation-iteration-count: infinite;
+}
+
+.slide-track:hover {
+  animation-play-state: paused;
 }
 
 @keyframes scroll {
@@ -53,9 +58,13 @@ img {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(250px * 6));
+    transform: translateX(calc(-250px * 12));
   }
-}
+} */
+
+/* .slide-track:hover {
+  animation-play-state: paused;
+} */
 
 .App {
   text-align: center;
