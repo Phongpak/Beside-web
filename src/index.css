@@ -12,8 +12,8 @@ input[type="date"]:valid:before {
   content: "";
 } */
 input[type="date"]::before {
-  content: attr(data-placeholder);
-  width: 100%;
+	content: attr(data-placeholder);
+	width: 100%;
 }
 
 /* hide our custom/fake placeholder text when in focus to show the default
@@ -21,5 +21,9 @@ input[type="date"]::before {
  */
 input[type="date"]:focus::before,
 input[type="date"]:valid::before {
-  display: none;
+	display: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+	display: none;
 }
