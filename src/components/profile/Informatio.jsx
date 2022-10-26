@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import dateFormat, { masks } from "dateformat";
 import {
@@ -59,14 +59,6 @@ function Informatio({ isEditing, handleChangeInput, input, user }) {
               icon={faPhone}
               className="text-[#809590] text-[25px]"
             ></FontAwesomeIcon>
-            {/* <FontAwesomeIcon
-              icon={faSquareFacebook}
-              className="text-[#809590] text-[25px]"
-            ></FontAwesomeIcon>
-            <FontAwesomeIcon
-              icon={faSquareInstagram}
-              className="text-[#809590] text-[25px]"
-            ></FontAwesomeIcon> */}
           </div>
         </div>
       </div>

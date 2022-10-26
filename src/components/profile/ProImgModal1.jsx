@@ -1,17 +1,66 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import ProfileImg from "../../image/profileImg.png";
+import { useEffect, useRef, useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
-function ProImgModal1({
-  isOpen,
-  closeModal,
-  handleClickDeleteProPic,
-  handleClickSaveProPic,
-  inputEl,
-  setFile,
-  input,
-  file
-}) {
+function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
+  const { user, updateUser, deleteProfileImage } = useAuth();
+  const [file1, setFile1] = useState(null);
+  const inputEl1 = useRef();
+  const [file2, setFile2] = useState(null);
+  const inputEl2 = useRef();
+  const [file3, setFile3] = useState(null);
+  const inputEl3 = useRef();
+
+  const handleClickSaveProPic = async (e) => {
+    try {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("profileImages", file1);
+      formData.append("profileImages", file2);
+      formData.append("profileImages", file3);
+
+      await updateUser(formData, user.id);
+      setFile1(null);
+      setFile2(null);
+      setFile3(null);
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleClickDeleteProPic = async (id) => {
+    setPics((prev) => prev.filter((el) => el.id !== id));
+    await deleteProfileImage(id);
+    // window.location.reload();
+    // console.log(pics);
+  };
+
+  const [pics, setPics] = useState([]);
+  useEffect(() => {
+    const fetchPics = async () => {
+      try {
+        const res = await getProfileImages(user.id);
+        setPics(res.data.profileImages);
+        // console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchPics();
+    setLoading(false);
+  }, [user.id]);
+
+  const [loading, setLoading] = useState(true);
+  if (loading) return <div>Loading</div>;
+
+  // console.log(pics);
+  // console.log(pics[1]?.id);
+
+  // const [imgShow, setImgShow] = useState([true, true, true]);
+
   return (
     <>
       {isOpen ? (
@@ -20,60 +69,145 @@ function ProImgModal1({
             onClick={closeModal}
             className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
           >
-            <div
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-auto my-6 mx-auto max-w-3xl"
-            >
-              <div className="border-4 border-[#9AC0B5]  rounded-lg min-w-[775px] min-h-[500px] shadow-lg relative flex flex-row justify-center items-center w-full bg-white outline-none focus:outline-none">
+            <div onClick={(e) => e.stopPropagation()} className="relative ">
+              <div className="border-4 border-[#9AC0B5]  rounded-lg min-w-[1300px] min-h-[500px] shadow-lg flex flex-row justify-center items-center w-full bg-white outline-none focus:outline-none ">
                 <div className="flex flex-col min-w-[725px] min-h-[400px] gap-[10px]">
-                  <button className="self-end text-[30px] text-gray-400">
+                  <button className="self-end text-[30px] text-gray-400 mb-5">
                     <FontAwesomeIcon icon={faXmark} onClick={closeModal} />
                   </button>
+
                   <div className="flex flex-row justify-center items-center gap-[25px] ">
                     <div className="flex flex-col gap-[15px] min-w-[325px] min-h-[350px] pt-10">
                       <input
                         type="file"
-                        className="d-none"
-                        ref={inputEl}
+                        className="absolute"
+                        ref={inputEl1}
                         onChange={(e) => {
                           console.log(e.target.files[0]);
-                          console.log(555);
                           if (e.target.files[0]) {
                             console.log(e.target.files);
-                            setFile(e.target.files[0]);
+                            setFile1(e.target.files[0]);
                           }
                         }}
                       />
 
-                      <img
-                        className="w-96 h-60"
-                        src={
-                          file
-                            ? URL.createObjectURL(file)
-                            : input.image || ProfileImg
-                        }
-                        alt="Img"
+                      <button
+                        className="relative pl-80 mt-[-50px]"
+                        onClick={() => {
+                          handleClickDeleteProPic(pics[0]?.id);
+                        }}
+                      >
+                        <i className="fa-solid fa-xmark" />
+                      </button>
+                      <span
+                        onClick={() => {
+                          if (!pics[0]?.id) {
+                            inputEl1.current.click();
+                          }
+                        }}
+                      >
+                        <img
+                          className="relative block w-96 h-60"
+                          src={
+                            file1
+                              ? URL.createObjectURL(file1)
+                              : pics[0]?.Image || ProfileImg
+                          }
+                          alt="Img"
+                        />
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col gap-[15px] min-w-[325px] min-h-[350px] pt-10">
+                      <input
+                        type="file"
+                        className="absolute"
+                        ref={inputEl2}
+                        onChange={(e) => {
+                          console.log(e.target.files[0]);
+                          if (e.target.files[0]) {
+                            console.log(e.target.files);
+                            setFile2(e.target.files[0]);
+                          }
+                        }}
                       />
 
-                      {/* <img
-                        src="https://dudeplace.co/wp-content/uploads/2021/04/joy-1.jpg"
-                        className="block w-96 h-60"
-                        alt="Camera"
-                      /> */}
+                      <button
+                        className="relative pl-80 mt-[-50px]"
+                        onClick={() => {
+                          handleClickDeleteProPic(pics[1]?.id);
+                        }}
+                      >
+                        <i className="fa-solid fa-xmark" />
+                      </button>
+
+                      <span
+                        onClick={() => {
+                          if (!pics[1]?.id) {
+                            inputEl2.current.click();
+                          }
+                        }}
+                      >
+                        <img
+                          className="relative block w-96 h-60"
+                          src={
+                            file2
+                              ? URL.createObjectURL(file2)
+                              : pics[1]?.Image || ProfileImg
+                          }
+                          alt="Img"
+                        />
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-[15px] min-w-[325px] min-h-[350px] pt-10">
+                      <input
+                        type="file"
+                        className="absolute"
+                        ref={inputEl3}
+                        onChange={(e) => {
+                          console.log(e.target.files[0]);
+                          if (e.target.files[0]) {
+                            console.log(e.target.files);
+                            setFile3(e.target.files[0]);
+                          }
+                        }}
+                      />
+
+                      <button
+                        className="relative pl-80 mt-[-50px]"
+                        onClick={() => {
+                          handleClickDeleteProPic(pics[2]?.id);
+                        }}
+                      >
+                        <i className="fa-solid fa-xmark" />
+                      </button>
+
+                      <span
+                        onClick={() => {
+                          if (!pics[2]?.id) {
+                            inputEl3.current.click();
+                          }
+                        }}
+                      >
+                        <img
+                          className="relative block w-96 h-60"
+                          src={
+                            file3
+                              ? URL.createObjectURL(file3)
+                              : pics[2]?.Image || ProfileImg
+                          }
+                          alt="Img"
+                        />
+                      </span>
                     </div>
                   </div>
+
                   <div className="flex flex-row justify-center gap-[20px]">
                     <button
-                      className="flex flex-row justify-center items-center w-[100px] h-[40px] border-2 border-[#9AC0B5] rounded-[20px] hover:bg-[#9AC0B5] hover:text-white transition delay-20 hover:border-0"
+                      className="flex flex-row justify-center items-center w-[100px] h-[40px] border-2 border-[#9AC0B5] rounded-[20px] hover:bg-[#9AC0B5] hover:text-white transition delay-20 hover:border-0 "
                       onClick={handleClickSaveProPic}
                     >
                       SAVE
-                    </button>
-                    <button
-                      className="flex flex-row justify-center items-center w-[100px] h-[40px] border-2 border-[#E6C3C1] rounded-[20px] hover:bg-[#E6C3C1] hover:text-white transition delay-20 hover:border-0"
-                      onClick={handleClickDeleteProPic}
-                    >
-                      DELETE
                     </button>
                   </div>
                 </div>

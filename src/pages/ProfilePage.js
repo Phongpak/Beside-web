@@ -1,7 +1,7 @@
 import Bio from "../components/profile/Bio";
 import Informatio from "../components/profile/Informatio";
 import ReviewCard from "../components/ReviewCard";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import UserTabBar from "../components/UserTabBar";
 import { useLoading } from "../context/LoadingContext";
@@ -13,7 +13,7 @@ function ProfilePage() {
     setIsEditing((prevIsEditing) => !prevIsEditing);
   };
 
-  const { user, updateUser } = useAuth();
+  const { user, updateUser, getProfileImages } = useAuth();
   const [input, setInput] = useState({});
   const { startLoading, stopLoading } = useLoading();
   console.log(user);
@@ -28,7 +28,7 @@ function ProfilePage() {
         language: user?.language,
         hobby: user?.hobby,
         lat: user?.lat,
-        lng: user?.lng,
+        lng: user?.lng
       };
     });
   }, [user]);
@@ -52,22 +52,11 @@ function ProfilePage() {
   };
   return (
     <div>
-      <Bio
-        toggleEditing={toggleEditing}
-        isEditing={isEditing}
-        user={user}
-        handleChangeInput={handleChangeInput}
-        input={input}
-      />
+      <Bio />
       <div className="w-[100vw] h-[650px] flex flex-col gap-10 px-60">
         <UserTabBar />
         <div className="flex flex-row gap-10">
-          <Informatio
-            isEditing={isEditing}
-            handleChangeInput={handleChangeInput}
-            input={input}
-            user={user}
-          />
+          <Informatio />
           <div className="flex flex-col   h-[650px]">
             <div className="flex flex-col gap-[10px]">
               <div className="text-[20px] text-[#224957] font-medium">

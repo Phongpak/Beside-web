@@ -4,7 +4,7 @@ import * as userService from "../api/userApi";
 import {
   addAccessToken,
   getAccessToken,
-  removeAccessToken,
+  removeAccessToken
 } from "../utilities/localStorage";
 
 const AuthContext = createContext();
@@ -32,6 +32,7 @@ function AuthContextProvider({ children }) {
     const res = await authService.getUser();
     console.log(res.data.user);
     setUser(res.data.user);
+    // console.log(res.data.user);
   };
   const login = async (input) => {
     const res = await authService.login(input);
@@ -54,8 +55,37 @@ function AuthContextProvider({ children }) {
 
   const deleteProfileImage = async (id) => {
     const res = await userService.deleteProfileImage(id);
-    setUser(res.data.user);
+    // setUser(res.data.user);
   };
+
+  const getProfileImages = async (id) => {
+    const res = await userService.getProfileImages(id);
+    // setUser(res.data.user);
+    return res;
+  };
+
+  const [isEditing, setIsEditing] = useState(false);
+  const toggleEditing = () => {
+    setIsEditing((prevIsEditing) => !prevIsEditing);
+  };
+
+  // const [input, setInput] = useState({});
+  // const handleChangeInput = (e) => {
+  //   setInput({ ...input, [e.target.name]: e.target.value });
+  // };
+
+  const [pics, setPics] = useState([]);
+  useEffect(() => {
+    const fetchPics = async () => {
+      try {
+        const res = await getProfileImages(user.id);
+        setPics(res.data.profileImages);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchPics();
+  }, [user.id]);
 
   return (
     <AuthContext.Provider

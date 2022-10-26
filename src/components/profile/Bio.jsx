@@ -1,12 +1,32 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useReducer } from "react";
+import ProfileImg from "./ProfileImg";
+import { useAuth } from "../../context/AuthContext";
 import ModalWallet from "../modals/ModalWallet";
 import { useState } from "react";
 import ModalAvailable from "../modals/ModalAvailable";
-// import { useReducer } from "react";
-import ProfileImg from "./ProfileImg";
+import { useLocation } from "react-router-dom";
 
-function Bio({ toggleEditing, isEditing, user, handleChangeInput, input }) {
+function Bio() {
+  const { pathname } = useLocation();
+  const { user, toggleEditing, isEditing } = useAuth();
+
+  const [input, setInput] = useState({});
+  useEffect(() => {
+    setInput((p) => {
+      return {
+        penName: user?.penName || user?.firstName,
+        description: user?.description,
+        rate: user?.rate
+      };
+    });
+  }, [user]);
+
+  const handleChangeInput = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+
   const [isOpenModalWallet, setIsOpenModalWallet] = useState(false);
   const [isOpenModalAvailable, setIsOpenModalAvailable] = useState(false);
 
@@ -25,18 +45,10 @@ function Bio({ toggleEditing, isEditing, user, handleChangeInput, input }) {
   const closeModalAvailable = () => {
     setIsOpenModalAvailable(false);
   };
+
   return (
     <div className="flex items-center bg-[#F4F2F2] h-[300px] w-[100vw] px-60">
       <div className="flex items-center justify-between h-[250px] w-[1000px]">
-        {/* <div className="flex justify-center w-[500px]">
-          <img
-            className="rounded-[5px]"
-            src={
-              "https://preview.redd.it/i13zau5gs1j51.jpg?auto=webp&s=77ac0d41d59d1e9aa774f218ad5f9f3ff18e905a"
-            }
-            width="325"
-          />
-        </div> */}
         <ProfileImg input={input} />
 
         <div className="flex flex-col justify-center w-[500px] gap-[10px]">
@@ -122,14 +134,19 @@ function Bio({ toggleEditing, isEditing, user, handleChangeInput, input }) {
             >
               Wallet: 50,000 THB
             </div>
+
             <div
               onClick={openModalAvailable}
-              className="flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[140px] h-[60px]"
+              className={`flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[140px] h-[60px] ${
+                Boolean(pathname !== "/profile") && "invisible"
+              }`}
             >
               Availability
             </div>
             <div
-              className="flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[140px] h-[60px]"
+              className={`flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[140px] h-[60px] ${
+                Boolean(pathname !== "/profile") && "invisible"
+              }`}
               onClick={toggleEditing}
             >
               Edit profile
