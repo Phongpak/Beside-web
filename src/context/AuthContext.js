@@ -10,7 +10,8 @@ import {
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(null);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   useEffect(() => {
     const fetchMe = async () => {
@@ -20,6 +21,8 @@ function AuthContextProvider({ children }) {
         }
       } catch (err) {
         console.log(err);
+      } finally {
+        setInitialLoading(false);
       }
     };
     fetchMe();
@@ -27,6 +30,7 @@ function AuthContextProvider({ children }) {
 
   const getUser = async () => {
     const res = await authService.getUser();
+    console.log(res.data.user);
     setUser(res.data.user);
   };
   const login = async (input) => {
@@ -44,6 +48,7 @@ function AuthContextProvider({ children }) {
 
   const updateUser = async (input, id) => {
     const res = await userService.updateUser(input, id);
+    console.log(res);
     setUser(res.data.user);
   };
 
@@ -63,6 +68,7 @@ function AuthContextProvider({ children }) {
         getUser,
         updateUser,
         deleteProfileImage,
+        initialLoading,
       }}
     >
       {children}

@@ -1,12 +1,20 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+  const handleClickLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -83,7 +91,7 @@ export default function Example() {
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    type="submit"
+                    onClick={handleClickLogout}
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                       "block w-full px-4 py-2 text-left text-sm"

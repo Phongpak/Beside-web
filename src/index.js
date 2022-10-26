@@ -1,21 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import '@fortawesome/fontawesome-free/css/all.css';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import "@fortawesome/fontawesome-free/css/all.css";
+import { BrowserRouter } from "react-router-dom";
 
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import AuthContextProvider from './context/AuthContext';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import AuthContextProvider from "./context/AuthContext";
+import LoadingContextProvider from "./context/LoadingContext";
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </AuthContextProvider>
+    <LoadingContextProvider>
+      <AuthContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </AuthContextProvider>
+    </LoadingContextProvider>
   </React.StrictMode>
 );
 

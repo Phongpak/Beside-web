@@ -1,7 +1,7 @@
 import React from "react";
 import { MoonLoader } from "react-spinners";
 
-function loading() {
+function Loading() {
   return (
     <div className="flex items-center justify-center space-x-2 h-screen">
       <h1 className="font-bols text-green-600 text-[70px] animate-pulse">
@@ -12,4 +12,4 @@ function loading() {
   );
 }
 
-export default loading;
+export default Loading;

@@ -57,7 +57,7 @@ function ModalCompleted({ isOpen, closeModal }) {
                       <FontAwesomeIcon
                         onClick={() => {
                           const score = index + 1;
-                          //   console.log(score);
+                          console.log(score);
                           setReview(score);
 
                           handleClick(index + 1);

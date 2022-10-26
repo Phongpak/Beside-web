@@ -4,11 +4,10 @@ import { Link } from "react-router-dom";
 
 function BookComponent() {
   return (
-    <div className="flex flex-col items-center justify-center  pt-8 mx-auto absolute top-[10%] w-full ">
-      <div className=" bg-[#F5F5F5] rounded-2xl shadow flex gap-4 flex-col h-[80vh] w-2/3 px-10 py-6 justify-center">
-        <div className="h-full w-full">
-          <GoogleMapContainer />
-        </div>
+    <div className="flex flex-col items-center justify-center  mx-auto absolute top-[10%] w-full ">
+      <div className=" bg-[#F5F5F5] rounded-2xl shadow flex gap-4 flex-col h-[800px]  w-2/3 px-10 py-6 justify-center">
+        <GoogleMapContainer />
+
         <div className="flex gap-[10px]">
           <div className="flex space-x-6">
             <input

@@ -7,6 +7,7 @@ import logo1 from "../../image/logo1.png";
 
 function Header() {
   const { user } = useAuth();
+
   return (
     <div className="lg:px-40 px-10 py-2 flex w-full justify-between items-center bg-[#506369]  ">
       <img

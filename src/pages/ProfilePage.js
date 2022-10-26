@@ -4,6 +4,7 @@ import ReviewCard from "../components/ReviewCard";
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import UserTabBar from "../components/UserTabBar";
+import { useLoading } from "../context/LoadingContext";
 
 function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
@@ -14,7 +15,8 @@ function ProfilePage() {
 
   const { user, updateUser } = useAuth();
   const [input, setInput] = useState({});
-
+  const { startLoading, stopLoading } = useLoading();
+  console.log(user);
   useEffect(() => {
     setInput((p) => {
       return {
@@ -37,11 +39,15 @@ function ProfilePage() {
 
   const handleClickSave = async (e) => {
     try {
+      startLoading();
+
       await updateUser(input, user.id);
       setIsEditing(false);
-      window.location.reload();
+      // window.location.reload();
     } catch (err) {
       console.log(err);
+    } finally {
+      // stopLoading();
     }
   };
   return (
