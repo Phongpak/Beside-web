@@ -1,22 +1,44 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
+import Slider from "react-slick";
 
-function VerifyPage() {
-  const [showImage, setShowImage] = useState("");
-  const getImage = (e) => {
-    setShowImage(e.target.files[0]);
-    console.log(URL.createObjectURL(showImage));
+const Homepage = () => {
+  //creating the ref
+  const customeSlider = useRef();
+
+  // setting slider configurations
+  var settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    arrows: false,
   };
+
+  const previous = () => {
+    customeSlider.current.slickNext();
+  };
+
+  const next = () => {
+    customeSlider.current.slickPrev();
+  };
+
   return (
-    <div className="w-full">
-      <div>example</div>
-      <img
-        className="w-1/3"
-        src="https://support.huaweicloud.com/intl/en-us/api-ocr/en-us_image_0288050121.png"
-      />
-      <input type="file" onChange={getImage} />
-      <img className="w-1/3" src={URL.createObjectURL(showImage)} />
+    <div>
+      <button onClick={next}>Next</button>
+      <button onClick={previous}>Previous</button>
+      <Slider {...settings} ref={customeSlider}>
+        <div>One</div>
+        <div>Two</div>
+        <div>Theree</div>
+        <div>Four</div>
+        <div>Five</div>
+      </Slider>
     </div>
   );
-}
+};
 
-export default VerifyPage;
+export default Homepage;

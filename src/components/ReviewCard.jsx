@@ -19,7 +19,7 @@ function ReviewCard() {
             <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
             <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
             <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-            <div>4.5</div>
+            <div className>4.5</div>
           </div>
         </div>
         <div className="flex flex-col gap-[5px]">

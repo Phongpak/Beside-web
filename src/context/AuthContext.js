@@ -1,16 +1,15 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import * as authService from "../api/authApi";
-import * as userService from "../api/userApi";
 import {
   addAccessToken,
   getAccessToken,
-  removeAccessToken
+  removeAccessToken,
 } from "../utilities/localStorage";
 
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchMe = async () => {
@@ -41,29 +40,9 @@ function AuthContextProvider({ children }) {
     setUser(null);
     removeAccessToken();
   };
-
-  const updateUser = async (input, id) => {
-    const res = await userService.updateUser(input, id);
-    setUser(res.data.user);
-  };
-
-  const deleteProfileImage = async (id) => {
-    const res = await userService.deleteProfileImage(id);
-    setUser(res.data.user);
-  };
-
   return (
     <AuthContext.Provider
-      value={{
-        login,
-        register,
-        user,
-        setUser,
-        logout,
-        getUser,
-        updateUser,
-        deleteProfileImage
-      }}
+      value={{ login, register, user, setUser, logout, getUser }}
     >
       {children}
     </AuthContext.Provider>

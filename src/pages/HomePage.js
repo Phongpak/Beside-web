@@ -8,7 +8,7 @@ function HomePage() {
     <>
       <div className="px-40 py-2 flex w-full justify-between items-center absolute z-10  ">
         <img className="scale-75" src={logo1} alt="logo" />
-        <div className=" w-1/3 gap-10 flex flex-row">
+        <div className=" w-1/3 gap-10 flex flex-row-reverse">
           <a className="text-[#809490] font-bold lg:text-2xl text-xl hover:text-[#98ABA7] ">
             Home
           </a>

@@ -3,15 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
   faAddressCard,
-  faPhone
+  faPhone,
 } from "@fortawesome/free-solid-svg-icons";
-// import {
-//   faSquareFacebook,
-//   faSquareInstagram
-// } from "@fortawesome/free-brands-svg-icons";
-function Informatio({ isEditing, handleChangeInput, input, user }) {
+import {
+  faSquareFacebook,
+  faSquareInstagram,
+} from "@fortawesome/free-brands-svg-icons";
+function Informatio() {
   return (
-    <div className="flex flex-col w-[350px] h-[700px] gap-[12px] text-[#224957]">
+    <div className="flex flex-col w-[350px] h-[650px] gap-[12px] text-[#224957]">
       <div className="flex flex-row justify-center items-center w-[350px] h-[150px] border-2 border-[#224957] rounded-[10px]">
         <div className="flex flex-col w-[90%] h-[90%] gap-[10px]">
           <div className="text-[20px] font-medium">Information</div>
@@ -45,14 +45,14 @@ function Informatio({ isEditing, handleChangeInput, input, user }) {
               icon={faPhone}
               className="text-[#809590] text-[25px]"
             ></FontAwesomeIcon>
-            {/* <FontAwesomeIcon
+            <FontAwesomeIcon
               icon={faSquareFacebook}
               className="text-[#809590] text-[25px]"
             ></FontAwesomeIcon>
             <FontAwesomeIcon
               icon={faSquareInstagram}
               className="text-[#809590] text-[25px]"
-            ></FontAwesomeIcon> */}
+            ></FontAwesomeIcon>
           </div>
         </div>
       </div>
@@ -65,69 +65,11 @@ function Informatio({ isEditing, handleChangeInput, input, user }) {
           </div>
           <div className="flex flex-row justify-between text-sm">
             <div>Gender:</div>
-
-            {isEditing ? (
-              <select
-                className="text-[#809590] w-28 text-right border-2 border-[#809590] rounded-xl"
-                onChange={handleChangeInput}
-                name="gender"
-                value={input?.gender}
-              >
-                <option value="NOT_SPECIFIC">Not specific</option>
-                <option value="MALE">MALE</option>
-                <option value="FEMALE">FEMALE</option>
-              </select>
-            ) : (
-              <div>{user?.gender}</div>
-            )}
+            <div>Not specific</div>
           </div>
           <div className="flex flex-row justify-between text-sm">
             <div>Interest:</div>
-            {isEditing ? (
-              <select
-                className="text-[#809590] w-28 text-right border-2 border-[#809590] rounded-xl"
-                onChange={handleChangeInput}
-                name="sexuallyInterested"
-                value={input.sexuallyInterested}
-              >
-                <option value="NOT_SPECIFIC">Not specific</option>
-                <option value="MALE">MALE</option>
-                <option value="FEMALE">FEMALE</option>
-              </select>
-            ) : (
-              <div> {user?.sexuallyInterested}</div>
-            )}
-          </div>
-        </div>
-      </div>
-      <div className="flex flex-row justify-center items-center w-[350px] h-[130px] border-2 border-[#224957] rounded-[10px]">
-        <div className="flex flex-col w-[90%] h-[90%] gap-[10px]">
-          <div className="text-[20px] font-medium">Location</div>
-          <div className="flex flex-row justify-start gap-[15px] text-sm">
-            {isEditing ? (
-              <input
-                className="text-[#224957] w-80  border-2 border-[#809590] rounded-xl"
-                type="text"
-                name="lat"
-                value={input?.lat}
-                onChange={handleChangeInput}
-              ></input>
-            ) : (
-              <div>{user?.lat}</div>
-            )}
-          </div>
-          <div className="flex flex-row justify-start gap-[15px] text-sm">
-            {isEditing ? (
-              <input
-                className="text-[#224957] w-80  border-2 border-[#809590] rounded-xl"
-                type="text"
-                name="lng"
-                value={input?.lng}
-                onChange={handleChangeInput}
-              ></input>
-            ) : (
-              <div>{user?.lng}</div>
-            )}
+            <div>Men</div>
           </div>
         </div>
       </div>
@@ -135,17 +77,7 @@ function Informatio({ isEditing, handleChangeInput, input, user }) {
         <div className="flex flex-col w-[90%] h-[90%] gap-[10px]">
           <div className="text-[20px] font-medium">Language</div>
           <div className="flex flex-row justify-start gap-[15px] text-sm">
-            {isEditing ? (
-              <input
-                className="text-[#224957] w-80  border-2 border-[#809590] rounded-xl"
-                type="text"
-                name="language"
-                value={input?.language}
-                onChange={handleChangeInput}
-              ></input>
-            ) : (
-              <div> {user?.language}</div>
-            )}
+            <div>Thai, English, Chinese</div>
           </div>
         </div>
       </div>
@@ -153,17 +85,7 @@ function Informatio({ isEditing, handleChangeInput, input, user }) {
         <div className="flex flex-col w-[90%] h-[90%] gap-[10px]">
           <div className="text-[20px] font-medium">Hobby</div>
           <div className="flex flex-row justify-start gap-[15px] text-sm">
-            {isEditing ? (
-              <input
-                className="text-[#224957] w-80  border-2 border-[#809590] rounded-xl"
-                type="text"
-                name="hobby"
-                value={input?.hobby}
-                onChange={handleChangeInput}
-              ></input>
-            ) : (
-              <div>{user?.hobby}</div>
-            )}
+            <div>Reading Book, Play Game, Piano, Football</div>
           </div>
         </div>
       </div>
