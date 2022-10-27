@@ -1,8 +1,11 @@
-import ProviderUserModal from "../../pages/admin/UserProviderModal";
-
 import { useState } from "react";
+import ProviderUserModal from "../../pages/admin/UserProviderModal";
+import * as adminService from "../../api/adminApi";
+const Moment = require("moment");
+const MomentRange = require("moment-range");
+const moment = MomentRange.extendMoment(Moment);
 
-function UserProviderCard() {
+function UserProviderCard({ user }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -11,6 +14,16 @@ function UserProviderCard() {
 
   const closeModal = () => {
     setIsOpen(false);
+  };
+  const accept = async (id) => {
+    await adminService.updateUser(id, { providerRequestStatus: "SUCCESS" });
+    window.location.reload();
+    closeModal();
+  };
+  const deny = async (id) => {
+    await adminService.updateUser(id, { providerRequestStatus: "REJECT" });
+    window.location.reload();
+    closeModal();
   };
   return (
     <>
@@ -21,15 +34,15 @@ function UserProviderCard() {
               <div>First name:</div>
               <div>Last name:</div>
               <div>Email:</div>
-              <div>Date:</div>
-              <div>Time:</div>
+              <div>Nationality:</div>
+              <div>Phone:</div>
             </div>
             <div className="flex flex-col justify-between ">
-              <div>wowwww</div>
-              <div>@gmail.com</div>
-              <div>wowwww@gmail.com</div>
-              <div>Monday 10 September 2022</div>
-              <div>10:34 am. </div>
+              <div>{user.firstName}</div>
+              <div>{user.lastName}</div>
+              <div>{user.email}</div>
+              <div>{user.nationality}</div>
+              <div>{user.mobile}</div>
             </div>
           </div>
           <div className="flex flex-row justify-center gap-[20px] self-end ">
@@ -42,7 +55,13 @@ function UserProviderCard() {
           </div>
         </div>
       </div>
-      <ProviderUserModal isOpen={isOpen} closeModal={closeModal} />
+      <ProviderUserModal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        user={user}
+        accept={accept}
+        deny={deny}
+      />
     </>
   );
 }

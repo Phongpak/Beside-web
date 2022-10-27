@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-function AllUserDetail() {
+import * as adminService from "../../api/adminApi";
+import Loading from "../../context/Loading";
+function AllUserDetail({ user }) {
   const [isBan, setIsBan] = useState(true);
-  const toggleBan = () => {
-    setIsBan((prevIsBan) => !prevIsBan);
+  const [loadingg, setLoading] = useState(true);
+  useEffect(() => {
+    setIsBan(user.isBan ? true : false);
+    setLoading(false);
+  }, [user]);
+
+  const send = async () => {
+    await adminService.updateUser(user.id, { isBan: !isBan });
+    window.location.reload();
   };
+
+  if (loadingg) return <Loading />;
   return (
     <div
       className={`flex flex-row justify-center items-center min-w-[1056px] h-[150px] border-4 border-${
-        isBan ? "[#9AC0B5]" : "[#E8D3D0]"
+        !isBan ? "[#9AC0B5]" : "[#E8D3D0]"
       } rounded-[15px]`}
     >
       <div className="flex flex-row justify-between items-center w-[95%] h-[85%]">
@@ -20,16 +30,16 @@ function AllUserDetail() {
               className="h-full"
             />
           </div>
-          <div className="flex flex"></div>
+          <div className="flex"></div>
           <div className="flex flex-col justify-between  font-medium">
             <div>First name:</div>
             <div>Last name:</div>
             <div>Email:</div>
           </div>
           <div className="flex flex-col justify-between  font-medium">
-            <div>Monday</div>
-            <div>Adam </div>
-            <div>wowwww@gmail.com</div>
+            <div>{user.firstName}</div>
+            <div>{user.lastName}</div>
+            <div>{user.email}</div>
           </div>
         </div>
         <div className="flex flex-row justify-center gap-[20px] self-end ">
@@ -41,13 +51,13 @@ function AllUserDetail() {
           </Link>
           <button
             className={`justify-center items-center w-[100px] h-[40px] text-[#224957] border-2 border- rounded-[20px] hover:bg-${
-              isBan ? "[#9AC0B5]" : "[#E8D3D0]"
+              !isBan ? "[#9AC0B5]" : "[#E8D3D0]"
             } hover:text-white transition delay-20 hover:border-0 border-${
-              isBan ? "[#9AC0B5]" : "[#E8D3D0]"
+              !isBan ? "[#9AC0B5]" : "[#E8D3D0]"
             }`}
-            onClick={toggleBan}
+            onClick={send}
           >
-            {`${isBan ? "Ban" : "Banned"}`}
+            {`${!isBan ? "Ban" : "Banned"}`}
           </button>
         </div>
       </div>
