@@ -5,8 +5,24 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import UserTabBar from "../components/UserTabBar";
 import { useLoading } from "../context/LoadingContext";
+import { useParams } from "react-router-dom";
+import { useProfile } from "../context/ProfileContext";
 
 function ProfilePage() {
+  const { id } = useParams();
+  const { getProfile, profileData } = useProfile();
+
+  const [profiles, setProfiles] = useState([]);
+
+  useEffect(() => {
+    const profileData = async () => {
+      let profile = await getProfile(id);
+      console.log("profile", profile);
+      setProfiles(profile.data.user);
+    };
+    profileData();
+  }, []);
+
   // const [isEditing, setIsEditing] = useState(false);
 
   // const toggleEditing = () => {
@@ -16,7 +32,8 @@ function ProfilePage() {
   const { user, updateUser, isEditing, setIsEditing } = useAuth();
   const [input, setInput] = useState({});
   const { startLoading, stopLoading } = useLoading();
-  console.log(user);
+
+  // console.log(user);
   useEffect(() => {
     setInput((p) => {
       return {
@@ -34,9 +51,9 @@ function ProfilePage() {
     });
   }, [user]);
 
-  // const handleChangeInput = (e) => {
-  //   setInput({ ...input, [e.target.name]: e.target.value });
-  // };
+  const handleChangeInput = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
 
   const handleClickSave = async (e) => {
     try {
@@ -57,9 +74,10 @@ function ProfilePage() {
         input={input}
         handleChangeInput={handleChangeInput}
         setInput={setInput}
+        profiles={profiles}
       />
       <div className="w-[100vw] h-[650px] flex flex-col gap-10 px-60">
-        <UserTabBar />
+        {id == user.id && <UserTabBar />}
         <div className="flex flex-row gap-10">
           <Informatio
             input={input}

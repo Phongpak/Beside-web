@@ -30,7 +30,7 @@ function AuthContextProvider({ children }) {
 
   const getUser = async () => {
     const res = await authService.getUser();
-    console.log(res.data.user);
+    // console.log(res.data.user);
     setUser(res.data.user);
     // console.log(res.data.user);
   };
@@ -69,22 +69,6 @@ function AuthContextProvider({ children }) {
     };
     fetchPics();
   }, [user?.id]);
-
-  const getProfileImages = async (id) => {
-    const res = await userService.getProfileImages(id);
-    return res;
-  };
-
-  const [isEditing, setIsEditing] = useState(false);
-  const toggleEditing = () => {
-    setIsEditing((prevIsEditing) => !prevIsEditing);
-  };
-
-  const getTransactionByUserId = async () => {
-    const res = await userService.getTransactionByUserId();
-    // setUser(res.data.transactions);
-    return res;
-  };
 
   const getProfileImages = async (id) => {
     const res = await userService.getProfileImages(id);

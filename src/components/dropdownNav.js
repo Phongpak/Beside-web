@@ -8,7 +8,8 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
+
   const navigate = useNavigate();
   const handleClickLogout = () => {
     logout();
@@ -38,7 +39,7 @@ export default function Example() {
             <Menu.Item>
               {({ active }) => (
                 <Link
-                  to="/profile"
+                  to={`/profile/${user.id}`}
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm"

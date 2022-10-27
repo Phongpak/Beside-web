@@ -6,6 +6,7 @@ import WithdrawForm from "../profile/WithdrawForm";
 
 function ModalWallet({ isOpenModalWallet, closeModalWallet }) {
   const [type, setType] = useState("topup");
+  // const { user } = useA;
   return (
     <>
       {isOpenModalWallet ? (

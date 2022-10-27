@@ -29,7 +29,7 @@ function Routers() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/booknow" element={<BooknowPage />} />
         <Route path="/explore" element={<ExplorePage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile/:id" element={<ProfilePage />} />
         <Route path="/adminUser" element={<User />} />
         <Route path="/adminProviderUser" element={<ProviderUser />} />
         <Route path="/adminTransaction" element={<Transaction />} />

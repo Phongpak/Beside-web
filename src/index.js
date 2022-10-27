@@ -9,17 +9,20 @@ import reportWebVitals from "./reportWebVitals";
 import AuthContextProvider from "./context/AuthContext";
 import LoadingContextProvider from "./context/LoadingContext";
 import OrderContextProvider from "./context/OrderContext";
+import ProfileContextProvider from "./context/ProfileContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <LoadingContextProvider>
-      <OrderContextProvider>
-        <AuthContextProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </AuthContextProvider>
-      </OrderContextProvider>
+      <ProfileContextProvider>
+        <OrderContextProvider>
+          <AuthContextProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </AuthContextProvider>
+        </OrderContextProvider>
+      </ProfileContextProvider>
     </LoadingContextProvider>
   </React.StrictMode>
 );

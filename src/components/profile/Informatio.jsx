@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../context/AuthContext";
 import GoogleMapContainerLocation from "../GoogleMapContainerLocation";
+import { useParams } from "react-router-dom";
 // import {
 //   faSquareFacebook,
 //   faSquareInstagram
@@ -18,16 +19,19 @@ import GoogleMapContainerLocation from "../GoogleMapContainerLocation";
 
 function Informatio({ handleChangeInput, input, setInput }) {
   const { isEditing, user } = useAuth();
-  console.log("kuy>>>>>>", setInput);
+  // console.log( setInput);
+  const { id } = useParams();
+
   if (!user) {
     return null;
   }
+
   const joinDate = new Date(user?.createdAt);
   const fullDate = dateFormat(joinDate || "02/02/22", " d mmmm yyyy ");
   const birthDate = new Date(user?.birthDate);
   const fullBirthDate = dateFormat(birthDate || "02/02/32", " d mmmm yyyy ");
 
-  console.log("user", user);
+  // console.log("user", user);
   return (
     <div className="flex flex-col w-[350px] h-[900px] gap-[12px] text-[#224957]">
       <div className="flex flex-row justify-center items-center w-[350px] h-[150px] border-2 border-[#224957] rounded-[10px]">
