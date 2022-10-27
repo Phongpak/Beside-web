@@ -1,31 +1,50 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function RegisterPage() {
   const { register } = useAuth();
   const [input, setInput] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    mobile: '',
-    birthDate: '',
-    gender: 'NOT_SPECIFIC',
-    password: '',
-    nationality: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    mobile: "",
+    birthDate: "",
+    gender: "NOT_SPECIFIC",
+    password: "",
+    nationality: "",
+    age: "",
   });
   const [isPasswordMatched, setIsPasswordMatched] = useState(false);
   const [passwordInput, setPasswordInput] = useState({
-    password: '',
-    confirmPassword: '',
+    password: "",
+    confirmPassword: "",
   });
+
+  const [image, setImage] = useState(null);
+  const inputEl = useRef(null);
+  const navigate = useNavigate();
+
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
   const handleSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      await register(input);
+      const formData = new FormData();
+      for (const key in input) {
+        formData.append(`${key}`, input[key]);
+      }
+      for (let item of image) {
+        formData.append("idCardImage", item);
+      }
+      for (var pair of formData.entries()) {
+        console.log(pair[0] + ", " + pair[1]);
+      }
+      const res = await register(formData);
+      console.log(res);
+      alert(`555${res?.data?.message}`);
+      navigate("/login");
     } catch (err) {
       console.log(err);
     }
@@ -33,19 +52,20 @@ function RegisterPage() {
   const validatePassword = () => {
     if (
       passwordInput.password === passwordInput.confirmPassword &&
-      passwordInput.password !== '' &&
-      passwordInput.confirmPassword !== ''
+      passwordInput.password !== "" &&
+      passwordInput.confirmPassword !== ""
     ) {
       setIsPasswordMatched(true);
       setInput({ ...input, password: passwordInput.password });
     } else {
       setIsPasswordMatched(false);
-      setInput({ ...input, password: '' });
+      setInput({ ...input, password: "" });
     }
   };
   const handlePasswordInput = (e) => {
     setPasswordInput({ ...passwordInput, [e.target.name]: e.target.value });
   };
+
   useEffect(() => {
     validatePassword();
   }, [passwordInput]);
@@ -70,7 +90,7 @@ function RegisterPage() {
                     name="firstName"
                     id="firstName"
                     className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] ${
-                      input.firstName ? '' : 'border-red-500 border-2'
+                      input.firstName ? "" : "border-red-500 border-2"
                     }`}
                     placeholder="First name"
                     required=""
@@ -83,7 +103,7 @@ function RegisterPage() {
                     name="lastName"
                     id="lastName"
                     className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] ${
-                      input.lastName ? '' : 'border-red-500 border-2'
+                      input.lastName ? "" : "border-red-500 border-2"
                     }`}
                     placeholder="Last name"
                     required=""
@@ -97,7 +117,7 @@ function RegisterPage() {
                   name="email"
                   id="email"
                   className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] ${
-                    input.email ? '' : 'border-red-500 border-2'
+                    input.email ? "" : "border-red-500 border-2"
                   }`}
                   placeholder="E-mail"
                   required=""
@@ -110,7 +130,7 @@ function RegisterPage() {
                   name="mobile"
                   id="mobile"
                   className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] ${
-                    input.mobile ? '' : 'border-red-500 border-2'
+                    input.mobile ? "" : "border-red-500 border-2"
                   }`}
                   placeholder="Phone number"
                   required="required"
@@ -123,7 +143,7 @@ function RegisterPage() {
                   name="nationality"
                   id="nationality"
                   className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] ${
-                    input.nationality ? '' : 'border-red-500 border-2'
+                    input.nationality ? "" : "border-red-500 border-2"
                   }`}
                   placeholder="Nationality"
                   required=""
@@ -134,7 +154,7 @@ function RegisterPage() {
                 <div>
                   <input
                     className={` text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] ${
-                      input.birthDate ? '' : 'border-red-500 border-2'
+                      input.birthDate ? "" : "border-red-500 border-2"
                     }`}
                     type="date"
                     name="birthDate"
@@ -149,7 +169,7 @@ function RegisterPage() {
                     id="gender"
                     defaultValue="NOT_SPECIFIC"
                     className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white bg-[#9AC0B5] text-date ${
-                      input.gender ? '' : 'border-red-500 border-2'
+                      input.gender ? "" : "border-red-500 border-2"
                     }`}
                     placeholder="Gender"
                     required=""
@@ -168,8 +188,8 @@ function RegisterPage() {
                   id="password"
                   className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white  bg-[#9AC0B5] ${
                     passwordInput.password && isPasswordMatched
-                      ? ''
-                      : 'border-red-500 border-2'
+                      ? ""
+                      : "border-red-500 border-2"
                   }`}
                   placeholder="Password"
                   required=""
@@ -183,12 +203,28 @@ function RegisterPage() {
                   id="confirmPassword"
                   className={`text-white text-sm rounded-lg block w-full p-2.5 placeholder-white  bg-[#9AC0B5] ${
                     passwordInput.confirmPassword && isPasswordMatched
-                      ? ''
-                      : 'border-red-500 border-2'
+                      ? ""
+                      : "border-red-500 border-2"
                   }`}
                   placeholder="Confirm Password"
                   required=""
                   onChange={handlePasswordInput}
+                />
+              </div>
+              <div>
+                <input
+                  ref={inputEl}
+                  type="file"
+                  className="text-white text-sm rounded-lg block w-full p-2.5 placeholder-white  bg-[#9AC0B5]"
+                  onChange={(e) => {
+                    if (e.target.files.length <= 3) {
+                      setImage(e.target.files);
+                    } else {
+                      inputEl.current.value = "";
+                      alert("Only 3 files accepted.");
+                      setImage([]);
+                    }
+                  }}
                 />
               </div>
 
@@ -221,22 +257,22 @@ function RegisterPage() {
                 type="submit"
                 className={`w-full text-[#224957] ${
                   isPasswordMatched ||
-                  (passwordInput.password !== '' &&
-                    passwordInput.confirmPassword !== '')
-                    ? ' bg-[#F5F5F5] '
-                    : 'bg-gray-300 '
+                  (passwordInput.password !== "" &&
+                    passwordInput.confirmPassword !== "")
+                    ? " bg-[#F5F5F5] "
+                    : "bg-gray-300 "
                 } hover:bg-[3bg-[#9AC0B5] rounded-lg text-[20px] px-5 py-2.5 text-center shadow-lg`}
                 disabled={
                   !isPasswordMatched ||
-                  passwordInput.password === '' ||
-                  passwordInput.confirmPassword === ''
+                  passwordInput.password === "" ||
+                  passwordInput.confirmPassword === ""
                 }
               >
                 Submit
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Already have an account?{' '}
-                <Link href="#" className="font-medium text-primary-600">
+                Already have an account?{" "}
+                <Link to="/login" className="font-medium text-primary-600">
                   Login here
                 </Link>
               </p>

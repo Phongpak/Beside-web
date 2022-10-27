@@ -28,8 +28,8 @@ function ModalAvailable({ isOpenModalAvailable, closeModalAvailable }) {
               onClick={(e) => e.stopPropagation()}
               className="relative w-auto my-6 mx-auto max-w-3xl"
             >
-              <div className="border-4 border-[#9AC0B5] rounded-[30px] rounded-lg min-w-[775px] min-h-[550px] shadow-lg relative flex flex-row justify-center items-center w-full bg-white outline-none focus:outline-none">
-                <div className="flex flex-col items-center min-w-[675px] min-h-[550px] gap-[20px]">
+              <div className="overflow-y-scroll hide-scrollbar border-4 border-[#9AC0B5] rounded-[30px] rounded-lg min-w-[775px] min-h-[550px] shadow-lg relative flex flex-row justify-center items-center w-full bg-white outline-none focus:outline-none">
+                <div className="flex flex-col items-center min-w-[675px] min-h-[550px] max-h-[550px] gap-[20px]">
                   <button className="self-end text-[30px] text-gray-400 absolute right-[20px]">
                     <FontAwesomeIcon
                       icon={faXmark}
@@ -64,13 +64,16 @@ function ModalAvailable({ isOpenModalAvailable, closeModalAvailable }) {
                     </div>
                   </div>
                   {type === "available" ? (
-                    weekDay.map((item, index) => (
-                      <DayAvailable
-                        weekDay={item}
-                        weekDayNumber={index}
-                        key={index}
-                      />
-                    ))
+                    weekDay.map((item, index) => {
+                      // console.log(index);
+                      return (
+                        <DayAvailable
+                          weekDay={item}
+                          weekDayNumber={index}
+                          key={item}
+                        />
+                      );
+                    })
                   ) : (
                     <DayUnavailable />
                   )}
