@@ -57,13 +57,13 @@ function ProfileImg() {
               1280: {
                 slidesPerView: 1,
                 spaceBetween: 1,
-                slidesPerGroup: 1
+                slidesPerGroup: 1,
               },
               1440: {
                 slidesPerView: 1,
                 spaceBetween: 1,
-                slidesPerGroup: 1
-              }
+                slidesPerGroup: 1,
+              },
             }}
             loop={true}
             modules={[Pagination, Navigation]}

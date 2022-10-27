@@ -5,6 +5,9 @@ import {
   faEnvelope,
   faAddressCard,
   faPhone,
+  faDollar,
+  faCheck,
+  faMoneyCheckDollar,
 } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../context/AuthContext";
 import GoogleMapContainerLocation from "../GoogleMapContainerLocation";
@@ -13,8 +16,9 @@ import GoogleMapContainerLocation from "../GoogleMapContainerLocation";
 //   faSquareInstagram
 // } from "@fortawesome/free-brands-svg-icons";
 
-function Informatio({ isEditing, handleChangeInput, input, user }) {
-  console.log(user);
+function Informatio({ handleChangeInput, input, setInput }) {
+  const { isEditing, user } = useAuth();
+  console.log("kuy>>>>>>", setInput);
   if (!user) {
     return null;
   }
@@ -59,6 +63,10 @@ function Informatio({ isEditing, handleChangeInput, input, user }) {
               icon={faPhone}
               className="text-[#809590] text-[25px]"
             ></FontAwesomeIcon>
+            <FontAwesomeIcon
+              icon={faMoneyCheckDollar}
+              className="text-[#809590] text-[25px]"
+            ></FontAwesomeIcon>
           </div>
         </div>
       </div>
@@ -94,7 +102,7 @@ function Informatio({ isEditing, handleChangeInput, input, user }) {
                 className="text-[#809590] w-28 text-right border-2 border-[#809590] rounded-xl"
                 onChange={handleChangeInput}
                 name="sexuallyInterested"
-                value={input.sexuallyInterested}
+                value={input?.sexuallyInterested}
               >
                 <option value="NOT_SPECIFIC">Not specific</option>
                 <option value="MALE">MALE</option>
@@ -112,8 +120,16 @@ function Informatio({ isEditing, handleChangeInput, input, user }) {
       <div className="flex flex-row justify-center items-center w-[350px]  border-2 border-[#224957] rounded-[10px]">
         <div className="flex flex-col w-[90%] h-[90%] gap-[10px]">
           <div className="text-[20px] font-medium">Location</div>
-          <div className="flex flex-col  gap-[15px] text-sm">
-            <GoogleMapContainerLocation />
+          <div
+            className={`flex flex-col ${
+              isEditing ? "h-60" : "h-20"
+            }   gap-[15px] text-sm`}
+          >
+            {!isEditing ? (
+              <div>{user?.location}</div>
+            ) : (
+              <GoogleMapContainerLocation setInput={setInput} input={input} />
+            )}
             {/* {isEditing ? (
               <input
                 className="text-[#224957] w-80  border-2 border-[#809590] rounded-xl"

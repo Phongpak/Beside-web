@@ -4,7 +4,7 @@ import * as userService from "../api/userApi";
 import {
   addAccessToken,
   getAccessToken,
-  removeAccessToken
+  removeAccessToken,
 } from "../utilities/localStorage";
 
 const AuthContext = createContext();
@@ -61,14 +61,30 @@ function AuthContextProvider({ children }) {
   useEffect(() => {
     const fetchPics = async () => {
       try {
-        const res = await getProfileImages(user.id);
+        const res = await getProfileImages(user?.id);
         setPics(res.data.profileImages);
       } catch (err) {
         console.log(err);
       }
     };
     fetchPics();
-  }, [user.id]);
+  }, [user?.id]);
+
+  const getProfileImages = async (id) => {
+    const res = await userService.getProfileImages(id);
+    return res;
+  };
+
+  const [isEditing, setIsEditing] = useState(false);
+  const toggleEditing = () => {
+    setIsEditing((prevIsEditing) => !prevIsEditing);
+  };
+
+  const getTransactionByUserId = async () => {
+    const res = await userService.getTransactionByUserId();
+    // setUser(res.data.transactions);
+    return res;
+  };
 
   const getProfileImages = async (id) => {
     const res = await userService.getProfileImages(id);
@@ -97,6 +113,12 @@ function AuthContextProvider({ children }) {
         getUser,
         updateUser,
         deleteProfileImage,
+        getProfileImages,
+        toggleEditing,
+        isEditing,
+        setIsEditing,
+        pics,
+        getTransactionByUserId,
         initialLoading,
       }}
     >

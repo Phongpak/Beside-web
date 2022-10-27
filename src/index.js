@@ -8,15 +8,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import AuthContextProvider from "./context/AuthContext";
 import LoadingContextProvider from "./context/LoadingContext";
+import OrderContextProvider from "./context/OrderContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <LoadingContextProvider>
-      <AuthContextProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </AuthContextProvider>
+      <OrderContextProvider>
+        <AuthContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </AuthContextProvider>
+      </OrderContextProvider>
     </LoadingContextProvider>
   </React.StrictMode>
 );

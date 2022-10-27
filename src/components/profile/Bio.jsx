@@ -8,24 +8,19 @@ import { useState } from "react";
 import ModalAvailable from "../modals/ModalAvailable";
 import { useLocation } from "react-router-dom";
 
-function Bio() {
-	const { pathname } = useLocation();
-	const { user, toggleEditing, isEditing } = useAuth();
+function Bio({ input, handleChangeInput, setInput }) {
+  const { pathname } = useLocation();
+  const { user, toggleEditing, isEditing } = useAuth();
 
-	const [input, setInput] = useState({});
-	useEffect(() => {
-		setInput((p) => {
-			return {
-				penName: user?.penName || user?.firstName,
-				description: user?.description,
-				rate: user?.rate
-			};
-		});
-	}, [user]);
-
-	const handleChangeInput = (e) => {
-		setInput({ ...input, [e.target.name]: e.target.value });
-	};
+  // useEffect(() => {
+  //   setInput((p) => {
+  //     return {
+  //       penName: user?.penName || user?.firstName,
+  //       description: user?.description,
+  //       rate: user?.rate,
+  //     };
+  //   });
+  // }, [user]);
 
 	const [isOpenModalWallet, setIsOpenModalWallet] = useState(false);
 	const [isOpenModalAvailable, setIsOpenModalAvailable] = useState(false);
