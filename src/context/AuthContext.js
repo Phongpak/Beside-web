@@ -55,24 +55,7 @@ function AuthContextProvider({ children }) {
 
   const deleteProfileImage = async (id) => {
     const res = await userService.deleteProfileImage(id);
-    // setUser(res.data.user);
   };
-
-  const getProfileImages = async (id) => {
-    const res = await userService.getProfileImages(id);
-    // setUser(res.data.user);
-    return res;
-  };
-
-  const [isEditing, setIsEditing] = useState(false);
-  const toggleEditing = () => {
-    setIsEditing((prevIsEditing) => !prevIsEditing);
-  };
-
-  // const [input, setInput] = useState({});
-  // const handleChangeInput = (e) => {
-  //   setInput({ ...input, [e.target.name]: e.target.value });
-  // };
 
   const [pics, setPics] = useState([]);
   useEffect(() => {
@@ -86,6 +69,22 @@ function AuthContextProvider({ children }) {
     };
     fetchPics();
   }, [user.id]);
+
+  const getProfileImages = async (id) => {
+    const res = await userService.getProfileImages(id);
+    return res;
+  };
+
+  const [isEditing, setIsEditing] = useState(false);
+  const toggleEditing = () => {
+    setIsEditing((prevIsEditing) => !prevIsEditing);
+  };
+
+  const getTransactionByUserId = async () => {
+    const res = await userService.getTransactionByUserId();
+    // setUser(res.data.transactions);
+    return res;
+  };
 
   return (
     <AuthContext.Provider

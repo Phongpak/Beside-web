@@ -7,13 +7,13 @@ import UserTabBar from "../components/UserTabBar";
 import { useLoading } from "../context/LoadingContext";
 
 function ProfilePage() {
-  const [isEditing, setIsEditing] = useState(false);
+  // const [isEditing, setIsEditing] = useState(false);
 
-  const toggleEditing = () => {
-    setIsEditing((prevIsEditing) => !prevIsEditing);
-  };
+  // const toggleEditing = () => {
+  //   setIsEditing((prevIsEditing) => !prevIsEditing);
+  // };
 
-  const { user, updateUser, getProfileImages } = useAuth();
+  const { user, updateUser, isEditing, setIsEditing } = useAuth();
   const [input, setInput] = useState({});
   const { startLoading, stopLoading } = useLoading();
   console.log(user);
@@ -33,9 +33,9 @@ function ProfilePage() {
     });
   }, [user]);
 
-  const handleChangeInput = (e) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-  };
+  // const handleChangeInput = (e) => {
+  //   setInput({ ...input, [e.target.name]: e.target.value });
+  // };
 
   const handleClickSave = async (e) => {
     try {

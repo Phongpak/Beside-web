@@ -14,7 +14,7 @@ function ModalPending({ isOpen, closeModal }) {
 							onClick={(e) => e.stopPropagation()}
 							className='relative w-auto my-6 mx-auto max-w-3xl'
 						>
-							<div className='border-4 border-[#9AC0B5] rounded-[30px] rounded-lg min-w-[775px] min-h-[500px] shadow-lg relative flex flex-row justify-center items-center w-full bg-white outline-none focus:outline-none'>
+							<div className='border-4 border-[#9AC0B5] rounded-lg min-w-[775px] min-h-[500px] shadow-lg relative flex flex-row justify-center items-center w-full bg-white outline-none focus:outline-none'>
 								<div className='flex flex-col min-w-[725px] min-h-[400px] gap-[10px]'>
 									<button className='self-end text-[30px] text-gray-400'>
 										<FontAwesomeIcon icon={faXmark} onClick={closeModal} />
