@@ -14,8 +14,7 @@ function BookComponent() {
           <div className="flex space-x-6">
             <input
               type="date"
-              name="date"
-              id="date"
+              name="appointmentDate"
               className="text-[#98ABA7] text-sm rounded-lg block w-full p-2.5 placeholder-[#98ABA7] bg-white"
               placeholder="Date"
             />
