@@ -12,8 +12,18 @@ function Transaction() {
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  const [type, setType] = useState("topUp");
+
+  const openTopUp = () => {
+    setType("topUp");
+  };
+
+  const openWithdraw = () => {
+    setType("Withdraw");
+  };
   return (
-    <div className="flex flex-col gap-[20px] w-[100vw] px-60">
+    <div className="flex flex-col gap-[20px] w-full px-60">
       <AdminTabBar />
       <div className="flex flex-row gap-[10px]">
         <input
@@ -30,10 +40,24 @@ function Transaction() {
         </select>
       </div>
       <div className="flex flex-row gap-[10px]">
-        <div className="cursor-pointer flex flex-row justify-center items-center bg-[#98ADC0] text-white text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#98ADC0]">
-          Topup
+        <div
+          onClick={openTopUp}
+          className={`cursor-pointer flex flex-row justify-center items-center ${
+            type == "topUp"
+              ? "bg-[#98ADC0] text-white border-0"
+              : "bg-white text-[#224957]  border-2 border-[#98ADC0]"
+          }   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#98ADC0] hover:text-white transition delay-20 hover:border-0`}
+        >
+          Top up
         </div>
-        <div className="cursor-pointer flex flex-row justify-center items-center bg-white text-[#224957] text-[14px] font-medium border-2 border-[#9AC0B5] rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#9AC0B5] hover:text-white transition delay-20 hover:border-0">
+        <div
+          onClick={openWithdraw}
+          className={`cursor-pointer flex flex-row justify-center items-center ${
+            type !== "topUp"
+              ? "bg-[#506369] text-white border-0"
+              : "bg-white text-[#224957]  border-2 border-[#9AC0B5]"
+          }   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0`}
+        >
           Withdraw
         </div>
       </div>

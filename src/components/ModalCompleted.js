@@ -5,7 +5,7 @@ import { useState } from "react";
 function ModalCompleted({ isOpen, closeModal }) {
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
-  const [review, setReview] = useState(0);
+
   const stars = [0, 0, 0, 0, 0];
 
   const handleClick = (value) => {
@@ -32,7 +32,7 @@ function ModalCompleted({ isOpen, closeModal }) {
               onClick={(e) => e.stopPropagation()}
               className="relative w-auto my-6 mx-auto max-w-3xl"
             >
-              <div className="border-4 border-[#9AC0B5] rounded-[30px] rounded-lg min-w-[775px] min-h-[500px] shadow-lg relative flex flex-row justify-center items-center w-full bg-white outline-none focus:outline-none">
+              <div className="border-4 border-[#9AC0B5] rounded-lg min-w-[775px] min-h-[500px] shadow-lg relative flex flex-row justify-center items-center w-full bg-white outline-none focus:outline-none">
                 <div className="flex flex-col items-center min-w-[725px] min-h-[475px] gap-[18px]">
                   <button className="self-end text-[30px] text-gray-400 absolute">
                     <FontAwesomeIcon icon={faXmark} onClick={closeModal} />
@@ -55,13 +55,7 @@ function ModalCompleted({ isOpen, closeModal }) {
                   <div className="flex flex-row justify-center items-center gap-[5px]">
                     {stars.map((item, index) => (
                       <FontAwesomeIcon
-                        onClick={() => {
-                          const score = index + 1;
-                          console.log(score);
-                          setReview(score);
-
-                          handleClick(index + 1);
-                        }}
+                        onClick={() => handleClick(index + 1)}
                         onMouseOver={() => handleMouseOver(index + 1)}
                         onMouseLeave={handleMouseLeave}
                         className={`cursor-pointer text-[30px] text-${

@@ -9,18 +9,18 @@ import {
   ComboboxPopover,
 } from "@reach/combobox";
 import { getLatLng } from "react-places-autocomplete";
+import { useOrder } from "../context/OrderContext";
 
-export default function GoogleMapContainer() {
+export default function GoogleMapContainer({ selected, setSelected }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCEgnqaYKv_x_EQEXkA2qCgSzgqXJPDloA",
     libraries: ["places"],
   });
   if (!isLoaded) return <div>Loading...</div>;
-  return <Map />;
+  return <Map selected={selected} setSelected={setSelected} />;
 }
-function Map() {
+function Map({ selected, setSelected }) {
   const center = useMemo(() => ({ lat: 13.7340977, lng: 100.5164019 }), []);
-  const [selected, setSelected] = useState(null);
   return (
     <>
       <div className="places-container">
@@ -37,6 +37,7 @@ function Map() {
   );
 }
 const PlacesAutocomplete = ({ setSelected }) => {
+  const { book, setBook } = useOrder();
   const {
     ready,
     value,
@@ -49,7 +50,7 @@ const PlacesAutocomplete = ({ setSelected }) => {
     clearSuggestions();
 
     const results = await getGeocode({ address });
-    console.log(results);
+    setBook({ ...book, location: address.split(",")[0] });
     const { lat, lng } = await getLatLng(results[0]);
     setSelected({ lat, lng });
   };

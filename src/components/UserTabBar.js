@@ -1,19 +1,21 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function UserTabBar() {
   const { pathname } = useLocation();
+  const { user } = useAuth();
   // console.log(pathname);
   return (
     <div className="flex justify-between pt-[20px]">
       <Link
-        to="/profile"
+        to={`/profile/${user?.id}`}
         className={`cursor-pointer flex flex-row justify-center items-center  text-[#224957] border-2 border-[#9AC0B5] font-medium rounded-[15px] min-w-[190px] h-[50px] hover:bg-[#506369] ${
-          Boolean(pathname !== "/profile") ? "bg-white" : "bg-[#506369]"
+          pathname !== `/profile/${user?.id}` ? "bg-white" : "bg-[#506369]"
         } ${
-          Boolean(pathname === "/profile") ? "text-white" : "text-[#224957]"
+          pathname === `/profile/${user?.id}` ? "text-white" : "text-[#224957]"
         } ${
-          Boolean(pathname === "/profile") ? "border-0" : "text-[#224957]"
+          pathname === `/profile/${user?.id}` ? "border-0" : "text-[#224957]"
         } hover:text-white transition delay-20 hover:border-0`}
       >
         Info

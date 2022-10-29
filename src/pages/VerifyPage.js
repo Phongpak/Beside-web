@@ -5,6 +5,7 @@ function VerifyPage() {
   const getImage = (e) => {
     setShowImage(e.target.files[0]);
     console.log(URL.createObjectURL(showImage));
+    console.log("showImage", showImage);
   };
   return (
     <div className="w-full">
@@ -14,7 +15,9 @@ function VerifyPage() {
         src="https://support.huaweicloud.com/intl/en-us/api-ocr/en-us_image_0288050121.png"
       />
       <input type="file" onChange={getImage} />
-      <img className="w-1/3" src={URL.createObjectURL(showImage)} />
+      {showImage !== "" && (
+        <img className="w-1/3" src={URL.createObjectURL(showImage)} />
+      )}
     </div>
   );
 }

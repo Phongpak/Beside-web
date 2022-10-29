@@ -1,11 +1,13 @@
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const navigate = useNavigate();
   const { login } = useAuth();
   const [input, setInput] = useState({
     email: "",
-    password: ""
+    password: "",
   });
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -14,6 +16,7 @@ function LoginPage() {
     e.preventDefault();
     try {
       await login(input);
+      navigate("/booknow");
     } catch (err) {
       console.log(err);
     }
@@ -52,6 +55,12 @@ function LoginPage() {
         <button className="bg-gray-200 shadow-md hover:shadow-xl transition delay-20 text-[#224957] w-[400px] h-[50px] rounded-[10px]">
           Login
         </button>
+        <div>
+          no Account ? create one click{" "}
+          <Link className="text-blue-900 hover:text-blue-200" to="/register">
+            here
+          </Link>{" "}
+        </div>
       </form>
     </div>
   );

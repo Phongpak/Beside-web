@@ -2,9 +2,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+// import SwiperCore, {Autoplay} from "swiper/core"
 // import "swiper/css/autoplay ";
 // import "swiper/css/scrollbar ";
-import { Pagination, Navigation } from "swiper";
+import { Pagination, Navigation, Autoplay } from "swiper";
 import { useState } from "react";
 
 function Carousel() {
@@ -15,10 +16,16 @@ function Carousel() {
       <h1 className="pt-[200px] text-[#9AC0B5] text-[40px] text-center mt-20">
         Top destination in bangkok
       </h1>
+
       <div>
         <Swiper
           // style={{ animation: "scroll 30s" }}
-          // className="slide-track"
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true
+          }}
+          className="slide-track"
           breakpoints={{
             1280: {
               slidesPerView: 4,
@@ -31,15 +38,16 @@ function Carousel() {
               slidesPerGroup: 5
             }
           }}
+          speed={5000}
           loop={true}
-          modules={[Pagination, Navigation]}
+          modules={[Pagination, Navigation, Autoplay]}
         >
-          <SwiperSlide className="my-20 slide-track">
-            <div className=" slide h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full">
+          <SwiperSlide className="my-20 ">
+            <div className=" slide h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full hover:-translate-y-10 hover:scale-125">
               <img
                 src="https://bangkoknightlife.com/wp-content/uploads/bangkok_at_night.jpg"
                 alt="..."
-                className="h-full w-full pop"
+                className="h-full w-full  "
               />
             </div>
             <div className=" w-60 mt-5">
@@ -48,8 +56,8 @@ function Carousel() {
               </h1>
             </div>
           </SwiperSlide>
-          <SwiperSlide className=" my-20 slide-track">
-            <div className="slide h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full">
+          <SwiperSlide className=" my-20 ">
+            <div className="slide h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full hover:-translate-y-10 hover:scale-125">
               <img
                 src="https://www.agoda.com/wp-content/uploads/2020/06/Chiang-Mai-tuk-tuk-day-trips-from-Chiang-Mai-Thailand.jpg"
                 alt="..."
@@ -62,8 +70,8 @@ function Carousel() {
               </h1>
             </div>
           </SwiperSlide>
-          <SwiperSlide className="my-20 slide-track">
-            <div className="slide h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full">
+          <SwiperSlide className="my-20 ">
+            <div className="slide h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full hover:-translate-y-10 hover:scale-125">
               <img
                 src="https://www.swedishnomad.com/wp-content/images/2022/05/Things-to-do-in-Pattaya.jpg"
                 alt="..."
@@ -76,8 +84,8 @@ function Carousel() {
               </h1>
             </div>
           </SwiperSlide>
-          <SwiperSlide className="my-20 slide-track">
-            <div className="slide h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full">
+          <SwiperSlide className="my-20 ">
+            <div className="slide h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full hover:-translate-y-10 hover:scale-125">
               <img
                 src="https://www.bangkokairblog.com/wp-content/uploads/2018/07/PHUKET-WALKING-STREET-MARKET.jpg"
                 alt="..."
@@ -90,8 +98,8 @@ function Carousel() {
               </h1>
             </div>
           </SwiperSlide>
-          <SwiperSlide className="my-20 slide-track">
-            <div className="slide h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full">
+          <SwiperSlide className="my-20 ">
+            <div className="slide h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full hover:-translate-y-10 hover:scale-125">
               <img
                 src="https://img.kapook.com/u/2022/sutasinee/08/93.jpg"
                 alt="..."
@@ -104,8 +112,8 @@ function Carousel() {
               </h1>
             </div>
           </SwiperSlide>
-          <SwiperSlide className=" my-20 slide-track">
-            <div className="h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full">
+          <SwiperSlide className=" my-20 ">
+            <div className="h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full hover:-translate-y-10 hover:scale-125">
               <img
                 src="https://obs.line-scdn.net/0hYubkJBYgBlpfEin-bU15DWVEBTVsfhVZOyRXWQN8WG56cEMONHVANHxFXWMlI0EENndNOXIQHWt1dRYLZyNA/w644"
                 alt="..."
@@ -118,8 +126,8 @@ function Carousel() {
               </h1>
             </div>
           </SwiperSlide>
-          <SwiperSlide className=" my-20 slide-track">
-            <div className="h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full">
+          <SwiperSlide className=" my-20 ">
+            <div className="h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full hover:-translate-y-10 hover:scale-125">
               <img
                 src="https://obs.line-scdn.net/0hYubkJBYgBlpfEin-bU15DWVEBTVsfhVZOyRXWQN8WG56cEMONHVANHxFXWMlI0EENndNOXIQHWt1dRYLZyNA/w644"
                 alt="..."
@@ -132,8 +140,8 @@ function Carousel() {
               </h1>
             </div>
           </SwiperSlide>
-          <SwiperSlide className=" my-20 slide-track">
-            <div className="h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full">
+          <SwiperSlide className=" my-20">
+            <div className="h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full hover:-translate-y-10 hover:scale-125">
               <img
                 src="https://obs.line-scdn.net/0hYubkJBYgBlpfEin-bU15DWVEBTVsfhVZOyRXWQN8WG56cEMONHVANHxFXWMlI0EENndNOXIQHWt1dRYLZyNA/w644"
                 alt="..."
