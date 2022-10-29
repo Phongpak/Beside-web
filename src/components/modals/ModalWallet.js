@@ -19,7 +19,7 @@ function ModalWallet({ isOpenModalWallet, closeModalWallet }) {
               onClick={(e) => e.stopPropagation()}
               className="relative w-auto my-6 mx-auto max-w-3xl"
             >
-              <div className="border-4 border-[#9AC0B5] rounded-[30px] rounded-lg min-w-[775px] shadow-lg relative flex flex-col justify-center items-center w-full bg-white outline-none focus:outline-none">
+              <div className="border-4 border-[#9AC0B5] rounded-[30px]  min-w-[775px] shadow-lg relative flex flex-col justify-center items-center w-full bg-white outline-none focus:outline-none">
                 <div className="flex flex-row justify-between items-center min-w-[725px] pt-[10px] pb-[10px]">
                   <div className="flex flex-row gap-[10px] self-start pt-[10px]">
                     <div
@@ -27,7 +27,7 @@ function ModalWallet({ isOpenModalWallet, closeModalWallet }) {
                         type === "topup"
                           ? "bg-[#506369] text-white"
                           : "bg-white text-[#224957] border-2 border-[#9AC0B5]"
-                      } cursor-pointer flex flex-row justify-center items-center text-[14px] font-medium rounded-[15px] min-w-[100px] h-[30px] hover:bg-[#506369] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0`}
+                      } cursor-pointer flex flex-row justify-center items-center text-[14px] font-medium rounded-[15px] min-w-[100px] h-[30px]  hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0`}
                       onClick={() => setType("topup")}
                     >
                       Topup
@@ -37,7 +37,7 @@ function ModalWallet({ isOpenModalWallet, closeModalWallet }) {
                         type === "withdraw"
                           ? "bg-[#506369] text-white"
                           : "bg-white text-[#224957] border-2 border-[#9AC0B5]"
-                      } cursor-pointer flex flex-row justify-center items-center text-[14px] font-medium rounded-[15px] min-w-[100px] h-[30px] hover:bg-[#506369] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0`}
+                      } cursor-pointer flex flex-row justify-center items-center text-[14px] font-medium rounded-[15px] min-w-[100px] h-[30px]  hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0`}
                       onClick={() => setType("withdraw")}
                     >
                       Withdraw
