@@ -5,7 +5,7 @@ import * as orderService from "../api/orderApi";
 import {
   addAccessToken,
   getAccessToken,
-  removeAccessToken
+  removeAccessToken,
 } from "../utilities/localStorage";
 
 const AuthContext = createContext();
@@ -86,8 +86,9 @@ function AuthContextProvider({ children }) {
     // setUser(res.data.transactions);
     return res;
   };
+
   const getMyOrders = async (id) => {
-    const res = await userService.getMyOrders(id);
+    const res = await orderService.getMyOrders(id);
     return res;
   };
 
@@ -104,10 +105,6 @@ function AuthContextProvider({ children }) {
     };
     fetchOrders();
   }, [user?.id]);
-
-  const updateOrder = async (input, id) => {
-    const res = await userService.updateOrder(input, id);
-  };
 
   return (
     <AuthContext.Provider
@@ -126,10 +123,8 @@ function AuthContextProvider({ children }) {
         setIsEditing,
         pics,
         getTransactionByUserId,
-        getMyOrders,
+        initialLoading,
         orders,
-        updateOrder,
-        initialLoading
       }}
     >
       {children}
