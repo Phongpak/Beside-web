@@ -75,8 +75,29 @@ function AuthContextProvider({ children }) {
 
   const getTransactionByUserId = async () => {
     const res = await userService.getTransactionByUserId();
-    // setUser(res.data.transactions);
     return res;
+  };
+  const getMyOrders = async (id) => {
+    const res = await userService.getMyOrders(id);
+    return res;
+  };
+
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const res = await getMyOrders(user.id);
+        setOrders(res.data.orders);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchOrders();
+  }, [user.id]);
+
+  const updateOrder = async (input, id) => {
+    const res = await userService.updateOrder(input, id);
   };
 
   return (
@@ -95,7 +116,10 @@ function AuthContextProvider({ children }) {
         isEditing,
         setIsEditing,
         pics,
-        getTransactionByUserId
+        getTransactionByUserId,
+        getMyOrders,
+        orders,
+        updateOrder
       }}
     >
       {children}

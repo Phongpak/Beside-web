@@ -12,8 +12,8 @@ function ProfilePage() {
   //   setIsEditing((prevIsEditing) => !prevIsEditing);
   // };
 
-  const { user, updateUser, isEditing, setIsEditing } = useAuth();
-  const [input, setInput] = useState({});
+  const { user, updateUser, isEditing, setIsEditing, input } = useAuth();
+  // const [input, setInput] = useState({});
 
   // useEffect(() => {
   //   setInput((p) => {
