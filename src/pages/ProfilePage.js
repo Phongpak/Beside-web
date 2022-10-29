@@ -10,18 +10,24 @@ import { useProfile } from "../context/ProfileContext";
 
 function ProfilePage() {
   const { id } = useParams();
-  const { getProfile, profileData } = useProfile();
+  const { getProfile } = useProfile();
+  // console.log(id);
 
   const [profiles, setProfiles] = useState([]);
 
   useEffect(() => {
     const profileData = async () => {
       let profile = await getProfile(id);
-      console.log("profile", profile);
+      // console.log("id", id);
+      // console.log("profile", profile);
       setProfiles(profile.data.user);
+      console.log(profile.data.user);
     };
-    profileData();
-  }, []);
+    if (id) {
+      profileData();
+    }
+  }, [id]);
+  // console.log("0", profiles);
 
   // const [isEditing, setIsEditing] = useState(false);
 
@@ -76,13 +82,14 @@ function ProfilePage() {
         setInput={setInput}
         profiles={profiles}
       />
-      <div className="w-[100vw] h-[650px] flex flex-col gap-10 px-60">
-        {id == user.id && <UserTabBar />}
+      <div className="w-full h-[650px] flex flex-col gap-10 px-60">
+        {!isEditing && id == user.id && <UserTabBar />}
         <div className="flex flex-row gap-10">
           <Informatio
             input={input}
             handleChangeInput={handleChangeInput}
             setInput={setInput}
+            profiles={profiles}
           />
           <div className="flex flex-col   h-[650px]">
             <div className="flex flex-col gap-[10px]">

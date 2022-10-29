@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useReducer } from "react";
+import { useEffect, useMemo, useReducer } from "react";
 import ProfileImg from "./ProfileImg";
 import { useAuth } from "../../context/AuthContext";
 import ModalWallet from "../modals/ModalWallet";
@@ -11,7 +11,7 @@ import { Link, useLocation } from "react-router-dom";
 function Bio({ input, handleChangeInput, setInput, profiles }) {
   const { pathname } = useLocation();
   const { user, toggleEditing, isEditing } = useAuth();
-  console.log("profiles[0]", profiles[0]?.id);
+  // console.log("profiles[0]", profiles[0]?.id);
   //   console.log(user?.wallet);
   // useEffect(() => {
   //   setInput((p) => {
@@ -26,6 +26,10 @@ function Bio({ input, handleChangeInput, setInput, profiles }) {
   const [isOpenModalWallet, setIsOpenModalWallet] = useState(false);
   const [isOpenModalAvailable, setIsOpenModalAvailable] = useState(false);
 
+  const [score, setScore] = useState(5);
+  console.log(score);
+  const full = useMemo(() => 18.3 * score + "px", [score]);
+  console.log(full);
   const openModalWallet = () => {
     setIsOpenModalWallet(true);
   };
@@ -43,9 +47,9 @@ function Bio({ input, handleChangeInput, setInput, profiles }) {
   };
 
   return (
-    <div className="flex items-center bg-[#F4F2F2] h-[300px] w-[100vw] px-60">
-      <div className="flex items-center justify-between h-[250px] w-[1000px]">
-        <ProfileImg input={input} />
+    <div className="flex items-center bg-[#F4F2F2]  h-[300px] px-60">
+      <div className="flex items-center justify-between h-[250px] ">
+        <ProfileImg input={input} profiles={profiles} />
 
         <div className="flex flex-col justify-center w-[500px] gap-[10px]">
           <div>
@@ -60,34 +64,43 @@ function Bio({ input, handleChangeInput, setInput, profiles }) {
               />
             ) : (
               <div className="text-[30px] text-[#224957] font-bold ">
-                {user?.id !== profiles[0]?.id
+                {pathname === `/profile/${user?.id}`
+                  ? user?.penName || user?.firstName
+                  : profiles
                   ? profiles[0]?.penName || profiles[0]?.firstName
                   : user?.penName || user?.firstName}
               </div>
             )}
             <p className="text-[#818182]">Active 6 minutes ago</p>
           </div>
-          <div className="flex flex-row gap-[5px]">
-            <FontAwesomeIcon
-              icon={faStar}
-              className="text-[#E6C3C1]"
-            ></FontAwesomeIcon>
-            <FontAwesomeIcon
-              icon={faStar}
-              className="text-[#E6C3C1]"
-            ></FontAwesomeIcon>
-            <FontAwesomeIcon
-              icon={faStar}
-              className="text-[#E6C3C1]"
-            ></FontAwesomeIcon>
-            <FontAwesomeIcon
-              icon={faStar}
-              className="text-[#E6C3C1]"
-            ></FontAwesomeIcon>
-            <FontAwesomeIcon
-              icon={faStar}
-              className="text-[#E6C3C1]"
-            ></FontAwesomeIcon>
+          <div className="flex w-1/4 justify-between">
+            <div
+              className={`flex flex-row overflow-hidden  `}
+              style={{ width: full }}
+            >
+              <FontAwesomeIcon
+                icon={faStar}
+                className="text-[#E6C3C1]"
+              ></FontAwesomeIcon>
+
+              <FontAwesomeIcon
+                icon={faStar}
+                className="text-[#E6C3C1]"
+              ></FontAwesomeIcon>
+              <FontAwesomeIcon
+                icon={faStar}
+                className="text-[#E6C3C1]"
+              ></FontAwesomeIcon>
+              <FontAwesomeIcon
+                icon={faStar}
+                className="text-[#E6C3C1]"
+              ></FontAwesomeIcon>
+              <FontAwesomeIcon
+                icon={faStar}
+                className="text-[#E6C3C1]  "
+              ></FontAwesomeIcon>
+            </div>
+            <div className="text-[#E6C3C1] font-semibold">{score}</div>
           </div>
 
           {isEditing ? (
@@ -101,7 +114,9 @@ function Bio({ input, handleChangeInput, setInput, profiles }) {
             />
           ) : (
             <div className="text-[#224957] break-words">
-              {user?.id !== profiles[0]?.id
+              {pathname !== `/profile/${user?.id}`
+                ? user?.description
+                : user?.id !== profiles[0]?.id
                 ? profiles[0]?.description
                 : user?.description}
             </div>
@@ -120,23 +135,29 @@ function Bio({ input, handleChangeInput, setInput, profiles }) {
               />
               THB/hr
             </div>
-          ) : user?.id == profiles[0]?.id ? (
+          ) : !profiles ? (
             <div className="flex justify-around items-center text-[#224957] bg-white border-2 border-[#9AC0B5] w-[170px] h-[30px] rounded-[50px]">
               rate:
               <div className="text-center">{user?.rate}</div>
               THB/hr
             </div>
-          ) : (
+          ) : user?.id !== profiles[0]?.id ? (
             <>
               <div>5000 Bath</div>
               <Link className="flex justify-around items-center text-[#224957] bg-white border-2 border-[#9AC0B5] w-[170px] h-[30px] rounded-[50px]">
                 Book now
               </Link>
             </>
+          ) : (
+            <div className="flex justify-around items-center text-[#224957] bg-white border-2 border-[#9AC0B5] w-[170px] h-[30px] rounded-[50px]">
+              rate:
+              <div className="text-center">{user?.rate}</div>
+              THB/hr
+            </div>
           )}
           <div className="flex flex-row gap-[20px]">
             {/* {user.id == profiles[0].id && ( */}
-            {user?.id == profiles[0]?.id && (
+            {pathname == `/profile/${user?.id}` ? (
               <div
                 onClick={openModalWallet}
                 className="flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[180px] h-[60px]"
@@ -144,6 +165,8 @@ function Bio({ input, handleChangeInput, setInput, profiles }) {
                 Wallet: {user?.wallet}
                 THB
               </div>
+            ) : (
+              ""
             )}
             {/* )} */}
 
