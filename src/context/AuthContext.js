@@ -97,7 +97,7 @@ function AuthContextProvider({ children }) {
 	useEffect(() => {
 		const fetchOrders = async () => {
 			try {
-				const res = await getMyOrders(user.id);
+				const res = await getMyOrders(user?.id);
 				setOrders(res.data.orders);
 			} catch (err) {
 				console.log(err);
