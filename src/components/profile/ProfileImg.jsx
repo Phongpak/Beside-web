@@ -21,34 +21,34 @@ function ProfileImg({ profiles }) {
   const [prevEl, setPrevEl] = useState(null);
   const [nextEl, setNextEl] = useState(null);
 
-  const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
+	const openModal = () => {
+		setIsOpen(true);
+	};
 
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+	const closeModal = () => {
+		setIsOpen(false);
+	};
 
-  const { user, getProfileImages } = useAuth();
+	const { user, getProfileImages } = useAuth();
 
   const [pics, setPics] = useState([]);
   const [providerPics, setProviderPics] = useState([]);
 
-  useEffect(() => {
-    const fetchPics = async () => {
-      try {
-        const res = await getProfileImages(user.id);
-        setPics(res.data.profileImages);
-        // console.log(res);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchPics();
-    setLoading(false);
-  }, [user.id]);
+	useEffect(() => {
+		const fetchPics = async () => {
+			try {
+				const res = await getProfileImages(user.id);
+				setPics(res.data.profileImages);
+				// console.log(res);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		fetchPics();
+		setLoading(false);
+	}, [user.id]);
 
   useEffect(() => {
     const fetchProviderPics = async () => {

@@ -1,10 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import * as authService from "../api/authApi";
 import * as userService from "../api/userApi";
+import * as orderService from "../api/orderApi";
 import {
-  addAccessToken,
-  getAccessToken,
-  removeAccessToken,
+	addAccessToken,
+	getAccessToken,
+	removeAccessToken,
 } from "../utilities/localStorage";
 
 const AuthContext = createContext();
@@ -75,16 +76,35 @@ function AuthContextProvider({ children }) {
     return res;
   };
 
-  const [isEditing, setIsEditing] = useState(false);
-  const toggleEditing = () => {
-    setIsEditing((prevIsEditing) => !prevIsEditing);
-  };
+	const [isEditing, setIsEditing] = useState(false);
+	const toggleEditing = () => {
+		setIsEditing((prevIsEditing) => !prevIsEditing);
+	};
 
   const getTransactionByUserId = async () => {
     const res = await userService.getTransactionByUserId();
     // setUser(res.data.transactions);
     return res;
   };
+
+	const getMyOrders = async (id) => {
+		const res = await orderService.getMyOrders(id);
+		return res;
+	};
+
+	const [orders, setOrders] = useState([]);
+
+	useEffect(() => {
+		const fetchOrders = async () => {
+			try {
+				const res = await getMyOrders(user.id);
+				setOrders(res.data.orders);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		fetchOrders();
+	}, [user.id]);
 
   return (
     <AuthContext.Provider
@@ -104,15 +124,17 @@ function AuthContextProvider({ children }) {
         pics,
         getTransactionByUserId,
         initialLoading,
+				orders
       }}
     >
       {children}
     </AuthContext.Provider>
   );
+
 }
 
 export const useAuth = () => {
-  return useContext(AuthContext);
+	return useContext(AuthContext);
 };
 
 export default AuthContextProvider;
