@@ -10,7 +10,7 @@ import {
   faMoneyCheckDollar,
 } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../context/AuthContext";
-import GoogleMapContainer from "../GoogleMapContainer";
+import GoogleMapContainerLocation from "../GoogleMapContainerLocation";
 import { useParams } from "react-router-dom";
 // import {
 //   faSquareFacebook,
@@ -145,7 +145,7 @@ function Informatio({ handleChangeInput, input, setInput, profiles }) {
                     : profiles[0]?.location || "-"}
                 </div>
               ) : (
-                <GoogleMapContainer
+                <GoogleMapContainerLocation
                   setInput={setInput}
                   input={input}
                   profiles={profiles}

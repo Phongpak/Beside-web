@@ -2,7 +2,6 @@ import booknow from "../images/booknow1.jpeg";
 import BookComponent from "../components/booknow/bookComponent";
 import Carousel from "../components/booknow/Carousel";
 import ReviewCard from "../components/ReviewCard";
-import BookComponent from "../components/booknow/bookComponent";
 
 function BooknowPage() {
   return (
