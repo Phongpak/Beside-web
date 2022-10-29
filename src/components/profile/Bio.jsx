@@ -27,9 +27,9 @@ function Bio({ input, handleChangeInput, setInput, profiles }) {
   const [isOpenModalAvailable, setIsOpenModalAvailable] = useState(false);
 
   const [score, setScore] = useState(5);
-  console.log(score);
+  // console.log(score);
   const full = useMemo(() => 18.3 * score + "px", [score]);
-  console.log(full);
+  // console.log(full);
   const openModalWallet = () => {
     setIsOpenModalWallet(true);
   };
@@ -114,9 +114,9 @@ function Bio({ input, handleChangeInput, setInput, profiles }) {
             />
           ) : (
             <div className="text-[#224957] break-words">
-              {pathname !== `/profile/${user?.id}`
+              {pathname === `/profile/${user?.id}`
                 ? user?.description
-                : user?.id !== profiles[0]?.id
+                : profiles
                 ? profiles[0]?.description
                 : user?.description}
             </div>
