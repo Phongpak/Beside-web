@@ -25,6 +25,18 @@ function Transaction() {
     setLoading(false);
   }, []);
 
+  // console.log(type);
+  // const [input, setInput] = useState("");
+
+  // const handleClick = async (input, id) => {
+  //   try {
+  //     await updateOrder({ status: input }, id);
+  //     window.location.reload();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   const openModal = () => {
     setIsOpen(true);
   };
