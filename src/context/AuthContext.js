@@ -5,7 +5,7 @@ import * as orderService from "../api/orderApi";
 import {
   addAccessToken,
   getAccessToken,
-  removeAccessToken,
+  removeAccessToken
 } from "../utilities/localStorage";
 
 const AuthContext = createContext();
@@ -106,6 +106,10 @@ function AuthContextProvider({ children }) {
     fetchOrders();
   }, [user?.id]);
 
+  const updateOrder = async (input, id) => {
+    const res = await userService.updateOrder(input, id);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -125,6 +129,7 @@ function AuthContextProvider({ children }) {
         getTransactionByUserId,
         initialLoading,
         orders,
+        updateOrder
       }}
     >
       {children}
