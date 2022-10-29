@@ -92,10 +92,6 @@ function AuthContextProvider({ children }) {
     return res;
   };
 
-  const updateOrder = async (input, id) => {
-    const res = await userService.updateOrder(input, id);
-  };
-
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
