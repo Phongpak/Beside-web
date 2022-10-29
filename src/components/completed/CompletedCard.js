@@ -3,8 +3,22 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import ModalCompleted from "../modals/ModalCompleted";
+import { useAuth } from "../../context/AuthContext";
+import proPic from "../../image/profileImg.png";
+import moment from "moment";
+import ReviewModal from "../modals/ReviewModal";
 
-function CompletedCard() {
+function CompletedCard({ item }) {
+  // console.log(item.customerReviewRating);
+  // console.log(item.providerReviewRating);
+  const { user } = useAuth();
+
+  const [seeUser, setSeeUser] = useState(
+    item.customer.id == user.id ? item.provider : item.customer
+  );
+
+  // console.log(seeUser);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -14,20 +28,46 @@ function CompletedCard() {
   const closeModal = () => {
     setIsOpen(false);
   };
+  const [isOpenReview, setIsOpenReview] = useState(false);
+
+  const openReviewModal = () => {
+    setIsOpenReview(true);
+  };
+
+  const closeReviewModal = () => {
+    setIsOpenReview(false);
+  };
+
+  const star = [];
+  for (let i = 1; i <= item.customerReviewRating; i++) {
+    star.push(i);
+  }
+  const star2 = [];
+  for (let i = 1; i <= item.providerReviewRating; i++) {
+    star2.push(i);
+  }
+
   return (
     <>
-      <div className="flex flex-row justify-center items-center min-w-[1056px] h-[150px] border-4 border-[#9AC0B5] rounded-[15px]">
+      <div
+        className={`flex flex-row justify-center items-center min-w-[1056px] h-[170px] border-4 border-${
+          item.customerId === user.id ? "[#9AC0B5]" : "[#E8D3D0]"
+        } rounded-[15px]`}
+      >
         <div className="flex flex-row justify-between items-center w-[95%] h-[85%]">
           <div className="flex flex-col justify-center items-center ml-[40px]">
+            <div className="font-medium text-[#224957]">
+              {item.customerId === user.id ? "Your Provider" : " Your Customer"}
+            </div>
             <div className="flex justify-center items-center border w-[100px] h-[100px] rounded-[100%] overflow-hidden">
               <img
                 className="h-full"
-                src={
-                  "https://preview.redd.it/i13zau5gs1j51.jpg?auto=webp&s=77ac0d41d59d1e9aa774f218ad5f9f3ff18e905a"
-                }
+                src={seeUser?.ProfileImages[0]?.Image || proPic}
               />
             </div>
-            <div className="font-medium text-[#224957]">Ruka Chan</div>
+            <div className="font-semibold text-[#224957]">
+              {seeUser.penName}
+            </div>
           </div>
           <div className="flex flex-row gap-[20px] h-[100%] text-[#224957]">
             <div className="flex flex-col justify-between w-[100px] font-medium">
@@ -37,31 +77,97 @@ function CompletedCard() {
               <div>Deal Price:</div>
             </div>
             <div className="flex flex-col justify-between w-[325px] font-medium">
-              <div>Monday 10 September 2022</div>
-              <div>10:00 - 18:00</div>
-              <div>Siam Paragon</div>
-              <div>8,000 THB</div>
+              <div>
+                {moment(item.appointmentDate).format("dddd, MMMM Do YYYY")}
+              </div>
+              <div>
+                {" "}
+                {item.fromTime.slice(0, 5)} - {item.toTime.slice(0, 5)}
+              </div>
+              <div>{item.location}</div>
+              <div>
+                {item.rentPriceTotal} {""}THB
+              </div>
             </div>
           </div>
-          <button
-            onClick={openModal}
-            className="flex justify-center items-center self-end font-medium text-[#224957] w-[175px] h-[40px] border-2 border-[#9AC0B5] rounded-[15px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0"
-          >
-            Write review here
-          </button>
-          <div className="flex justify-center items-center self-end font-medium text-[#E37383] w-[175px] h-[40px] border-2 border-[#E8D3D0] rounded-[15px]">
-            Denied
-          </div>
-          <div className="flex justify-end items-center self-end gap-[5px] font-medium text-[#9AC0B5] text-[20px] w-[175px]">
-            <FontAwesomeIcon icon={faStar} />
-            <FontAwesomeIcon icon={faStar} />
-            <FontAwesomeIcon icon={faStar} />
-            <FontAwesomeIcon icon={faStar} />
-            <FontAwesomeIcon icon={faStar} />
+
+          <div className="flex mt-28 gap-5">
+            {seeUser.id === item.customerId && item.providerReviewDescription && (
+              <button
+                onClick={openReviewModal}
+                className="flex justify-center items-center  font-medium text-[#E37383] hover:text-[#E8D3D0] transition delay-20 "
+              >
+                {`  ${
+                  item.customerId === user.id
+                    ? "Your provider"
+                    : " Your customer"
+                }'s review`}
+              </button>
+            )}
+            {seeUser.id === item.providerId && item.customerReviewDescription && (
+              <button
+                onClick={openReviewModal}
+                className="flex justify-center items-center  font-medium text-[#E37383] hover:text-[#E8D3D0] transition delay-20 "
+              >
+                {`  ${
+                  item.customerId === user.id
+                    ? "Your provider"
+                    : " Your customer"
+                }'s review`}
+              </button>
+            )}
+            {user.id === item.providerId && !item.customerReviewDescription && (
+              <button
+                onClick={openModal}
+                className="flex justify-center items-center self-end font-medium text-[#224957] w-[175px] h-[40px] border-2 border-[#9AC0B5] rounded-[15px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0"
+              >
+                Write review here
+              </button>
+            )}
+            {user.id === item.customerId && !item.providerReviewDescription && (
+              <button
+                onClick={openModal}
+                className="flex justify-center items-center self-end font-medium text-[#224957] w-[175px] h-[40px] border-2 border-[#9AC0B5] rounded-[15px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0"
+              >
+                Write review here
+              </button>
+            )}
+
+            {item.status === "REJECT" && (
+              <div className="flex justify-center items-center self-end font-medium text-[#E37383] w-[175px] h-[40px] border-2 border-[#E8D3D0] rounded-[15px]">
+                Rejected
+              </div>
+            )}
+
+            {user.id === item.customerId && item.providerReviewDescription && (
+              <div className="flex justify-end items-center self-end gap-[5px] font-medium text-[#9AC0B5] text-[20px] w-[175px]">
+                {star2.map(() => (
+                  <FontAwesomeIcon icon={faStar} />
+                ))}
+              </div>
+            )}
+            {user.id === item.providerId && item.customerReviewDescription && (
+              <div className="flex justify-end items-center self-end gap-[5px] font-medium text-[#9AC0B5] text-[20px] w-[175px]">
+                {star.map(() => (
+                  <FontAwesomeIcon icon={faStar} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
-      <ModalCompleted isOpen={isOpen} closeModal={closeModal} />
+      <ModalCompleted
+        isOpen={isOpen}
+        closeModal={closeModal}
+        seeUser={seeUser}
+        item={item}
+      />
+      <ReviewModal
+        isOpenReview={isOpenReview}
+        closeReviewModal={closeReviewModal}
+        seeUser={seeUser}
+        item={item}
+      />
     </>
   );
 }

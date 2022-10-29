@@ -48,7 +48,7 @@ function ProfileImg({ profiles }) {
     };
     fetchPics();
     setLoading(false);
-  }, [user.id]);
+  }, [user?.id]);
 
   useEffect(() => {
     const fetchProviderPics = async () => {
@@ -73,7 +73,7 @@ function ProfileImg({ profiles }) {
 
   return (
     <>
-      {user.id == id ||
+      {user?.id == id ||
       pathname == "/pending" ||
       pathname == "/upcoming" ||
       pathname == "/completed" ||
@@ -174,8 +174,8 @@ function ProfileImg({ profiles }) {
           />
         </div>
       ) : (
-        <div className="py-20">
-          <img src={ProfilePic} className="w-96 h-60 " />
+        <>
+          <img src={ProfilePic} className="w-96 h-60" />
           <ProImgModal1
             isOpen={isOpen}
             closeModal={closeModal}
@@ -183,7 +183,7 @@ function ProfileImg({ profiles }) {
             getProfileImages={getProfileImages}
             user={user}
           />
-        </div>
+        </>
       )}
     </>
   );

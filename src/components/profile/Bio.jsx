@@ -173,14 +173,14 @@ function Bio({ input, handleChangeInput, setInput, profiles }) {
             <div
               onClick={openModalAvailable}
               className={`flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[140px] h-[60px] ${
-                Boolean(pathname !== `/profile/${user.id}`) && "invisible"
+                Boolean(pathname !== `/profile/${user?.id}`) && "invisible"
               }`}
             >
               Availability
             </div>
             <div
               className={`flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[140px] h-[60px] ${
-                Boolean(pathname !== `/profile/${user.id}`) && "invisible"
+                Boolean(pathname !== `/profile/${user?.id}`) && "invisible"
               }`}
               onClick={toggleEditing}
             >
