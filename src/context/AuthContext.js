@@ -110,6 +110,10 @@ function AuthContextProvider({ children }) {
     fetchOrders();
   }, [user?.id]);
 
+  const updateOrder = async (input, id) => {
+    const res = await userService.updateOrder(input, id);
+  };
+
   return (
     <AuthContext.Provider
       value={{
