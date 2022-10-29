@@ -11,7 +11,7 @@ import { useAuth } from "../context/AuthContext";
 import moment from "moment";
 
 function WalletHistory() {
-  const { user, getTransactionByUserId } = useAuth();
+  const { getTransactionByUserId } = useAuth();
 
   const [transactions, setTransactions] = useState([]);
 
@@ -27,16 +27,6 @@ function WalletHistory() {
     fetchTransactions();
   }, []);
 
-  // const [type, setType] = useState("ALL");
-
-  // const openTopUp = () => {
-  //   setType("TOPUP");
-  // };
-
-  // const openWithdraw = () => {
-  //   setType("WITHDRAW");
-  // };
-
   const [searchTerm, setSearchTerm] = useState("");
   const [searchStatus, setSearchStatus] = useState("");
   const [searchType, setSearchType] = useState("");
@@ -47,10 +37,6 @@ function WalletHistory() {
 
   const changeSearchStatus = (status) => {
     setSearchStatus(status);
-  };
-
-  const changeSearchType = (type) => {
-    setSearchType(type);
   };
 
   return (
@@ -87,7 +73,7 @@ function WalletHistory() {
             className={`cursor-pointer flex flex-row justify-center items-center ${
               searchType === ""
                 ? "bg-[#D4E4F4] text-white border-0"
-                : "bg-white text-[#224957]  border-2 border-[#D4E4F4]"
+                : "bg-white text-[#224957]  border-2 border-[#9AC0B5]"
             }   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#D4E4F4] hover:text-white transition delay-20 hover:border-0`}
           >
             All
@@ -101,7 +87,7 @@ function WalletHistory() {
             className={`cursor-pointer flex flex-row justify-center items-center ${
               searchType == "TOPUP"
                 ? "bg-[#98ADC0] text-white border-0"
-                : "bg-white text-[#224957]  border-2 border-[#98ADC0]"
+                : "bg-white text-[#224957]  border-2 border-[#9AC0B5]"
             }   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#98ADC0] hover:text-white transition delay-20 hover:border-0`}
           >
             Top up
