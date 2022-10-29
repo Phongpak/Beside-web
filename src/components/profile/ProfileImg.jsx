@@ -11,102 +11,182 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper";
 
 import ProfilePic from "../../image/profileImg.png";
+import { useLocation, useParams } from "react-router-dom";
 
-function ProfileImg() {
-  const { input } = useAuth();
-  const [prevEl, setPrevEl] = useState(null);
-  const [nextEl, setNextEl] = useState(null);
+function ProfileImg({ profiles }) {
+	const { input } = useAuth();
+	const { id } = useParams();
+	const { pathname } = useLocation();
 
-  const [isOpen, setIsOpen] = useState(false);
+	const [prevEl, setPrevEl] = useState(null);
+	const [nextEl, setNextEl] = useState(null);
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
+	const [isOpen, setIsOpen] = useState(false);
 
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+	const openModal = () => {
+		setIsOpen(true);
+	};
 
-  const { user, getProfileImages } = useAuth();
+	const closeModal = () => {
+		setIsOpen(false);
+	};
 
-  const [pics, setPics] = useState([]);
+	const { user, getProfileImages } = useAuth();
 
-  useEffect(() => {
-    const fetchPics = async () => {
-      try {
-        const res = await getProfileImages(user.id);
-        setPics(res.data.profileImages);
-        // console.log(res);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchPics();
-    setLoading(false);
-  }, [user.id]);
+	const [pics, setPics] = useState([]);
+	const [providerPics, setProviderPics] = useState([]);
 
-  const [loading, setLoading] = useState(true);
-  if (loading) return <div>Loading</div>;
+	useEffect(() => {
+		const fetchPics = async () => {
+			try {
+				const res = await getProfileImages(user.id);
+				setPics(res.data.profileImages);
+				// console.log(res);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		fetchPics();
+		setLoading(false);
+	}, [user?.id]);
 
-  return (
-    <>
-      {pics.length ? (
-        <>
-          <Swiper
-            breakpoints={{
-              1280: {
-                slidesPerView: 1,
-                spaceBetween: 1,
-                slidesPerGroup: 1,
-              },
-              1440: {
-                slidesPerView: 1,
-                spaceBetween: 1,
-                slidesPerGroup: 1,
-              },
-            }}
-            loop={true}
-            modules={[Pagination, Navigation]}
-          >
-            {pics.map((item, index) => {
-              return (
-                <SwiperSlide className="my-20 " key={index}>
-                  <div
-                    className="flex flex-col  justify-center overflow-hidden"
-                    onClick={openModal}
-                  >
-                    <img
-                      src={item.Image}
-                      alt="..."
-                      className="block w-96 h-60"
-                    />
-                  </div>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-          <ProImgModal1
-            isOpen={isOpen}
-            closeModal={closeModal}
-            input={input}
-            getProfileImages={getProfileImages}
-            user={user}
-          />
-        </>
-      ) : (
-        <>
-          <img src={ProfilePic} className="w-96 h-60" onClick={openModal} />
-          <ProImgModal1
-            isOpen={isOpen}
-            closeModal={closeModal}
-            input={input}
-            getProfileImages={getProfileImages}
-            user={user}
-          />
-        </>
-      )}
-    </>
-  );
+	useEffect(() => {
+		const fetchProviderPics = async () => {
+			try {
+				const res = await getProfileImages(id);
+				setProviderPics(res.data.profileImages);
+				console.log(res.data.profileImages);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		fetchProviderPics();
+		setLoading(false);
+	}, [id]);
+
+	const [loading, setLoading] = useState(true);
+	if (loading) return <div>Loading</div>;
+
+	// if (!user || !profiles) {
+	//   return null;
+	// }
+
+	return (
+		<>
+			{user?.id == id ||
+			pathname == "/pending" ||
+			pathname == "/upcoming" ||
+			pathname == "/completed" ||
+			pathname == "/wallethistory" ? (
+				pics.length ? (
+					<div className="w-[500px]">
+						<Swiper
+							breakpoints={{
+								1280: {
+									slidesPerView: 1,
+									spaceBetween: 1,
+									slidesPerGroup: 1
+								},
+								1440: {
+									slidesPerView: 1,
+									spaceBetween: 1,
+									slidesPerGroup: 1
+								}
+							}}
+							loop={true}
+							modules={[Pagination, Navigation]}
+						>
+							{pics.map((item, index) => {
+								return (
+									<SwiperSlide className="w-[500px] " key={index}>
+										<div
+											className="flex flex-col  justify-center overflow-hidden"
+											onClick={openModal}
+										>
+											<img
+												src={item.Image}
+												alt="..."
+												className="block w-96 h-60"
+											/>
+										</div>
+									</SwiperSlide>
+								);
+							})}
+						</Swiper>
+						<ProImgModal1
+							isOpen={isOpen}
+							closeModal={closeModal}
+							input={input}
+							getProfileImages={getProfileImages}
+							user={user}
+						/>
+					</div>
+				) : (
+					<>
+						<img src={ProfilePic} className="w-96 h-60" onClick={openModal} />
+						<ProImgModal1
+							isOpen={isOpen}
+							closeModal={closeModal}
+							input={input}
+							getProfileImages={getProfileImages}
+							user={user}
+						/>
+					</>
+				)
+			) : providerPics.length ? (
+				<div className="w-[500px]">
+					<Swiper
+						breakpoints={{
+							1280: {
+								slidesPerView: 1,
+								spaceBetween: 1,
+								slidesPerGroup: 1
+							},
+							1440: {
+								slidesPerView: 1,
+								spaceBetween: 1,
+								slidesPerGroup: 1
+							}
+						}}
+						loop={true}
+						modules={[Pagination, Navigation]}
+					>
+						{providerPics.map((item, index) => {
+							return (
+								<SwiperSlide className="w-[500px]" key={index}>
+									<div className="flex flex-col justify-center overflow-hidden">
+										<img
+											src={item.Image}
+											alt="..."
+											className="block w-96 h-60"
+										/>
+									</div>
+								</SwiperSlide>
+							);
+						})}
+					</Swiper>
+					<ProImgModal1
+						isOpen={isOpen}
+						closeModal={closeModal}
+						input={input}
+						getProfileImages={getProfileImages}
+						user={user}
+					/>
+				</div>
+			) : (
+				<>
+					<img src={ProfilePic} className="w-96 h-60" />
+					<ProImgModal1
+						isOpen={isOpen}
+						closeModal={closeModal}
+						input={input}
+						getProfileImages={getProfileImages}
+						user={user}
+					/>
+				</>
+			)}
+		</>
+	);
 }
 
 export default ProfileImg;
