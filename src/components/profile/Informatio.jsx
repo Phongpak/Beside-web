@@ -17,16 +17,17 @@ import { useParams } from "react-router-dom";
 //   faSquareInstagram
 // } from "@fortawesome/free-brands-svg-icons";
 
-function Informatio({ handleChangeInput, input, setInput, profiles }) {
+function Informatio({ handleChangeInput, input, setInput, profiles, myOrder }) {
   const { isEditing, user } = useAuth();
   // console.log( setInput);
   const { id } = useParams();
-  console.log(profiles[0]?.id);
-  console.log("user", user);
-  console.log("profiles", profiles);
+
   if (!user || !profiles[0]) {
     return null;
   }
+
+  const successOrder = myOrder?.filter((item) => item.status == "SUCCESS");
+  const successRate = (successOrder?.length / myOrder?.length) * 100;
 
   const joinDate = new Date(
     user?.id == id ? user?.createdAt : profiles[0]?.createdAt
@@ -49,11 +50,13 @@ function Informatio({ handleChangeInput, input, setInput, profiles }) {
           </div>
           <div className="flex flex-row justify-between text-sm">
             <div>Work Sold</div>
-            <div>150 Times</div>
+            <div>
+              {myOrder?.length} Time{myOrder?.length <= 1 ? "" : "s"}
+            </div>
           </div>
           <div className="flex flex-row justify-between text-sm">
             <div>Success Rate</div>
-            <div>99%</div>
+            <div>{successRate ? successRate : 0}%</div>
           </div>
         </div>
       </div>

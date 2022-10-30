@@ -6,29 +6,16 @@ import { useAuth } from "../../context/AuthContext";
 import ModalWallet from "../modals/ModalWallet";
 import { useState } from "react";
 import ModalAvailable from "../modals/ModalAvailable";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
-function Bio({ input, handleChangeInput, setInput, profiles }) {
+function Bio({ input, handleChangeInput, setInput, profiles, myOrder }) {
   const { pathname } = useLocation();
+  const { id } = useParams();
   const { user, toggleEditing, isEditing } = useAuth();
-  // console.log("profiles[0]", profiles[0]?.id);
-  //   console.log(user?.wallet);
-  // useEffect(() => {
-  //   setInput((p) => {
-  //     return {
-  //       penName: user?.penName || user?.firstName,
-  //       description: user?.description,
-  //       rate: user?.rate,
-  //     };
-  //   });
-  // }, [user]);
 
   const [isOpenModalWallet, setIsOpenModalWallet] = useState(false);
   const [isOpenModalAvailable, setIsOpenModalAvailable] = useState(false);
 
-  const [score, setScore] = useState(5);
-  // console.log(score);
-  const full = useMemo(() => 18.3 * score + "px", [score]);
   // console.log(full);
   const openModalWallet = () => {
     setIsOpenModalWallet(true);
@@ -45,6 +32,17 @@ function Bio({ input, handleChangeInput, setInput, profiles }) {
   const closeModalAvailable = () => {
     setIsOpenModalAvailable(false);
   };
+
+  const arrRating = myOrder
+    ?.filter((item) => item.status == "SUCCESS")
+    .map((item) => {
+      return item.providerReviewRating;
+    });
+
+  const sumRating = arrRating?.reduce((acc, item) => acc + item, 0);
+  const avgRating = (sumRating / arrRating?.length).toFixed(1);
+  console.log("avgRating", avgRating);
+  const full = useMemo(() => 18.3 * avgRating + "px", [avgRating]);
 
   return (
     <div className="flex items-center bg-[#F4F2F2]  h-[300px] px-60">
@@ -73,35 +71,47 @@ function Bio({ input, handleChangeInput, setInput, profiles }) {
             )}
             <p className="text-[#818182]">Active 6 minutes ago</p>
           </div>
-          <div className="flex w-1/4 justify-between">
-            <div
-              className={`flex flex-row overflow-hidden  `}
-              style={{ width: full }}
-            >
-              <FontAwesomeIcon
-                icon={faStar}
-                className="text-[#E6C3C1]"
-              ></FontAwesomeIcon>
 
-              <FontAwesomeIcon
-                icon={faStar}
-                className="text-[#E6C3C1]"
-              ></FontAwesomeIcon>
-              <FontAwesomeIcon
-                icon={faStar}
-                className="text-[#E6C3C1]"
-              ></FontAwesomeIcon>
-              <FontAwesomeIcon
-                icon={faStar}
-                className="text-[#E6C3C1]"
-              ></FontAwesomeIcon>
-              <FontAwesomeIcon
-                icon={faStar}
-                className="text-[#E6C3C1]  "
-              ></FontAwesomeIcon>
+          {avgRating && avgRating > 0 ? (
+            <div className="flex w-1/4  h-6 justify-between">
+              <div
+                className={`flex flex-row overflow-hidden  `}
+                style={{ width: full }}
+              >
+                <FontAwesomeIcon
+                  icon={faStar}
+                  className="text-[#E6C3C1]"
+                ></FontAwesomeIcon>
+
+                <FontAwesomeIcon
+                  icon={faStar}
+                  className="text-[#E6C3C1]"
+                ></FontAwesomeIcon>
+                <FontAwesomeIcon
+                  icon={faStar}
+                  className="text-[#E6C3C1]"
+                ></FontAwesomeIcon>
+                <FontAwesomeIcon
+                  icon={faStar}
+                  className="text-[#E6C3C1]"
+                ></FontAwesomeIcon>
+                <FontAwesomeIcon
+                  icon={faStar}
+                  className="text-[#E6C3C1]  "
+                ></FontAwesomeIcon>
+              </div>
+              <div className="text-[#E6C3C1] font-semibold">{avgRating}</div>
             </div>
-            <div className="text-[#E6C3C1] font-semibold">{score}</div>
-          </div>
+          ) : pathname == `/profile/${id}` ? (
+            <div className="flex w-1/4 text-[#E6C3C1]  h-6 justify-between">
+              No review
+            </div>
+          ) : (
+            <div className="flex text-[#E6C3C1]  h-6 justify-between">
+              {" "}
+              see review in profile page{" "}
+            </div>
+          )}
 
           {isEditing ? (
             <input
@@ -114,7 +124,7 @@ function Bio({ input, handleChangeInput, setInput, profiles }) {
             />
           ) : (
             <div className="text-[#224957] break-words">
-              {pathname === `/profile/${user?.id}`
+              {pathname === `/profile/${id}`
                 ? user?.description
                 : profiles
                 ? profiles[0]?.description
@@ -128,7 +138,6 @@ function Bio({ input, handleChangeInput, setInput, profiles }) {
               <input
                 className="w-14 text-center "
                 type="text"
-                // placeholder={user?.rate}
                 name="rate"
                 value={input?.rate}
                 onChange={handleChangeInput}
@@ -156,7 +165,6 @@ function Bio({ input, handleChangeInput, setInput, profiles }) {
             </div>
           )}
           <div className="flex flex-row gap-[20px]">
-            {/* {user.id == profiles[0].id && ( */}
             {pathname == `/profile/${user?.id}` ? (
               <div
                 onClick={openModalWallet}
