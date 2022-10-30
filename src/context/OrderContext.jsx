@@ -29,7 +29,7 @@ function OrderContextProvider({ children }) {
         5,
         order
       );
-      setProviders(res.data.provider);
+      setProviders(res.data.finalAvailableProviders);
     } catch (err) {
       console.log(err);
     }
@@ -45,6 +45,7 @@ function OrderContextProvider({ children }) {
         selected,
         setSelected,
         handleSearchProvider,
+        providers,
       }}
     >
       {children}
