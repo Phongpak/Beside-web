@@ -43,7 +43,7 @@ function PendingCard({ item }) {
               />
             </div>
             <div className="font-semibold text-[#224957]">
-              {seeUser.penName}
+              {seeUser.penName || seeUser.firstName}
             </div>
           </div>
           <div className="flex flex-row gap-[20px] h-[100%] text-[#224957]">
@@ -69,7 +69,15 @@ function PendingCard({ item }) {
           </div>
           <button
             onClick={openModal}
-            className="flex justify-center items-center self-end font-medium text-[#224957] w-[175px] h-[40px] border-2 border-[#9AC0B5] rounded-[15px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0"
+            className={`flex justify-center items-center self-end font-medium text-[#224957] w-[175px] h-[40px] border-2 ${
+              seeUser.id === item.providerId
+                ? "border-[#9AC0B5]"
+                : "border-[#E8D3D0]"
+            } rounded-[15px]  ${
+              seeUser.id === item.providerId
+                ? "hover:bg-[#9AC0B5]"
+                : "hover:bg-[#E8D3D0]"
+            } hover:text-white transition delay-20 hover:border-0`}
           >
             See more details
           </button>
