@@ -8,7 +8,14 @@ import { useState } from "react";
 import ModalAvailable from "../modals/ModalAvailable";
 import { Link, useLocation, useParams } from "react-router-dom";
 
-function Bio({ input, handleChangeInput, setInput, profiles, myOrder }) {
+function Bio({
+  input,
+  handleChangeInput,
+  setInput,
+  profiles,
+  myOrder,
+  AllOrder,
+}) {
   const { pathname } = useLocation();
   const { id } = useParams();
   const { user, toggleEditing, isEditing } = useAuth();
@@ -33,11 +40,11 @@ function Bio({ input, handleChangeInput, setInput, profiles, myOrder }) {
     setIsOpenModalAvailable(false);
   };
 
-  const arrRating = myOrder
-    ?.filter((item) => item.status == "SUCCESS")
-    .map((item) => {
+  const arrRating = AllOrder?.filter((item) => item.status == "SUCCESS").map(
+    (item) => {
       return item.providerReviewRating;
-    });
+    }
+  );
 
   const sumRating = arrRating?.reduce((acc, item) => acc + item, 0);
   const avgRating = (sumRating / arrRating?.length).toFixed(1);
@@ -124,10 +131,10 @@ function Bio({ input, handleChangeInput, setInput, profiles, myOrder }) {
             />
           ) : (
             <div className="text-[#224957] break-words">
-              {pathname === `/profile/${id}`
+              {pathname === `/profile/${user?.id}`
                 ? user?.description
                 : profiles
-                ? profiles[0]?.description
+                ? profiles[0]?.description || "no description"
                 : user?.description}
             </div>
           )}

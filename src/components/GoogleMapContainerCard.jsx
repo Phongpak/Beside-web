@@ -46,7 +46,7 @@ function Map({ setInput, input, item }) {
         center={center}
         mapContainerClassName="w-full h-full"
       >
-        {/* ({<Marker position={center} />}) */}
+        ({<Marker position={center} />})
       </GoogleMap>
     </>
   );

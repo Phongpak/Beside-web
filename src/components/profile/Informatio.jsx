@@ -17,7 +17,14 @@ import { useParams } from "react-router-dom";
 //   faSquareInstagram
 // } from "@fortawesome/free-brands-svg-icons";
 
-function Informatio({ handleChangeInput, input, setInput, profiles, myOrder }) {
+function Informatio({
+  handleChangeInput,
+  input,
+  setInput,
+  profiles,
+  myOrder,
+  AllOrder,
+}) {
   const { isEditing, user } = useAuth();
   // console.log( setInput);
   const { id } = useParams();
@@ -26,8 +33,8 @@ function Informatio({ handleChangeInput, input, setInput, profiles, myOrder }) {
     return null;
   }
 
-  const successOrder = myOrder?.filter((item) => item.status == "SUCCESS");
-  const successRate = (successOrder?.length / myOrder?.length) * 100;
+  const successOrder = AllOrder?.filter((item) => item.status == "SUCCESS");
+  const successRate = (successOrder?.length / AllOrder?.length) * 100;
 
   const joinDate = new Date(
     user?.id == id ? user?.createdAt : profiles[0]?.createdAt
@@ -50,9 +57,7 @@ function Informatio({ handleChangeInput, input, setInput, profiles, myOrder }) {
           </div>
           <div className="flex flex-row justify-between text-sm">
             <div>Work Sold</div>
-            <div>
-              {myOrder?.length} Time{myOrder?.length <= 1 ? "" : "s"}
-            </div>
+            <div>{AllOrder?.length} Times</div>
           </div>
           <div className="flex flex-row justify-between text-sm">
             <div>Success Rate</div>

@@ -25,20 +25,28 @@ function ProfilePage() {
       profileData();
     }
   }, [id]);
-  // console.log("0", profiles);
 
-  // const [isEditing, setIsEditing] = useState(false);
+  const [allOrders, setAllOrders] = useState([]);
 
-  // const toggleEditing = () => {
-  //   setIsEditing((prevIsEditing) => !prevIsEditing);
-  // };
+  useEffect(() => {
+    const orderData = async () => {
+      let allOrder = await getMyOrders(id);
 
-  const { user, updateUser, isEditing, setIsEditing, orders } = useAuth();
+      setAllOrders(allOrder.data.orders);
+    };
+    if (id) {
+      orderData();
+    }
+  }, [id]);
+  console.log("allOrders", allOrders);
+
+  const { user, updateUser, isEditing, setIsEditing, orders, getMyOrders } =
+    useAuth();
   const [input, setInput] = useState({});
   const { startLoading, stopLoading } = useLoading();
-  // console.log("orders", orders);
+
   const myOrder = orders.filter((item) => item?.provider?.id == id);
-  // console.log("myOrder", myOrder);
+  const AllOrder = allOrders.filter((item) => item?.provider?.id == id);
 
   useEffect(() => {
     setInput((p) => {
@@ -81,6 +89,7 @@ function ProfilePage() {
         setInput={setInput}
         profiles={profiles}
         myOrder={myOrder}
+        AllOrder={AllOrder}
       />
       <div className="w-full h-[650px] flex flex-col gap-10 px-60">
         {!isEditing && id == user?.id && <UserTabBar />}
@@ -91,11 +100,12 @@ function ProfilePage() {
             setInput={setInput}
             profiles={profiles}
             myOrder={myOrder}
+            AllOrder={AllOrder}
           />
           <div className="flex flex-col   h-[650px]">
             <div className="flex flex-col gap-[10px]">
               <div className="text-[20px] text-[#224957] font-medium">
-                {id == user?.id && "My"} reviews ({myOrder?.length})
+                {id == user?.id && "My"} reviews ({AllOrder?.length})
               </div>
 
               <input
@@ -103,7 +113,7 @@ function ProfilePage() {
                 placeholder="Search here..."
               />
               <div className="flex flex-row flex-wrap gap-6">
-                {myOrder.map((item) => (
+                {AllOrder.map((item) => (
                   <ReviewCardByUser item={item} />
                 ))}
               </div>
