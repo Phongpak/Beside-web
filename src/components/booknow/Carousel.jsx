@@ -14,7 +14,7 @@ function Carousel() {
   return (
     <div>
       <h1 className="pt-[200px] text-[#9AC0B5] text-[40px] text-center mt-20">
-        Top destination in bangkok
+        Top destination in Thailand
       </h1>
 
       <div>
@@ -129,28 +129,28 @@ function Carousel() {
           <SwiperSlide className=" my-20 ">
             <div className="h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full hover:-translate-y-10 hover:scale-125">
               <img
-                src="https://obs.line-scdn.net/0hYubkJBYgBlpfEin-bU15DWVEBTVsfhVZOyRXWQN8WG56cEMONHVANHxFXWMlI0EENndNOXIQHWt1dRYLZyNA/w644"
+                src="https://a.cdn-hotels.com/gdcs/production115/d617/7e772b8a-f371-45d5-a922-4a4f7baab9fc.jpg?impolicy=fcrop&w=800&h=533&q=medium"
                 alt="..."
                 className="h-full w-full"
               />
             </div>
             <div className=" w-60 mt-5">
               <h1 className="text-center text-2xl font-semibold text-[#506369]">
-                Krabi
+                Hua Hin
               </h1>
             </div>
           </SwiperSlide>
           <SwiperSlide className=" my-20">
             <div className="h-60 w-60 flex flex-col  justify-center overflow-hidden rounded-full hover:-translate-y-10 hover:scale-125">
               <img
-                src="https://obs.line-scdn.net/0hYubkJBYgBlpfEin-bU15DWVEBTVsfhVZOyRXWQN8WG56cEMONHVANHxFXWMlI0EENndNOXIQHWt1dRYLZyNA/w644"
+                src="https://www.theluxurysignature.com/wp-content/uploads/2015/07/gallery.dataphoto.414-e1437986288702.jpg"
                 alt="..."
                 className="h-full w-full"
               />
             </div>
             <div className=" w-60 mt-5">
               <h1 className="text-center text-2xl font-semibold text-[#506369]">
-                Krabi
+                Samui
               </h1>
             </div>
           </SwiperSlide>
