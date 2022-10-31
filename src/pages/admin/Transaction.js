@@ -10,7 +10,7 @@ function Transaction() {
   const [transactions, setTransactions] = useState([]);
   const [status, setStatus] = useState("");
   const [search, setSearch] = useState("");
-  const [type, setType] = useState("TOPUP");
+  const [type, setType] = useState("");
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -35,6 +35,10 @@ function Transaction() {
 
   const openTopUp = () => {
     setType("TOPUP");
+  };
+
+  const openALL = () => {
+    setType("");
   };
 
   const openWithdraw = () => {
@@ -62,6 +66,16 @@ function Transaction() {
       </div>
       <div className="flex flex-row gap-[10px]">
         <div
+          onClick={openALL}
+          className={`cursor-pointer flex flex-row justify-center items-center ${
+            type == ""
+              ? "bg-[#98ADC0] text-white border-0"
+              : "bg-white text-[#224957]  border-2 border-[#98ADC0]"
+          }   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#98ADC0] hover:text-white transition delay-20 hover:border-0`}
+        >
+          ALL
+        </div>
+        <div
           onClick={openTopUp}
           className={`cursor-pointer flex flex-row justify-center items-center ${
             type == "TOPUP"
@@ -74,10 +88,10 @@ function Transaction() {
         <div
           onClick={openWithdraw}
           className={`cursor-pointer flex flex-row justify-center items-center ${
-            type !== "TOPUP"
-              ? "bg-[#506369] text-white border-0"
+            type == "WITHDRAW"
+              ? "bg-[#98ADC0] text-white border-0"
               : "bg-white text-[#224957]  border-2 border-[#9AC0B5]"
-          }   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0`}
+          }   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#98ADC0] hover:text-white transition delay-20 hover:border-0`}
         >
           Withdraw
         </div>
@@ -87,6 +101,9 @@ function Transaction() {
 
       {transactions
         .filter((item) => {
+          if (!type) {
+            return item.status.includes(status) && item.task !== "ORDER";
+          }
           return item.status.includes(status) && item.task.includes(type);
         })
         .map((item, index) => (

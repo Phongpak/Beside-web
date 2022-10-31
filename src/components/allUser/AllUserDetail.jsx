@@ -26,7 +26,11 @@ function AllUserDetail({ user }) {
         <div className="flex flex-row justify-between w-1/2 gap-[20px] h-[100%] text-[#224957] mx-auto ">
           <div className="h-full ">
             <img
-              src="https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png"
+              src={
+                user.ProfileImages[0]?.Image
+                  ? user.ProfileImages[0]?.Image
+                  : "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png"
+              }
               className="h-full"
             />
           </div>

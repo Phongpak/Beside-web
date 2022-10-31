@@ -5,7 +5,6 @@ const MomentRange = require("moment-range");
 const moment = MomentRange.extendMoment(Moment);
 
 function UserProviderModal({ isOpen, closeModal, user, accept, deny }) {
-  console.log(user);
   return (
     <>
       {isOpen ? (
