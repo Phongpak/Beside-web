@@ -7,6 +7,7 @@ import ModalWallet from "../modals/ModalWallet";
 import { useState } from "react";
 import ModalAvailable from "../modals/ModalAvailable";
 import { Link, useLocation, useParams } from "react-router-dom";
+import ModalProviderRequest from "../modals/ModalProviderRequest";
 
 function Bio({
   input,
@@ -22,6 +23,7 @@ function Bio({
 
   const [isOpenModalWallet, setIsOpenModalWallet] = useState(false);
   const [isOpenModalAvailable, setIsOpenModalAvailable] = useState(false);
+  const [isOpenProviderRequest, setIsOpenProviderRequest] = useState(false);
 
   // console.log(full);
   const openModalWallet = () => {
@@ -50,6 +52,14 @@ function Bio({
   const avgRating = (sumRating / arrRating?.length).toFixed(1);
   console.log("avgRating", avgRating);
   const full = useMemo(() => 18.3 * avgRating + "px", [avgRating]);
+
+  const openModalProviderRequest = () => {
+    setIsOpenProviderRequest(true);
+  };
+
+  const closeModalProviderRequest = () => {
+    setIsOpenProviderRequest(false);
+  };
 
   return (
     <div className="flex items-center bg-[#F4F2F2]  h-[300px] px-60">
@@ -185,14 +195,25 @@ function Bio({
             )}
             {/* )} */}
 
-            <div
-              onClick={openModalAvailable}
-              className={`flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[140px] h-[60px] ${
-                Boolean(pathname !== `/profile/${user?.id}`) && "invisible"
-              }`}
-            >
-              Availability
-            </div>
+            {user.providerRequestStatus === "SUCCESS" ? (
+              <div
+                onClick={openModalAvailable}
+                className={`flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[140px] h-[60px] ${
+                  Boolean(pathname !== `/profile/${user?.id}`) && "invisible"
+                }`}
+              >
+                Availability
+              </div>
+            ) : (
+              <div
+                onClick={openModalProviderRequest}
+                className={`flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[140px] h-[60px] ${
+                  Boolean(pathname !== `/profile/${user?.id}`) && "invisible"
+                }`}
+              >
+                Be a Provider !
+              </div>
+            )}
             <div
               className={`flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[140px] h-[60px] ${
                 Boolean(pathname !== `/profile/${user?.id}`) && "invisible"
@@ -211,6 +232,10 @@ function Bio({
       <ModalAvailable
         isOpenModalAvailable={isOpenModalAvailable}
         closeModalAvailable={closeModalAvailable}
+      />
+      <ModalProviderRequest
+        isOpenProviderRequest={isOpenProviderRequest}
+        closeModalProviderRequest={closeModalProviderRequest}
       />
     </div>
   );

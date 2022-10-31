@@ -130,7 +130,6 @@ function AuthContextProvider({ children }) {
         initialLoading,
         orders,
         updateOrder,
-        getMyOrders,
       }}
     >
       {children}

@@ -2,7 +2,7 @@ import FilterCard from "../components/explore/FilterCard";
 import PriceCard from "../components/explore/PriceCard";
 import { useOrder } from "../context/OrderContext";
 function ExplorePage() {
-  const { book } = useOrder();
+  const { book, providers } = useOrder();
   return (
     <div className="px-52">
       <div className="flex justify-center">
@@ -29,10 +29,9 @@ function ExplorePage() {
         </div>
 
         <div className="flex flex-col gap-8">
-          <PriceCard />
-          <PriceCard />
-          <PriceCard />
-          <PriceCard />
+          {providers.map((item) => (
+            <PriceCard key={item.id} provider={item} />
+          ))}
         </div>
       </div>
     </div>

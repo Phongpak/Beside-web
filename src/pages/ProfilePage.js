@@ -47,7 +47,7 @@ function ProfilePage() {
 
   const myOrder = orders.filter((item) => item?.provider?.id == id);
   const AllOrder = allOrders.filter((item) => item?.provider?.id == id);
-
+  console.log("AllOrder", AllOrder);
   useEffect(() => {
     setInput((p) => {
       return {
