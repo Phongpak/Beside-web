@@ -76,7 +76,7 @@ function CompletedCard({ item }) {
               />
             </div>
             <div className="font-semibold text-[#224957]">
-              {seeUser.penName}
+              {seeUser.penName || seeUser.firstName}
             </div>
           </div>
           <div className="flex flex-row gap-[20px] h-[100%] text-[#224957] ml-60">

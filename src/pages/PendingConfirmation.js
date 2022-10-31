@@ -3,21 +3,22 @@ import PendingCard from "../components/pendingConfirmation/PendingCard";
 import Bio from "../components/profile/Bio";
 import UserTabBar from "../components/UserTabBar";
 import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 function PendingConfirmation() {
   // const [seeUser, setSeeUser] = useState(
   //   user.customer.id == user.id ? user.provider : user.customer
   // );
 
-  const [type, setType] = useState("provider");
+  // const [type, setType] = useState("provider");
 
-  const openProvider = () => {
-    setType("provider");
-  };
+  // const openProvider = () => {
+  //   setType("provider");
+  // };
 
-  const openCustomer = () => {
-    setType("customer");
-  };
+  // const openCustomer = () => {
+  //   setType("customer");
+  // };
 
   const { user, orders } = useAuth();
   // console.log(user.providerId !== user.id);
