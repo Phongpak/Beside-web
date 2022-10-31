@@ -85,18 +85,49 @@ function HomePage() {
       </div>
       <div>
         <h1 className="pt-[80px] text-center text-[40px]  text-[#224957] ">
-          Example
+          Example Activities
         </h1>
       </div>
       <div className="flex space-x-[100px] px-[180px] pt-[80px]">
-        <img src={jogging} className=" rounded-lg w-[500px] h-[200px]" />
-        <img src={dating} className=" rounded-lg w-[500px] h-[200px]" />
-        <img src={teatime} className=" rounded-lg w-[500px] h-[200px]" />
+        <div>
+          <img src={jogging} className=" rounded-lg w-[500px] h-[200px]" />
+          <p className="text-center  text-[#224957] text-[20px] mt-4 font-medium">
+            Jogging
+          </p>
+        </div>
+        <div>
+          <img src={dating} className=" rounded-lg w-[500px] h-[200px]" />
+          <p className="text-center  text-[#224957] text-[20px] mt-4 font-medium">
+            Dating
+          </p>
+        </div>
+        <div>
+          <img src={teatime} className=" rounded-lg w-[500px] h-[200px]" />
+          <p className="text-center  text-[#224957] text-[20px] mt-4 font-medium">
+            Tea-time
+          </p>
+        </div>
       </div>
+
       <div className="flex space-x-[100px] px-[180px] pt-[80px] pb-[100px]">
-        <img src={party} className="  w-[500px] h-[200px]" />
-        <img src={tutor} className="  w-[500px] h-[200px]" />
-        <img src={diving} className="  w-[500px] h-[200px]" />
+        <div>
+          <img src={party} className="  w-[500px] h-[200px]" />
+          <p className="text-center  text-[#224957] text-[20px] mt-4 font-medium">
+            Party
+          </p>
+        </div>
+        <div>
+          <img src={tutor} className="  w-[500px] h-[200px]" />
+          <p className="text-center  text-[#224957] text-[20px] mt-4 font-medium">
+            Tutor
+          </p>
+        </div>
+        <div>
+          <img src={diving} className="  w-[500px] h-[200px]" />
+          <p className="text-center  text-[#224957] text-[20px] mt-4 font-medium">
+            Diving
+          </p>
+        </div>
       </div>
     </>
   );
