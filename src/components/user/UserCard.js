@@ -1,8 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import UserModal from "../../pages/admin/UserModal";
+import * as adminService from "../../api/adminApi";
+const Moment = require("moment");
+const MomentRange = require("moment-range");
+const moment = MomentRange.extendMoment(Moment);
 
-function UserCard() {
+function UserCard({ user }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -11,6 +15,16 @@ function UserCard() {
 
   const closeModal = () => {
     setIsOpen(false);
+  };
+  const accept = async (id) => {
+    await adminService.updateUser(id, { isVerify: true });
+    window.location.reload();
+    closeModal();
+  };
+  const deny = async (id) => {
+    await adminService.deleteUser(id);
+    window.location.reload();
+    closeModal();
   };
   return (
     <div className="flex  justify-start p-2  w-fit border-4 border-[#9AC0B5] rounded-[15px]">
@@ -24,12 +38,11 @@ function UserCard() {
             <div>Time:</div>
           </div>
           <div className="flex flex-col justify-between ">
-            <div>wowwww</div>
-            <div>@gmail.com</div>
-
-            <div>Monday 10 September 1989</div>
-            <div>Monday 10 September 2022</div>
-            <div>10:34 am. </div>
+            <div>{user.firstName}</div>
+            <div>{user.lastName}</div>
+            <div>{moment(user.birthDate).format("DD-MM-YYYY")}</div>
+            <div>{moment(user.createdAt).format("DD-MM-YYYY")}</div>
+            <div>{moment(user.createdAt).format("hh:mm:ss")}</div>
           </div>
         </div>
         <div className="flex flex-row justify-center gap-[20px] self-end ">
@@ -41,7 +54,13 @@ function UserCard() {
           </button>
         </div>
       </div>
-      <UserModal isOpen={isOpen} closeModal={closeModal} />
+      <UserModal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        user={user}
+        accept={accept}
+        deny={deny}
+      />
     </div>
   );
 }
