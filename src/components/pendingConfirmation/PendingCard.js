@@ -3,6 +3,7 @@ import ModalPending from "../../components/modals/ModalPending";
 import moment from "moment";
 import { useAuth } from "../../context/AuthContext";
 import proPic from "../../image/profileImg.png";
+import { Link } from "react-router-dom";
 
 function PendingCard({ item }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,15 +37,21 @@ function PendingCard({ item }) {
             <div className="font-medium text-[#224957]">
               {item.customerId === user.id ? "Your Provider" : " Your Customer"}
             </div>
-            <div className="flex justify-center items-center border w-[100px] h-[100px] rounded-[100%] overflow-hidden">
+            <Link
+              className="flex justify-center items-center border w-[100px] h-[100px] rounded-[100%] overflow-hidden"
+              to={`/profile/${seeUser.id}`}
+            >
               <img
                 className="h-full"
                 src={seeUser?.ProfileImages[0]?.Image || proPic}
               />
-            </div>
-            <div className="font-semibold text-[#224957]">
+            </Link>
+            <Link
+              className="font-semibold text-[#224957]"
+              to={`/profile/${seeUser.id}`}
+            >
               {seeUser.penName}
-            </div>
+            </Link>
           </div>
           <div className="flex flex-row gap-[20px] h-[100%] text-[#224957]">
             <div className="flex flex-col justify-between w-[100px] font-medium">
@@ -69,7 +76,15 @@ function PendingCard({ item }) {
           </div>
           <button
             onClick={openModal}
-            className="flex justify-center items-center self-end font-medium text-[#224957] w-[175px] h-[40px] border-2 border-[#9AC0B5] rounded-[15px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0"
+            className={`flex justify-center items-center self-end font-medium text-[#224957] w-[175px] h-[40px] border-2 ${
+              seeUser.id === item.providerId
+                ? "border-[#9AC0B5]"
+                : "border-[#E8D3D0]"
+            } rounded-[15px]  ${
+              seeUser.id === item.providerId
+                ? "hover:bg-[#9AC0B5]"
+                : "hover:bg-[#E8D3D0]"
+            } hover:text-white transition delay-20 hover:border-0`}
           >
             See more details
           </button>
