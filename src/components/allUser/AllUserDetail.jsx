@@ -48,7 +48,7 @@ function AllUserDetail({ user }) {
         </div>
         <div className="flex flex-row justify-center gap-[20px] self-end ">
           <Link
-            to="/profile"
+            to={`/profile/${user.id}`}
             className="flex flex-row justify-center items-center w-[100px] h-[40px] text-[#224957] hover:text-[#9AC0B5] transition delay-20 hover:border-0"
           >
             profile

@@ -64,9 +64,12 @@ function ProviderUser() {
               item.lastName.toLowerCase().includes(search)
             );
           })
-          .map((item, index) => (
-            <UserProviderCard key={index} user={item} />
-          ))}
+          .map((item, index) => {
+            if (!item.providerRequestStatus) {
+              return "";
+            }
+            return <UserProviderCard key={index} user={item} />;
+          })}
       </div>
     </div>
   );
