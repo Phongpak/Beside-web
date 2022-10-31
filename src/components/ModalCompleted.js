@@ -1,23 +1,53 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faStar } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import proPic from "../../image/profileImg.png";
+import { useAuth } from "../../context/AuthContext";
 
-function ModalCompleted({ isOpen, closeModal }) {
+function ModalCompleted({ isOpen, closeModal, seeUser, item }) {
+  const { user, updateOrder } = useAuth();
+  // console.log(seeUser);
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
-
+  const [review, setReview] = useState(0);
   const stars = [0, 0, 0, 0, 0];
 
-  const handleClick = (value) => {
+  const handleMouseClick = (value) => {
     setCurrentValue(value);
   };
 
-  const handleMouseOver = (value) => {
+  const handleMouseHover = (value) => {
     setHoverValue(value);
   };
 
   const handleMouseLeave = (value) => {
     setHoverValue(undefined);
+  };
+
+  const [input, setInput] = useState("");
+
+  const handleChangeInput = (e) => {
+    setInput(e.target.value);
+  };
+
+  const handleClickSubmit = async () => {
+    try {
+      if (item.customerId == user.id) {
+        await updateOrder(
+          { providerReviewDescription: input, providerReviewRating: review },
+          item.id
+        );
+      }
+      if (item.providerId == user.id) {
+        await updateOrder(
+          { customerReviewDescription: input, customerReviewRating: review },
+          item.id
+        );
+      }
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -40,23 +70,31 @@ function ModalCompleted({ isOpen, closeModal }) {
                   <div className="flex justify-center items-center border w-[120px] h-[120px] rounded-[100%] overflow-hidden mt-[20px]">
                     <img
                       className="h-full"
-                      src={
-                        "https://preview.redd.it/i13zau5gs1j51.jpg?auto=webp&s=77ac0d41d59d1e9aa774f218ad5f9f3ff18e905a"
-                      }
+                      src={seeUser?.ProfileImages[0]?.Image || proPic}
                     />
                   </div>
                   <div className="text-[#224957] text-[20px] font-medium">
-                    Let's rate your provider's service
+                    {`Let's rate your ${
+                      item.customerId === user.id ? "provider" : "customer"
+                    } here`}
                   </div>
                   <textarea
                     className="border-2 border-[#9AC0B5] rounded-[20px] w-[500px] h-[150px] resize-none p-[10px]"
                     type="text"
+                    value={input}
+                    onChange={handleChangeInput}
                   />
                   <div className="flex flex-row justify-center items-center gap-[5px]">
                     {stars.map((item, index) => (
                       <FontAwesomeIcon
-                        onClick={() => handleClick(index + 1)}
-                        onMouseOver={() => handleMouseOver(index + 1)}
+                        onClick={() => {
+                          const score = index + 1;
+                          console.log(score);
+                          setReview(score);
+
+                          handleMouseClick(index + 1);
+                        }}
+                        onMouseOver={() => handleMouseHover(index + 1)}
                         onMouseLeave={handleMouseLeave}
                         className={`cursor-pointer text-[30px] text-${
                           (hoverValue || currentValue) > index
@@ -68,7 +106,10 @@ function ModalCompleted({ isOpen, closeModal }) {
                       />
                     ))}
                   </div>
-                  <button className="flex justify-center items-center font-medium text-[#224957] w-[175px] h-[40px] border-2 border-[#9AC0B5] rounded-[15px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0">
+                  <button
+                    className="flex justify-center items-center font-medium text-[#224957] w-[175px] h-[40px] border-2 border-[#9AC0B5] rounded-[15px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0"
+                    onClick={handleClickSubmit}
+                  >
                     Submit
                   </button>
                 </div>
