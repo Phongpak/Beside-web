@@ -3,10 +3,13 @@ import { faXmark, faStar } from "@fortawesome/free-solid-svg-icons";
 import proPic from "../../image/profileImg.png";
 import { useAuth } from "../../context/AuthContext";
 
-function ReviewModal({ isOpenReview, closeReviewModal, seeUser, item }) {
+function YourreviewModal({
+	isOpenYourReview,
+	closeYourReviewModal,
+	seeUser,
+	item
+}) {
 	const { user } = useAuth();
-	//   console.log(seeUser);
-
 	const star = [];
 	for (let i = 1; i <= item.customerReviewRating; i++) {
 		star.push(i);
@@ -16,13 +19,12 @@ function ReviewModal({ isOpenReview, closeReviewModal, seeUser, item }) {
 	for (let i = 1; i <= item.providerReviewRating; i++) {
 		star2.push(i);
 	}
-
 	return (
 		<>
-			{isOpenReview ? (
+			{isOpenYourReview ? (
 				<>
 					<div
-						onClick={closeReviewModal}
+						onClick={closeYourReviewModal}
 						className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
 					>
 						<div
@@ -34,7 +36,7 @@ function ReviewModal({ isOpenReview, closeReviewModal, seeUser, item }) {
 									<button className="self-end text-[30px] text-gray-400 absolute">
 										<FontAwesomeIcon
 											icon={faXmark}
-											onClick={closeReviewModal}
+											onClick={closeYourReviewModal}
 										/>
 									</button>
 									<div className="flex justify-center items-center border w-[120px] h-[120px] rounded-[100%] overflow-hidden mt-[20px]">
@@ -44,10 +46,10 @@ function ReviewModal({ isOpenReview, closeReviewModal, seeUser, item }) {
 										/>
 									</div>
 									<div className="text-[#224957] text-[20px] font-medium">
-										Their review about you
+										What you think about them
 									</div>
 
-									{seeUser.id === item.customerId ? (
+									{user.id === item.customerId ? (
 										<div
 											className="border-2 border-[#9AC0B5] rounded-[20px] w-[500px] h-[150px] resize-none p-[10px]"
 											type="text"
@@ -63,14 +65,14 @@ function ReviewModal({ isOpenReview, closeReviewModal, seeUser, item }) {
 										</div>
 									)}
 
-									{seeUser.id === item.customerId ? (
-										<div className="flex justify-center items-center gap-[5px] font-medium text-[#E8D3D0] text-[40px] w-[175px]">
+									{user.id === item.customerId ? (
+										<div className="flex justify-center items-center gap-[5px] font-medium text-[#9AC0B5] text-[40px] w-[175px]">
 											{star2.map(() => (
 												<FontAwesomeIcon icon={faStar} />
 											))}
 										</div>
 									) : (
-										<div className="flex justify-center items-center  gap-[5px] font-medium text-[#E8D3D0] text-[40px] w-[175px]">
+										<div className="flex justify-center items-center  gap-[5px] font-medium text-[#9AC0B5] text-[40px] w-[175px]">
 											{star.map(() => (
 												<FontAwesomeIcon icon={faStar} />
 											))}
@@ -87,4 +89,4 @@ function ReviewModal({ isOpenReview, closeReviewModal, seeUser, item }) {
 	);
 }
 
-export default ReviewModal;
+export default YourreviewModal;

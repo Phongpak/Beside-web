@@ -6,6 +6,7 @@ import { useAuth } from "../context/AuthContext";
 
 function Completed() {
 	const { user, orders } = useAuth();
+
 	const [searchTerm, setSearchTerm] = useState("");
 	const changeSearchTerm = (text) => {
 		setSearchTerm(text);
@@ -85,11 +86,33 @@ function Completed() {
 
 				{orders
 					.filter((item) => {
-						return (
-							(item.status === "SUCCESS" || item.status === "REJECT") &&
-							item.rentPriceTotal.toString().includes(searchTerm) &&
-							item.status.toLowerCase().includes(searchStatus.toLowerCase())
-						);
+						if (searchUserType === "") {
+							return (
+								(item.status === "SUCCESS" || item.status === "REJECT") &&
+								item.rentPriceTotal.toString().includes(searchTerm) &&
+								item.status.toLowerCase().includes(searchStatus.toLowerCase())
+							);
+						}
+						if (searchUserType === "provider") {
+							return (
+								(item.status === "SUCCESS" || item.status === "REJECT") &&
+								item.rentPriceTotal.toString().includes(searchTerm) &&
+								item.status
+									.toLowerCase()
+									.includes(searchStatus.toLowerCase()) &&
+								item.customerId === user.id
+							);
+						}
+						if (searchUserType === "customer") {
+							return (
+								(item.status === "SUCCESS" || item.status === "REJECT") &&
+								item.rentPriceTotal.toString().includes(searchTerm) &&
+								item.status
+									.toLowerCase()
+									.includes(searchStatus.toLowerCase()) &&
+								item.providerId === user.id
+							);
+						}
 					})
 					.map((item, index) => (
 						<CompletedCard key={index} item={item} />

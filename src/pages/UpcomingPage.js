@@ -5,8 +5,12 @@ import UserTabBar from "../components/UserTabBar";
 import { useAuth } from "../context/AuthContext";
 
 function Upcoming() {
-	const [type, setType] = useState("provider");
+	const [type, setType] = useState("all");
 	const { user, orders } = useAuth();
+
+	const openAll = () => {
+		setType("all");
+	};
 
 	const openProvider = () => {
 		setType("provider");
@@ -26,62 +30,52 @@ function Upcoming() {
 				/>
 				<div className="flex flex-row gap-[10px]">
 					<div
+						onClick={openAll}
+						className={`cursor-pointer flex flex-row justify-center items-center ${
+							type === "all"
+								? "bg-[#D4E4F4] text-white border-0"
+								: "bg-white text-[#224957] border-2 border-[#D4E4F4]"
+						}    text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#D4E4F4] hover:text-white transition delay-20 hover:border-0`}
+					>
+						All
+					</div>
+					<div
 						onClick={openProvider}
 						className={`cursor-pointer flex flex-row justify-center items-center ${
 							type === "provider"
-								? "bg-[#506369] text-white border-0"
-								: "bg-white text-[#224957]  border-2 border-[#9AC0B5]"
-						}   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0`}
+								? "bg-[#9AC0B5] text-white border-0"
+								: "bg-white text-[#224957] border-2 border-[#9AC0B5]"
+						}   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#9AC0B5] hover:text-white transition delay-20 hover:border-0`}
 					>
 						Your Provider
 					</div>
 					<div
 						onClick={openCustomer}
 						className={`cursor-pointer flex flex-row justify-center items-center ${
-							type !== "provider"
-								? "bg-[#506369] text-white border-0"
-								: "bg-white text-[#224957]  border-2 border-[#9AC0B5]"
-						}   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0`}
+							type === "customer"
+								? "bg-[#E8D3D0] text-white border-0"
+								: "bg-white text-[#224957] border-2 border-[#E8D3D0]"
+						}   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#E8D3D0] hover:text-white transition delay-20 hover:border-0`}
 					>
 						Your Customer
 					</div>
 				</div>
 				<div className="text-[#C4C4C4]">Recents :</div>
-				{type === "provider"
+				{type === "all"
+					? orders.map((item) => {
+							if (item.status === "INPROGRESS") {
+								return <UpcomingCard props={item} type={type} />; // show all
+							}
+					  })
+					: type === "provider"
 					? orders.map((item) => {
 							if (item.customerId === user.id && item.status === "INPROGRESS") {
-								return (
-									<UpcomingCard
-										orderId={item.id}
-										customerId={item.customerId}
-										providerId={item.providerId}
-										firstName={item.provider.firstName}
-										image={item.provider.ProfileImages[0]?.Image}
-										appointmentDate={item.appointmentDate}
-										fromTime={item.fromTime.slice(0, 5)}
-										toTime={item.toTime.slice(0, 5)}
-										location={item.location}
-										rentPriceTotal={item.rentPriceTotal}
-									/>
-								); // show provider ของ customer
+								return <UpcomingCard props={item} type={type} />; // show provider ของ customer
 							}
 					  })
 					: orders.map((item) => {
 							if (item.providerId === user.id && item.status === "INPROGRESS") {
-								return (
-									<UpcomingCard
-										orderId={item.id}
-										customerId={item.customerId}
-										providerId={item.providerId}
-										firstName={item.customer.firstName}
-										image={item.customer.ProfileImages[0]?.Image}
-										appointmentDate={item.appointmentDate}
-										fromTime={item.fromTime.slice(0, 5)}
-										toTime={item.toTime.slice(0, 5)}
-										location={item.location}
-										rentPriceTotal={item.rentPriceTotal}
-									/>
-								); // show customer ของ provider
+								return <UpcomingCard props={item} type={type} />; // show customer ของ provider
 							}
 					  })}
 			</div>

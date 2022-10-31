@@ -7,6 +7,7 @@ import { useAuth } from "../../context/AuthContext";
 import proPic from "../../image/profileImg.png";
 import moment from "moment";
 import ReviewModal from "../modals/ReviewModal";
+import YourreviewModal from "../modals/YourreviewModal";
 
 function CompletedCard({ item }) {
 	// console.log(item.customerReviewRating);
@@ -37,6 +38,15 @@ function CompletedCard({ item }) {
 	const closeReviewModal = () => {
 		setIsOpenReview(false);
 	};
+	const [isOpenYourReview, setIsOpenYourReview] = useState(false);
+
+	const openYourReviewModal = () => {
+		setIsOpenYourReview(true);
+	};
+
+	const closeYourReviewModal = () => {
+		setIsOpenYourReview(false);
+	};
 
 	const star = [];
 	for (let i = 1; i <= item.customerReviewRating; i++) {
@@ -54,7 +64,7 @@ function CompletedCard({ item }) {
 					item.customerId === user.id ? "[#9AC0B5]" : "[#E8D3D0]"
 				} rounded-[15px]`}
 			>
-				<div className="flex flex-row justify-between items-center w-[95%] h-[85%]">
+				<div className="flex flex-row items-center w-[95%] h-[85%]">
 					<div className="flex flex-col justify-center items-center ml-[40px]">
 						<div className="font-medium text-[#224957]">
 							{item.customerId === user.id ? "Your Provider" : " Your Customer"}
@@ -69,14 +79,14 @@ function CompletedCard({ item }) {
 							{seeUser.penName}
 						</div>
 					</div>
-					<div className="flex flex-row gap-[20px] h-[100%] text-[#224957]">
+					<div className="flex flex-row gap-[20px] h-[100%] text-[#224957] ml-60">
 						<div className="flex flex-col justify-between w-[100px] font-medium">
 							<div>Date:</div>
 							<div>Time:</div>
 							<div>Location:</div>
 							<div>Deal Price:</div>
 						</div>
-						<div className="flex flex-col justify-between w-[325px] font-medium">
+						<div className="flex flex-col justify-between w-[325px] font-medium ml-32">
 							<div>
 								{moment(item.appointmentDate).format("dddd, MMMM Do YYYY")}
 							</div>
@@ -91,29 +101,31 @@ function CompletedCard({ item }) {
 						</div>
 					</div>
 
-					<div className="flex mt-28 gap-5">
-						{seeUser.id === item.customerId && item.providerReviewDescription && (
+					<div className="flex mt-28 gap-1">
+						{user.id === item.customerId && item.providerReviewDescription && (
 							<button
-								onClick={openReviewModal}
-								className="flex justify-center items-center  font-medium text-[#E37383] hover:text-[#E8D3D0] transition delay-20 "
+								onClick={openYourReviewModal}
+								className="flex justify-center items-center  font-medium text-[#9AC0B5] hover:text-[#224957] transition delay-20 "
 							>
-								{`  ${
-									item.customerId === user.id
-										? "Your provider"
-										: " Your customer"
-								}'s review`}
+								{/* {`  ${
+                  item.customerId === user.id
+                    ? "Your provider"
+                    : " Your customer"
+                }'s review`} */}
+								See what you have reviewed
 							</button>
 						)}
-						{seeUser.id === item.providerId && item.customerReviewDescription && (
+						{user.id === item.providerId && item.customerReviewDescription && (
 							<button
-								onClick={openReviewModal}
-								className="flex justify-center items-center  font-medium text-[#E37383] hover:text-[#E8D3D0] transition delay-20 "
+								onClick={openYourReviewModal}
+								className="flex justify-center items-center  font-medium text-[#9AC0B5] hover:text-[#224957] transition delay-20 "
 							>
-								{`  ${
-									item.customerId === user.id
-										? "Your provider"
-										: " Your customer"
-								}'s review`}
+								{/* {`  ${
+                  item.customerId === user.id
+                    ? "Your provider"
+                    : " Your customer"
+                }'s review`} */}
+								See what you have reviewed
 							</button>
 						)}
 						{user.id === item.providerId && !item.customerReviewDescription && (
@@ -138,21 +150,47 @@ function CompletedCard({ item }) {
 								Rejected
 							</div>
 						)}
+						{/* <div onClick={openReviewModal}>
+              {user.id === item.customerId && item.providerReviewDescription && (
+                <div className="flex justify-end items-center self-end gap-[5px] font-medium text-[#9AC0B5] text-[20px] w-[175px]">
+                  {star2.map(() => (
+                    <FontAwesomeIcon icon={faStar} />
+                  ))}
+                </div>
+              )}
+            </div>
 
-						{user.id === item.customerId && item.providerReviewDescription && (
-							<div className="flex justify-end items-center self-end gap-[5px] font-medium text-[#9AC0B5] text-[20px] w-[175px]">
-								{star2.map(() => (
-									<FontAwesomeIcon icon={faStar} />
-								))}
-							</div>
-						)}
-						{user.id === item.providerId && item.customerReviewDescription && (
-							<div className="flex justify-end items-center self-end gap-[5px] font-medium text-[#9AC0B5] text-[20px] w-[175px]">
-								{star.map(() => (
-									<FontAwesomeIcon icon={faStar} />
-								))}
-							</div>
-						)}
+            <div onClick={openReviewModal}>
+              {user.id === item.providerId && item.customerReviewDescription && (
+                <div className="flex justify-end items-center self-end gap-[5px] font-medium text-[#9AC0B5] text-[20px] w-[175px]">
+                  {star.map(() => (
+                    <FontAwesomeIcon icon={faStar} />
+                  ))}
+                </div>
+              )}
+            </div> */}
+
+						<div onClick={openReviewModal}>
+							{seeUser.id === item.customerId &&
+								item.providerReviewDescription && (
+									<div className="flex justify-end items-center self-end gap-[5px] font-medium text-[#E37383] text-[20px] w-[175px]">
+										{star2.map(() => (
+											<FontAwesomeIcon icon={faStar} />
+										))}
+									</div>
+								)}
+						</div>
+
+						<div onClick={openReviewModal}>
+							{seeUser.id === item.providerId &&
+								item.customerReviewDescription && (
+									<div className="flex justify-end items-center self-end gap-[5px] font-medium text-[#E37383] text-[20px] w-[175px]">
+										{star.map(() => (
+											<FontAwesomeIcon icon={faStar} />
+										))}
+									</div>
+								)}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -165,6 +203,12 @@ function CompletedCard({ item }) {
 			<ReviewModal
 				isOpenReview={isOpenReview}
 				closeReviewModal={closeReviewModal}
+				seeUser={seeUser}
+				item={item}
+			/>
+			<YourreviewModal
+				isOpenYourReview={isOpenYourReview}
+				closeYourReviewModal={closeYourReviewModal}
 				seeUser={seeUser}
 				item={item}
 			/>
