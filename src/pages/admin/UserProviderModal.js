@@ -45,22 +45,28 @@ function UserProviderModal({ isOpen, closeModal, user, accept, deny }) {
                     </div>
                   </div>
                   <div className="flex flex-row justify-center gap-[20px] my-10">
-                    <button
-                      onClick={() => {
-                        accept(user.id);
-                      }}
-                      className="flex flex-row justify-center items-center w-[100px] h-[40px] border-2 border-[#9AC0B5] rounded-[20px] hover:bg-[#9AC0B5] hover:text-white transition delay-20 hover:border-0"
-                    >
-                      ACCEPT
-                    </button>
-                    <button
-                      onClick={() => {
-                        deny(user.id);
-                      }}
-                      className="flex flex-row justify-center items-center w-[100px] h-[40px] border-2 border-[#E6C3C1] rounded-[20px] hover:bg-[#E6C3C1] hover:text-white transition delay-20 hover:border-0"
-                    >
-                      DENY
-                    </button>
+                    {user.providerRequestStatus == "PENDING" ? (
+                      <>
+                        <button
+                          onClick={() => {
+                            accept(user.id);
+                          }}
+                          className="flex flex-row justify-center items-center w-[100px] h-[40px] border-2 border-[#9AC0B5] rounded-[20px] hover:bg-[#9AC0B5] hover:text-white transition delay-20 hover:border-0"
+                        >
+                          ACCEPT
+                        </button>
+                        <button
+                          onClick={() => {
+                            deny(user.id);
+                          }}
+                          className="flex flex-row justify-center items-center w-[100px] h-[40px] border-2 border-[#E6C3C1] rounded-[20px] hover:bg-[#E6C3C1] hover:text-white transition delay-20 hover:border-0"
+                        >
+                          DENY
+                        </button>
+                      </>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
               </div>

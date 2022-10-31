@@ -46,12 +46,29 @@ function UserProviderCard({ user }) {
             </div>
           </div>
           <div className="flex flex-row justify-center gap-[20px] self-end ">
-            <button
-              onClick={openModal}
-              className="flex flex-row justify-center items-center w-[100px] h-[40px] border-2 text-[#224957] border-[#9AC0B5] rounded-[20px] hover:bg-[#9AC0B5] hover:text-white transition delay-20 hover:border-0"
-            >
-              Verification
-            </button>
+            {user.providerRequestStatus === "SUCCESS" ? (
+              <button
+                onClick={openModal}
+                className="flex flex-row justify-center items-center w-[100px] h-[40px] border-2 text-[#224957] border-[#9AC0B5] rounded-[20px] hover:bg-[#9AC0B5] hover:text-white transition delay-20 hover:border-0"
+              >
+                Verified
+              </button>
+            ) : user.providerRequestStatus == null ? (
+              <button className="flex flex-row justify-center items-center w-[100px] h-[40px] border-2 text-[#224957] border-[#9AC0B5] rounded-[20px] hover:bg-[#9AC0B5] hover:text-white transition delay-20 hover:border-0">
+                no Request
+              </button>
+            ) : user.providerRequestStatus == "REJECT" ? (
+              <button className="disabled flex flex-row justify-center items-center w-[100px] h-[40px] border-2 text-[#224957] border-[#9AC0B5] rounded-[20px] hover:bg-[#9AC0B5] hover:text-white transition delay-20 hover:border-0">
+                Rejected
+              </button>
+            ) : (
+              <button
+                onClick={openModal}
+                className="flex flex-row justify-center items-center w-[100px] h-[40px] border-2 text-[#224957] border-[#9AC0B5] rounded-[20px] hover:bg-[#9AC0B5] hover:text-white transition delay-20 hover:border-0"
+              >
+                Verification
+              </button>
+            )}
           </div>
         </div>
       </div>
