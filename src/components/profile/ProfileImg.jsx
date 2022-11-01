@@ -122,7 +122,7 @@ function ProfileImg({ profiles }) {
             />
           </div>
         ) : (
-          <>
+          <div className="w-[500px]">
             <img src={ProfilePic} className="w-96 h-60" onClick={openModal} />
             <ProImgModal1
               isOpen={isOpen}
@@ -131,7 +131,7 @@ function ProfileImg({ profiles }) {
               getProfileImages={getProfileImages}
               user={user}
             />
-          </>
+          </div>
         )
       ) : providerPics.length ? (
         <div className="w-[500px]">
