@@ -4,10 +4,12 @@ import moment from "moment";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation";
+// import "./styles.css";
+// import "swiper/css/navigation";
 // import "swiper/css/autoplay ";
 // import "swiper/css/scrollbar ";
-import { Pagination, Navigation } from "swiper";
+import { Pagination } from "swiper";
+// import { Pagination, Navigation } from "swiper";
 import proPic from "../../image/profileImg.png";
 import { useAuth } from "../../context/AuthContext";
 import { useState } from "react";
@@ -59,7 +61,14 @@ function ModalPending({ isOpen, closeModal, item, seeUser }) {
                             slidesPerView={1}
                             spaceBetween={10}
                             loop={true}
-                            modules={[Pagination, Navigation]}
+                            // modules={[Pagination, Navigation]}
+                            // navigation
+                            // pagination={{ clickable: true }}
+                            // scrollbar={{ draggable: true }}
+                            // onSwiper={(swiper) => console.log(swiper)}
+                            // onSlideChange={() => console.log("slide change")}
+                            pagination={true}
+                            modules={[Pagination]}
                           >
                             {seeUser?.ProfileImages?.map((item, index) => {
                               return (
