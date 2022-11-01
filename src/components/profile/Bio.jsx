@@ -8,6 +8,7 @@ import { useState } from "react";
 import ModalAvailable from "../modals/ModalAvailable";
 import { Link, useLocation, useParams } from "react-router-dom";
 import ModalProviderRequest from "../modals/ModalProviderRequest";
+import { useOrder } from "../../context/OrderContext";
 
 function Bio({
   input,
@@ -16,10 +17,14 @@ function Bio({
   profiles,
   myOrder,
   AllOrder,
+  totalPrice,
 }) {
   const { pathname } = useLocation();
   const { id } = useParams();
+  const { book, providers } = useOrder();
   const { user, toggleEditing, isEditing } = useAuth();
+  console.log("book", book);
+  console.log("providers", providers);
 
   const [isOpenModalWallet, setIsOpenModalWallet] = useState(false);
   const [isOpenModalAvailable, setIsOpenModalAvailable] = useState(false);
@@ -41,6 +46,7 @@ function Bio({
   const closeModalAvailable = () => {
     setIsOpenModalAvailable(false);
   };
+  console.log("AllOrder", AllOrder);
 
   const arrRating = AllOrder?.filter((item) => item.status == "SUCCESS").map(
     (item) => {
@@ -50,6 +56,8 @@ function Bio({
 
   const sumRating = arrRating?.reduce((acc, item) => acc + item, 0);
   const avgRating = (sumRating / arrRating?.length).toFixed(1);
+  // console.log("arrRating", arrRating);
+  // console.log("avgRating", avgRating);
   console.log("avgRating", avgRating);
   const full = useMemo(() => 18.3 * avgRating + "px", [avgRating]);
 
@@ -169,10 +177,10 @@ function Bio({
             </div>
           ) : user?.id !== profiles[0]?.id ? (
             <>
-              <div>5000 Bath</div>
-              <Link className="flex justify-around items-center text-[#224957] bg-white border-2 border-[#9AC0B5] w-[170px] h-[30px] rounded-[50px]">
+              <div className="">{totalPrice} Bath</div>
+              <div className="flex justify-around cursor-pointer items-center hover:border-none hover:bg-[#9AC0B5] hover:text-white text-[#224957] bg-white border-2 border-[#9AC0B5] w-[170px] h-[30px] rounded-[50px]">
                 Book now
-              </Link>
+              </div>
             </>
           ) : (
             <div className="flex justify-around items-center text-[#224957] bg-white border-2 border-[#9AC0B5] w-[170px] h-[30px] rounded-[50px]">
