@@ -109,8 +109,16 @@ function UpcomingCard({ props, type }) {
 								src={
 									(type === "all" && user.id === props.providerId) ||
 									(type === "customer" && user.id === props.providerId)
-										? props.customer.ProfileImages[0]?.Image || proPic
-										: props.provider.ProfileImages[0]?.Image || proPic
+										? props.customer.ProfileImages.filter(
+												(item) => item.isShow === true
+										  )[0]?.Image ||
+										  props.customer.ProfileImages[0]?.Image ||
+										  proPic
+										: props.provider.ProfileImages.filter(
+												(item) => item.isShow === true
+										  )[0]?.Image ||
+										  props.provider.ProfileImages[0]?.Image ||
+										  proPic
 								}
 							/>
 						</div>
@@ -140,7 +148,7 @@ function UpcomingCard({ props, type }) {
 						</div>
 					</div>
 					{timeDiffStart <= 24 ? (
-						<div className="flex flex-row justify-end items-center self-end gap-[10px] w-[265px]">
+						<div className="flex flex-row justify-end items-center self-end gap-[10px] w-[280px]">
 							{props.providerId === user.id && timeDiffEnd > 0 ? (
 								<button
 									className={`flex flex-row justify-center items-center text-[#224957] w-[80px] h-[40px] border-2 rounded-[15px] hover:text-white transition delay-20 hover:border-2 ${
@@ -199,8 +207,16 @@ function UpcomingCard({ props, type }) {
 						otherImage={
 							(type === "all" && user.id === props.providerId) ||
 							(type === "customer" && user.id === props.providerId)
-								? props.customer.ProfileImages[0]?.Image || proPic
-								: props.provider.ProfileImages[0]?.Image || proPic
+								? props.customer.ProfileImages.filter(
+										(item) => item.isShow === true
+								  )[0]?.Image ||
+								  props.customer.ProfileImages[0]?.Image ||
+								  proPic
+								: props.provider.ProfileImages.filter(
+										(item) => item.isShow === true
+								  )[0]?.Image ||
+								  props.provider.ProfileImages[0]?.Image ||
+								  proPic
 						}
 						room={props.id}
 						setShowChat={setShowChat}
