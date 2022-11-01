@@ -6,7 +6,7 @@ function ExplorePage() {
   const { book, providers } = useOrder();
   const [filter, setFilter] = useState({
     gender: "",
-    age: "",
+    age: ""
   });
   const [allProviders, setAllProviders] = useState(providers);
 
@@ -24,7 +24,7 @@ function ExplorePage() {
   const multiplier = +book.toTime.split(":")[0] - book.fromTime.split(":")[0];
   console.log(multiplier);
   const filterByGender = (providers, gender) => {
-    const filteredProviders = allProviders.filter(
+    const filteredProviders = providers.filter(
       (item) => item.gender === gender
     );
     return filteredProviders;

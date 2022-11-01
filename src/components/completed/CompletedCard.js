@@ -66,7 +66,7 @@ function CompletedCard({ item }) {
         } rounded-[15px]`}
       >
         <div className="flex flex-row items-center w-[95%] h-[85%] justify-between">
-          <div className="flex flex-col justify-center items-center ml-[40px]">
+          <div className="flex flex-col justify-center items-center ml-[40px] w-[110px]">
             <div className="font-medium text-[#224957]">
               {item.customerId === user.id ? "Your Provider" : " Your Customer"}
             </div>
@@ -108,7 +108,7 @@ function CompletedCard({ item }) {
             </div>
           </div>
 
-          <div className="flex mt-28 gap-1 w-[355px] justify-end">
+          <div className="flex mt-28 gap-1 w-[280px] justify-end items-center text-[15px]">
             {user.id === item.customerId && item.providerReviewDescription && (
               <button
                 onClick={openYourReviewModal}
