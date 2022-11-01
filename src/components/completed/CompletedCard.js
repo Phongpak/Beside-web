@@ -76,7 +76,13 @@ function CompletedCard({ item }) {
 						>
 							<img
 								className="h-full"
-								src={seeUser?.ProfileImages[0]?.Image || proPic}
+								src={
+									seeUser?.ProfileImages.filter(
+										(item) => item.isShow === true
+									)[0]?.Image ||
+									seeUser?.ProfileImages[0]?.Image ||
+									proPic
+								}
 							/>
 						</Link>
 						<Link
@@ -114,7 +120,7 @@ function CompletedCard({ item }) {
 								onClick={openYourReviewModal}
 								className="flex justify-center items-center  font-medium text-[#9AC0B5] hover:text-[#224957] transition delay-20 "
 							>
-								See what you have reviewed
+								See review
 							</button>
 						)}
 						{user.id === item.providerId && item.customerReviewDescription && (
@@ -122,7 +128,7 @@ function CompletedCard({ item }) {
 								onClick={openYourReviewModal}
 								className="flex justify-center items-center  font-medium text-[#E8D3D0] hover:text-[#224957] transition delay-20 "
 							>
-								See what you have reviewed
+								See review
 							</button>
 						)}
 						{user.id === item.providerId && !item.customerReviewDescription && (
