@@ -12,7 +12,7 @@ import ReviewCardByUser from "../components/ReviewCardByUser";
 function ProfilePage() {
   const { id } = useParams();
   const { getProfile } = useProfile();
-
+  // console.log("getProfile", getProfile);
   const [profiles, setProfiles] = useState([]);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function ProfilePage() {
   useEffect(() => {
     const orderData = async () => {
       let allOrder = await getMyOrders(id);
-
+      // console.log("allOrder", allOrder);
       setAllOrders(allOrder.data.orders);
     };
     if (id) {
@@ -47,7 +47,7 @@ function ProfilePage() {
 
   const myOrder = orders.filter((item) => item?.provider?.id == id);
   const AllOrder = allOrders.filter((item) => item?.provider?.id == id);
-  console.log("AllOrder", AllOrder);
+  // console.log("AllOrder", AllOrder);
   useEffect(() => {
     setInput((p) => {
       return {
