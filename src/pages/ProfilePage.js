@@ -8,12 +8,15 @@ import { useLoading } from "../context/LoadingContext";
 import { useParams } from "react-router-dom";
 import { useProfile } from "../context/ProfileContext";
 import ReviewCardByUser from "../components/ReviewCardByUser";
+import { useOrder } from "../context/OrderContext";
 
 function ProfilePage() {
   const { id } = useParams();
   const { getProfile } = useProfile();
-  // console.log("getProfile", getProfile);
+  const { book, providers } = useOrder();
   const [profiles, setProfiles] = useState([]);
+  // console.log("book", book);
+  // console.log("providers", providers);
 
   useEffect(() => {
     const profileData = async () => {
@@ -31,14 +34,14 @@ function ProfilePage() {
   useEffect(() => {
     const orderData = async () => {
       let allOrder = await getMyOrders(id);
-      // console.log("allOrder", allOrder);
+      console.log("allOrder", allOrder);
       setAllOrders(allOrder.data.orders);
     };
     if (id) {
       orderData();
     }
   }, [id]);
-  console.log("allOrders", allOrders);
+  // console.log("allOrders", allOrders);
 
   const { user, updateUser, isEditing, setIsEditing, orders, getMyOrders } =
     useAuth();
@@ -46,8 +49,10 @@ function ProfilePage() {
   const { startLoading, stopLoading } = useLoading();
 
   const myOrder = orders.filter((item) => item?.provider?.id == id);
-  const AllOrder = allOrders.filter((item) => item?.provider?.id == id);
-  // console.log("AllOrder", AllOrder);
+  const AllOrder = allOrders.filter(
+    (item) => item?.provider?.id == id && item?.status === "SUCCESS"
+  );
+  console.log("AllOrder", AllOrder);
   useEffect(() => {
     setInput((p) => {
       return {
@@ -64,6 +69,13 @@ function ProfilePage() {
       };
     });
   }, [user]);
+  const multiplier =
+    +book?.toTime?.split(":")[0] - book?.fromTime?.split(":")[0];
+
+  // console.log("multiplier", multiplier);
+
+  const totalPrice = multiplier * providers[0].rate;
+  // console.log("totalPrice", totalPrice);
 
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -84,6 +96,7 @@ function ProfilePage() {
   return (
     <div>
       <Bio
+        totalPrice={totalPrice}
         input={input}
         handleChangeInput={handleChangeInput}
         setInput={setInput}
