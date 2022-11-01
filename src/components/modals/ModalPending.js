@@ -73,13 +73,13 @@ function ModalPending({ isOpen, closeModal, item, seeUser }) {
                             {seeUser?.ProfileImages?.map((item, index) => {
                               return (
                                 <SwiperSlide className="my-20 " key={index}>
-                                  {/* <div className="flex flex-col  justify-center overflow-hidden"> */}
-                                  <img
-                                    src={item.Image}
-                                    alt="..."
-                                    className="w-80 h-60"
-                                  />
-                                  {/* </div> */}
+                                  <div className="flex flex-col  justify-center overflow-hidden">
+                                    <img
+                                      src={item.Image}
+                                      alt="..."
+                                      className="w-80 h-60"
+                                    />
+                                  </div>
                                 </SwiperSlide>
                               );
                             })}

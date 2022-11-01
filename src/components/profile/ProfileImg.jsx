@@ -4,11 +4,14 @@ import { useAuth } from "../../context/AuthContext";
 import ProImgModal1 from "./ProImgModal1";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation";
+import { Pagination } from "swiper";
+// import "swiper/css/pagination";
+// import "swiper/css/navigation";
 // import "swiper/css/autoplay ";
 // import "swiper/css/scrollbar ";
-import { Pagination, Navigation } from "swiper";
+// import { Pagination, Navigation } from "swiper";
 
 import ProfilePic from "../../image/profileImg.png";
 import { useLocation, useParams } from "react-router-dom";
@@ -85,31 +88,35 @@ function ProfileImg({ profiles }) {
                 1280: {
                   slidesPerView: 1,
                   spaceBetween: 1,
-                  slidesPerGroup: 1,
+                  slidesPerGroup: 1
                 },
                 1440: {
                   slidesPerView: 1,
                   spaceBetween: 1,
-                  slidesPerGroup: 1,
-                },
+                  slidesPerGroup: 1
+                }
               }}
               loop={true}
-              modules={[Pagination, Navigation]}
+              pagination={true}
+              modules={[Pagination]}
             >
               {pics.map((item, index) => {
                 return (
-                  <SwiperSlide className="w-[500px] " key={index}>
-                    <div
-                      className="flex flex-col  justify-center overflow-hidden"
-                      onClick={openModal}
-                    >
-                      <img
-                        src={item.Image}
-                        alt="..."
-                        className="block w-96 h-60"
-                      />
-                    </div>
-                  </SwiperSlide>
+                  <div>
+                    <SwiperSlide className="" key={index}>
+                      <div
+                        className="flex flex-col  justify-center overflow-hidden"
+                        onClick={openModal}
+                      >
+                        <img
+                          src={item.Image}
+                          alt="..."
+                          className=" block w-96 h-60"
+                          // onClick={openModal}
+                        />
+                      </div>
+                    </SwiperSlide>
+                  </div>
                 );
               })}
             </Swiper>
@@ -123,7 +130,7 @@ function ProfileImg({ profiles }) {
           </div>
         ) : (
           <div className="w-[500px]">
-            <img src={ProfilePic} className="w-96 h-60" onClick={openModal} />
+            <img src={ProfilePic} className="w-60 h-96" onClick={openModal} />
             <ProImgModal1
               isOpen={isOpen}
               closeModal={closeModal}
@@ -140,25 +147,29 @@ function ProfileImg({ profiles }) {
               1280: {
                 slidesPerView: 1,
                 spaceBetween: 1,
-                slidesPerGroup: 1,
+                slidesPerGroup: 1
               },
               1440: {
                 slidesPerView: 1,
                 spaceBetween: 1,
-                slidesPerGroup: 1,
-              },
+                slidesPerGroup: 1
+              }
             }}
             loop={true}
-            modules={[Pagination, Navigation]}
+            pagination={true}
+            modules={[Pagination]}
           >
             {providerPics.map((item, index) => {
               return (
-                <SwiperSlide className="w-[500px]" key={index}>
-                  <div className="flex flex-col justify-center overflow-hidden">
+                <SwiperSlide className="" key={index}>
+                  {/* <div className="flex flex-col  justify-center overflow-hidden">
+                    <img src={item.Image} alt="..." className="w-80 h-60" />
+                  </div> */}
+                  <div className="flex flex-col  justify-center overflow-hidden">
                     <img
                       src={item.Image}
                       alt="..."
-                      className="block w-96 h-60"
+                      className=" block w-96 h-60"
                     />
                   </div>
                 </SwiperSlide>
@@ -175,7 +186,7 @@ function ProfileImg({ profiles }) {
         </div>
       ) : (
         <>
-          <img src={ProfilePic} className="w-96 h-60" />
+          <img src={ProfilePic} className="w-80 h-60" />
           <ProImgModal1
             isOpen={isOpen}
             closeModal={closeModal}
