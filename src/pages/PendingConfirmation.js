@@ -3,22 +3,9 @@ import PendingCard from "../components/pendingConfirmation/PendingCard";
 import Bio from "../components/profile/Bio";
 import UserTabBar from "../components/UserTabBar";
 import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 function PendingConfirmation() {
-  // const [seeUser, setSeeUser] = useState(
-  //   user.customer.id == user.id ? user.provider : user.customer
-  // );
-
-  const [type, setType] = useState("provider");
-
-  const openProvider = () => {
-    setType("provider");
-  };
-
-  const openCustomer = () => {
-    setType("customer");
-  };
-
   const { user, orders } = useAuth();
   // console.log(user.providerId !== user.id);
   const [searchTerm, setSearchTerm] = useState("");
@@ -55,28 +42,30 @@ function PendingConfirmation() {
             All
           </button>
           <button
+            name="provider"
             onClick={(event) => {
-              setSearchUserType(event.target.value);
+              setSearchUserType(event.target.name);
             }}
             value="provider"
             className={`cursor-pointer flex flex-row justify-center items-center ${
-              searchUserType === user.id
-                ? "bg-[#98ADC0] text-white border-0"
-                : "bg-white text-[#224957]  border-2 border-[#9AC0B5]"
-            }   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#98ADC0] hover:text-white transition delay-20 hover:border-0`}
+              searchUserType === "provider"
+                ? "bg-[#9AC0B5] text-white border-0"
+                : "bg-white text-[#224957] border-2 border-[#9AC0B5]"
+            }   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#9AC0B5] hover:text-white transition delay-20 hover:border-0`}
           >
             Your Provider
           </button>
           <button
+            name="customer"
             onClick={(event) => {
-              setSearchUserType(event.target.value);
+              setSearchUserType(event.target.name);
             }}
             value="customer"
             className={`cursor-pointer flex flex-row justify-center items-center ${
-              searchUserType === user.id
-                ? "bg-[#506369] text-white border-0"
-                : "bg-white text-[#224957]  border-2 border-[#9AC0B5]"
-            }   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0`}
+              searchUserType === "customer"
+                ? "bg-[#E8D3D0] text-white border-0"
+                : "bg-white text-[#224957] border-2 border-[#E8D3D0]"
+            }   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#E8D3D0] hover:text-white transition delay-20 hover:border-0`}
           >
             Your Customer
           </button>

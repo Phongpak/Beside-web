@@ -2,6 +2,15 @@ import { Link } from "react-router-dom";
 import bg from "../images/bg1.jpeg";
 import clock from "../images/clock.jpeg";
 import logo1 from "../images/logo1.png";
+import map from "../images/thailand-map.png";
+import jogging from "../images/jogging.avif";
+import party from "../images/party.jpeg";
+import teatime from "../images/Tea-Time.jpeg";
+import dating from "../images/dating.webp";
+import tutor from "../images/tutor.webp";
+import diving from "../images/diving.jpeg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 function HomePage() {
   return (
@@ -22,7 +31,7 @@ function HomePage() {
       </div>
       <div className="relative">
         <img src={bg} />
-        <h1 className="absolute text-[60px] text-black top-[200px] left-[380px] -translate-x-1/2 -translate-y-1/2">
+        <h1 className="absolute text-[60px] text-[#224957] top-[200px] left-[380px] -translate-x-1/2 -translate-y-1/2">
           WELCOME TO
         </h1>
 
@@ -32,9 +41,8 @@ function HomePage() {
           alt="logo"
         />
 
-        <p className="scale-800 absolute top-[400px] left-[490px] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[100px] text-[30px]">
-          Book your stay and enjoy Luxury redefined at the most affordable
-          rates.
+        <p className="scale-800 absolute top-[400px] left-[490px] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[100px] text-[30px]  text-[#224957] ">
+          Book your company with the most reasonable rates here.
         </p>
 
         <Link
@@ -44,11 +52,17 @@ function HomePage() {
           Book now
         </Link>
 
-        <p className="scale-800 absolute top-[770px] left-[1220px] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[100px] text-[30px] text-white">
-          Scroll
-        </p>
+        <div className="flex flex-row">
+          <p className="scale-800 absolute top-[770px] left-[1220px] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[100px] text-[30px] text-white">
+            Scroll
+          </p>
+          <FontAwesomeIcon
+            icon={faAngleDown}
+            className="mx-auto mt-[-100px] text-4xl text-white"
+          />
+        </div>
       </div>
-      <h1 className="pt-[80px] text-[#14274A] text-[40px] text-center">
+      <h1 className="pt-[80px]  text-[#224957]  text-[40px] text-center">
         It doesn't matter where you're going, it's who you have beside you.
       </h1>
 
@@ -58,12 +72,11 @@ function HomePage() {
             About us
           </h1>
           <p className="w-[500px] pt-[40px] text-[25px] text-[#9AC0B5]">
-            Beside.com has Friends from around the world available for hire.
-            Covid-19 Update Oct 2022: Most states and countries have lifted
-            their restrictions. Please use social distancing if not vaccinated
-            when meeting in person. Our Friends are also offering "Virtual
-            Friend Services" such as Facetime, Zoom, Texting, Phone Friends and
-            more.
+            Beside.com has Friends from around Thailand available for hire. It's
+            always good to have a local Friend no matter where you go. Are you
+            moving to a new city, travel for work, or going on vacation? Hire a
+            local Friend to show you around a new town! Learn the best places
+            for shopping, eating, entertainment, hotels and more.
           </p>
         </div>
         <div>
@@ -71,19 +84,50 @@ function HomePage() {
         </div>
       </div>
       <div>
-        <h1 className="pt-[80px] text-center text-[40px] text-[#14274A]">
-          Example
+        <h1 className="pt-[80px] text-center text-[40px]  text-[#224957] ">
+          Example Activities
         </h1>
       </div>
       <div className="flex space-x-[100px] px-[180px] pt-[80px]">
-        <img src={clock} className=" rounded-lg w-[500px] h-[200px]" />
-        <img src={clock} className=" rounded-lg w-[500px] h-[200px]" />
-        <img src={clock} className=" rounded-lg w-[500px] h-[200px]" />
+        <div>
+          <img src={jogging} className=" rounded-lg w-[500px] h-[200px]" />
+          <p className="text-center  text-[#224957] text-[20px] mt-4 font-medium">
+            Jogging
+          </p>
+        </div>
+        <div>
+          <img src={dating} className=" rounded-lg w-[500px] h-[200px]" />
+          <p className="text-center  text-[#224957] text-[20px] mt-4 font-medium">
+            Dating
+          </p>
+        </div>
+        <div>
+          <img src={teatime} className=" rounded-lg w-[500px] h-[200px]" />
+          <p className="text-center  text-[#224957] text-[20px] mt-4 font-medium">
+            Tea-time
+          </p>
+        </div>
       </div>
+
       <div className="flex space-x-[100px] px-[180px] pt-[80px] pb-[100px]">
-        <img src={clock} className="  w-[500px] h-[200px]" />
-        <img src={clock} className="  w-[500px] h-[200px]" />
-        <img src={clock} className="  w-[500px] h-[200px]" />
+        <div>
+          <img src={party} className="  w-[500px] h-[200px]" />
+          <p className="text-center  text-[#224957] text-[20px] mt-4 font-medium">
+            Party
+          </p>
+        </div>
+        <div>
+          <img src={tutor} className="  w-[500px] h-[200px]" />
+          <p className="text-center  text-[#224957] text-[20px] mt-4 font-medium">
+            Tutor
+          </p>
+        </div>
+        <div>
+          <img src={diving} className="  w-[500px] h-[200px]" />
+          <p className="text-center  text-[#224957] text-[20px] mt-4 font-medium">
+            Diving
+          </p>
+        </div>
       </div>
     </>
   );

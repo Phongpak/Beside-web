@@ -57,27 +57,29 @@ function Completed() {
           </button>
           <button
             onClick={(event) => {
-              setSearchUserType(event.target.value);
+              setSearchUserType(event.target.name);
             }}
             value="provider"
+            name="provider"
             className={`cursor-pointer flex flex-row justify-center items-center ${
-              searchUserType === user.id
-                ? "bg-[#98ADC0] text-white border-0"
-                : "bg-white text-[#224957]  border-2 border-[#9AC0B5]"
-            }   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#98ADC0] hover:text-white transition delay-20 hover:border-0`}
+              searchUserType === "provider"
+                ? "bg-[#9AC0B5] text-white border-0"
+                : "bg-white text-[#224957] border-2 border-[#9AC0B5]"
+            }   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#9AC0B5] hover:text-white transition delay-20 hover:border-0`}
           >
             Your Provider
           </button>
           <button
             onClick={(event) => {
-              setSearchUserType(event.target.value);
+              setSearchUserType(event.target.name);
             }}
             value="customer"
+            name="customer"
             className={`cursor-pointer flex flex-row justify-center items-center ${
-              searchUserType === user.id
-                ? "bg-[#506369] text-white border-0"
-                : "bg-white text-[#224957]  border-2 border-[#9AC0B5]"
-            }   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0`}
+              searchUserType === "customer"
+                ? "bg-[#E8D3D0] text-white border-0"
+                : "bg-white text-[#224957] border-2 border-[#E8D3D0]"
+            }   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#E8D3D0] hover:text-white transition delay-20 hover:border-0`}
           >
             Your Customer
           </button>
