@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import OrderChat from "../OrderChat";
 import * as chatService from "../../api/chatApi";
 import * as orderService from "../../api/orderApi";
 import "dayjs/locale";
 import dayjs from "dayjs";
 import moment from "moment";
+import proPic from "../../image/profileImg.png";
 
 const socket = io.connect("http://localhost:4000");
 
@@ -15,6 +17,13 @@ function UpcomingCard({ props, type }) {
 	const [oldMessages, setOldMessages] = useState([]);
 	const [unseenMessages, setUnseenMessages] = useState([]);
 	const { user } = useAuth();
+	const navigate = useNavigate();
+
+	const profileId =
+		(type === "all" && user.id === props.providerId) ||
+		(type === "customer" && user.id === props.providerId)
+			? props.customerId
+			: props.providerId;
 
 	const currentDate = new Date();
 	const currentTimeMinute = currentDate.getTime() / 1000 / 60;
@@ -76,7 +85,7 @@ function UpcomingCard({ props, type }) {
 	return (
 		<>
 			<div
-				className={`flex flex-row justify-center items-center min-w-[1056px] h-[150px] rounded-[15px] border-4 ${
+				className={`flex flex-row justify-center items-center min-w-[1056px] h-[170px] rounded-[15px] border-4 ${
 					(type === "all" && user.id === props.providerId) ||
 					(type === "customer" && user.id === props.providerId)
 						? "border-[#E8D3D0]"
@@ -84,8 +93,11 @@ function UpcomingCard({ props, type }) {
 				}`}
 			>
 				<div className="flex flex-row justify-between items-center w-[95%] h-[85%]">
-					<div className="flex flex-col justify-center items-center ml-[40px]">
-						<div className="font-medium text-[#224957] text-[14px]">
+					<div
+						className="flex flex-col justify-center items-center w-[110px] ml-[40px] cursor-pointer"
+						onClick={() => navigate(`/profile/${profileId}`)}
+					>
+						<div className="font-medium text-[#224957] text-[16px]">
 							{(type === "all" && user.id === props.providerId) ||
 							(type === "customer" && user.id === props.providerId)
 								? "Your Customer"
@@ -97,12 +109,12 @@ function UpcomingCard({ props, type }) {
 								src={
 									(type === "all" && user.id === props.providerId) ||
 									(type === "customer" && user.id === props.providerId)
-										? props.customer.ProfileImages[0].Image
-										: props.provider.ProfileImages[0].Image
+										? props.customer.ProfileImages[0]?.Image || proPic
+										: props.provider.ProfileImages[0]?.Image || proPic
 								}
 							/>
 						</div>
-						<div className="font-medium text-[#224957]">
+						<div className="font-semibold text-[#224957]">
 							{(type === "all" && user.id === props.providerId) ||
 							(type === "customer" && user.id === props.providerId)
 								? props.customer.penName || props.customer.firstName
@@ -187,8 +199,8 @@ function UpcomingCard({ props, type }) {
 						otherImage={
 							(type === "all" && user.id === props.providerId) ||
 							(type === "customer" && user.id === props.providerId)
-								? props.customer.ProfileImages[0].Image
-								: props.provider.ProfileImages[0].Image
+								? props.customer.ProfileImages[0]?.Image || proPic
+								: props.provider.ProfileImages[0]?.Image || proPic
 						}
 						room={props.id}
 						setShowChat={setShowChat}
