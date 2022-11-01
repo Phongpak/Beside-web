@@ -5,7 +5,7 @@ import suzy from "../../images/suzy.png";
 import { Link } from "react-router-dom";
 import RatingStar from "../ui/RatingStar";
 
-function PriceCard({ provider }) {
+function PriceCard({ provider, multiplier }) {
   const { birthDate } = provider;
   const calculateAge = (dob) => {
     let today = new Date();
@@ -62,12 +62,14 @@ function PriceCard({ provider }) {
       </div>
       <div className=" flex flex-col gap-2 border-2 border-[#9AC0B5] rounded-xl py-8 px-4 text-center">
         <p className="font-medium  text-[#224957]">Price</p>
-        <p className=" text-[#224957] text-3xl  font-bold">{provider.rate}</p>
+        <p className=" text-[#224957] text-3xl  font-bold">
+          {+provider.rate * multiplier}
+        </p>
         <p className="font-medium  text-[#224957]">THB</p>
 
         <div>
           <Link
-            to="/profile"
+            to={`/profile/${provider.id}`}
             className="mt-[30px] p-1 items-center  font-medium text-[#224957] w-[150px] h-[40px] border-2 border-[#9AC0B5] rounded-[10px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-[#506369]"
           >
             More details
