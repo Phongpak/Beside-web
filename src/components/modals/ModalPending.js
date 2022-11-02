@@ -13,6 +13,7 @@ import { Pagination } from "swiper";
 import proPic from "../../image/profileImg.png";
 import { useAuth } from "../../context/AuthContext";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function ModalPending({ isOpen, closeModal, item, seeUser }) {
   // console.log(seeUser);
@@ -46,34 +47,31 @@ function ModalPending({ isOpen, closeModal, item, seeUser }) {
             >
               <div className="border-4 border-[#9AC0B5] rounded-lg min-w-[775px] min-h-[500px] shadow-lg relative flex flex-row justify-center items-center w-full bg-white outline-none focus:outline-none">
                 <div className="flex flex-col min-w-[725px] min-h-[400px] gap-[10px]">
-                  <button className="self-end text-[30px] text-gray-400">
+                  <button className="self-end text-[30px] text-gray-400 mr-6">
                     <FontAwesomeIcon icon={faXmark} onClick={closeModal} />
                   </button>
                   <div className="flex flex-row justify-center items-center gap-[25px]">
                     <div className="flex flex-col gap-[15px] min-w-[325px] min-h-[350px]">
-                      <div className="text-[20px] text-[#224957] font-medium">
+                      <Link
+                        className="text-[20px] text-[#224957] font-semibold mx-auto"
+                        to={`/profile/${seeUser.id}`}
+                      >
                         {seeUser.penName}
-                      </div>
+                      </Link>
 
                       {seeUser?.ProfileImages.length ? (
-                        <div className="mx-[50px] my-[-70px] py-[-100px]">
+                        <div className="">
                           <Swiper
                             slidesPerView={1}
                             spaceBetween={10}
                             loop={true}
-                            // modules={[Pagination, Navigation]}
-                            // navigation
-                            // pagination={{ clickable: true }}
-                            // scrollbar={{ draggable: true }}
-                            // onSwiper={(swiper) => console.log(swiper)}
-                            // onSlideChange={() => console.log("slide change")}
                             pagination={true}
                             modules={[Pagination]}
                           >
                             {seeUser?.ProfileImages?.map((item, index) => {
                               return (
-                                <SwiperSlide className="my-20 " key={index}>
-                                  <div className="flex flex-col  justify-center overflow-hidden">
+                                <SwiperSlide className=" " key={index}>
+                                  <div className="flex flex-col  justify-center overflow-hidden pl-14">
                                     <img
                                       src={item.Image}
                                       alt="..."
@@ -91,7 +89,7 @@ function ModalPending({ isOpen, closeModal, item, seeUser }) {
                         </>
                       )}
                     </div>
-                    <div className="flex flex-row justify-center min-w-[325px] min-h-[330px] self-start border-4 border-[#9AC0B5] rounded-[20px]">
+                    <div className="flex flex-row justify-center min-w-[325px] min-h-[330px] self-start border-4 border-[#9AC0B5] rounded-[20px] mr-9">
                       <div className="flex flex-col w-[295px] h-[150px] pt-[10px] gap-[10px]">
                         <div className="flex flex-row gap-[20px] text-[#224957] text-[14px]">
                           <div className="flex flex-col justify-between w-[140px] gap-[10px] font-medium">

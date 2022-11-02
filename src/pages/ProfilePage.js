@@ -65,7 +65,7 @@ function ProfilePage() {
         hobby: user?.hobby,
         lat: user?.lat,
         lng: user?.lng,
-        location: user?.location,
+        location: user?.location
       };
     });
   }, [user]);
@@ -74,7 +74,7 @@ function ProfilePage() {
 
   // console.log("multiplier", multiplier);
 
-  const totalPrice = multiplier * providers[0].rate;
+  const totalPrice = multiplier * providers[0]?.rate;
   // console.log("totalPrice", totalPrice);
 
   const handleChangeInput = (e) => {

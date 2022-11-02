@@ -74,7 +74,7 @@ function Bio({
       <div className="flex items-center justify-between h-[250px] ">
         <ProfileImg input={input} profiles={profiles} />
 
-        <div className="flex flex-col justify-center w-[500px] gap-[10px] pl-20">
+        <div className="flex flex-col justify-center w-[500px] gap-[10px]">
           <div>
             {isEditing ? (
               <input
