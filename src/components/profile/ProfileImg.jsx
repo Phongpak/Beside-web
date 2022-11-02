@@ -103,7 +103,7 @@ function ProfileImg() {
 													<img
 														src={item.Image}
 														alt="..."
-														className="block w-96 h-60"
+														className="block w-96 h-60 object-contain"
 													/>
 												</div>
 											</SwiperSlide>
@@ -119,7 +119,7 @@ function ProfileImg() {
 													<img
 														src={item.Image}
 														alt="..."
-														className="block w-96 h-60"
+														className="block w-96 h-60 object-contain"
 													/>
 												</div>
 											</SwiperSlide>
