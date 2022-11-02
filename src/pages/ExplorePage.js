@@ -12,11 +12,12 @@ function ExplorePage() {
 
   useEffect(() => {
     if (filter.gender) {
+      console.log("test");
       setAllProviders(filterByGender(providers, filter.gender));
     } else {
       setAllProviders(providers);
     }
-  }, [filter]);
+  }, [filter.gender, filter.age]);
 
   const handleFilter = (e) => {
     setFilter({ ...filter, [e.target.name]: e.target.value });
@@ -24,7 +25,7 @@ function ExplorePage() {
   const multiplier = +book.toTime.split(":")[0] - book.fromTime.split(":")[0];
   console.log(multiplier);
   const filterByGender = (providers, gender) => {
-    const filteredProviders = allProviders.filter(
+    const filteredProviders = providers.filter(
       (item) => item.gender === gender
     );
     return filteredProviders;
