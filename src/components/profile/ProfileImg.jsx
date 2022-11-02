@@ -61,7 +61,11 @@ function ProfileImg() {
 	const [loading, setLoading] = useState(true);
 	if (loading) return <div>Loading</div>;
 
-	const orderImages = pics.sort((a, b) => b.isShow - a.isShow);
+	const myOrderImages = pics.sort((a, b) => b.isShow - a.isShow);
+	const otherOrderImages = providerPics.sort((a, b) => b.isShow - a.isShow);
+	console.log("myOrderImages", myOrderImages);
+	console.log("otherOrderImages", otherOrderImages);
+	console.log("id", id);
 
 	return (
 		<>
@@ -88,22 +92,39 @@ function ProfileImg() {
 							loop={true}
 							modules={[Pagination, Navigation]}
 						>
-							{orderImages.map((item, index) => {
-								return (
-									<SwiperSlide className="w-[500px] " key={index}>
-										<div
-											className="flex flex-col  justify-center overflow-hidden"
-											onClick={openModal}
-										>
-											<img
-												src={item.Image}
-												alt="..."
-												className="block w-96 h-60"
-											/>
-										</div>
-									</SwiperSlide>
-								);
-							})}
+							{user.id === +id || id === undefined
+								? myOrderImages.map((item, index) => {
+										return (
+											<SwiperSlide className="w-[500px] " key={index}>
+												<div
+													className="flex flex-col  justify-center overflow-hidden"
+													onClick={openModal}
+												>
+													<img
+														src={item.Image}
+														alt="..."
+														className="block w-96 h-60"
+													/>
+												</div>
+											</SwiperSlide>
+										);
+								  })
+								: otherOrderImages.map((item, index) => {
+										return (
+											<SwiperSlide className="w-[500px] " key={index}>
+												<div
+													className="flex flex-col  justify-center overflow-hidden"
+													onClick={openModal}
+												>
+													<img
+														src={item.Image}
+														alt="..."
+														className="block w-96 h-60"
+													/>
+												</div>
+											</SwiperSlide>
+										);
+								  })}
 						</Swiper>
 						<ProImgModal1
 							isOpen={isOpen}
