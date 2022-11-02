@@ -50,8 +50,11 @@ const PlacesAutocomplete = ({ setSelected }) => {
     clearSuggestions();
 
     const results = await getGeocode({ address });
-    setBook({ ...book, location: address.split(",")[0] });
     const { lat, lng } = await getLatLng(results[0]);
+    const pin = await getLatLng(results[0]);
+    const Lat = pin?.lat?.toString();
+    const Lng = pin?.lng?.toString();
+    setBook({ ...book, lng: Lng, lat: Lat, location: address.split(",")[0] });
 
     setSelected({ lat, lng });
   };

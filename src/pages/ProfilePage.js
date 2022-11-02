@@ -47,10 +47,12 @@ function ProfilePage() {
     useAuth();
   const [input, setInput] = useState({});
   const { startLoading, stopLoading } = useLoading();
-
+  console.log("input", input);
   const myOrder = orders.filter((item) => item?.provider?.id == id);
   const AllOrder = allOrders.filter(
-    (item) => item?.provider?.id == id && item?.status === "SUCCESS"
+    (item) =>
+      item?.provider?.id == id &&
+      (item?.status === "REJECT" || item?.status === "SUCCESS")
   );
   console.log("AllOrder", AllOrder);
   useEffect(() => {
@@ -74,7 +76,7 @@ function ProfilePage() {
 
   // console.log("multiplier", multiplier);
 
-  const totalPrice = multiplier * providers[0].rate;
+  const totalPrice = multiplier * providers[0]?.rate;
   // console.log("totalPrice", totalPrice);
 
   const handleChangeInput = (e) => {

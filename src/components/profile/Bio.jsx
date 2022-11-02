@@ -6,9 +6,10 @@ import { useAuth } from "../../context/AuthContext";
 import ModalWallet from "../modals/ModalWallet";
 import { useState } from "react";
 import ModalAvailable from "../modals/ModalAvailable";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 import ModalProviderRequest from "../modals/ModalProviderRequest";
 import { useOrder } from "../../context/OrderContext";
+import { useLoading } from "../../context/LoadingContext";
 
 function Bio({
   input,
@@ -21,16 +22,28 @@ function Bio({
 }) {
   const { pathname } = useLocation();
   const { id } = useParams();
-  const { book, providers } = useOrder();
+  const { book, providers, createOrder } = useOrder();
   const { user, toggleEditing, isEditing } = useAuth();
   console.log("book", book);
-  console.log("providers", providers);
+  const [order, setOrder] = useState({
+    appointmentDate: book?.appointmentDate,
+    fromTime: book?.fromTime,
+    toTime: book?.toTime,
+    rentPriceTotal: totalPrice,
+    description: book?.description,
+    lat: book?.lat,
+    lng: book?.lng,
+    location: book?.location,
 
+    customerId: user?.id,
+    providerId: id,
+  });
+
+  const navigate = useNavigate();
   const [isOpenModalWallet, setIsOpenModalWallet] = useState(false);
   const [isOpenModalAvailable, setIsOpenModalAvailable] = useState(false);
   const [isOpenProviderRequest, setIsOpenProviderRequest] = useState(false);
-
-  // console.log(full);
+  const { startLoading, stopLoading } = useLoading();
   const openModalWallet = () => {
     setIsOpenModalWallet(true);
   };
@@ -46,7 +59,6 @@ function Bio({
   const closeModalAvailable = () => {
     setIsOpenModalAvailable(false);
   };
-  console.log("AllOrder", AllOrder);
 
   const arrRating = AllOrder?.filter((item) => item.status == "SUCCESS").map(
     (item) => {
@@ -56,9 +68,8 @@ function Bio({
 
   const sumRating = arrRating?.reduce((acc, item) => acc + item, 0);
   const avgRating = (sumRating / arrRating?.length).toFixed(1);
-  // console.log("arrRating", arrRating);
+
   // console.log("avgRating", avgRating);
-  console.log("avgRating", avgRating);
   const full = useMemo(() => 18.3 * avgRating + "px", [avgRating]);
 
   const openModalProviderRequest = () => {
@@ -67,6 +78,18 @@ function Bio({
 
   const closeModalProviderRequest = () => {
     setIsOpenProviderRequest(false);
+  };
+
+  const handleClickCreateOrder = async () => {
+    try {
+      await createOrder(order);
+      startLoading();
+      window.location.assign("/pending");
+    } catch (err) {
+      console.log("err", err);
+    } finally {
+      stopLoading();
+    }
   };
 
   return (
@@ -150,7 +173,7 @@ function Bio({
           ) : (
             <div className="text-[#224957] break-words">
               {pathname === `/profile/${user?.id}`
-                ? user?.description
+                ? user?.description || "no description"
                 : profiles
                 ? profiles[0]?.description || "no description"
                 : user?.description}
@@ -178,7 +201,10 @@ function Bio({
           ) : user?.id !== profiles[0]?.id ? (
             <>
               <div className="">{totalPrice} Bath</div>
-              <div className="flex justify-around cursor-pointer items-center hover:border-none hover:bg-[#9AC0B5] hover:text-white text-[#224957] bg-white border-2 border-[#9AC0B5] w-[170px] h-[30px] rounded-[50px]">
+              <div
+                onClick={handleClickCreateOrder}
+                className="flex justify-around cursor-pointer items-center hover:border-none hover:bg-[#9AC0B5] hover:text-white text-[#224957] bg-white border-2 border-[#9AC0B5] w-[170px] h-[30px] rounded-[50px]"
+              >
                 Book now
               </div>
             </>

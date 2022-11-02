@@ -47,7 +47,7 @@ function UpcomingCard({ props, type }) {
       delete Object.assign(item, { authorId: item.userId })["userId"];
       Object.assign(item, { author: item.User.penName || item.User.firstName });
       delete Object.assign(item, {
-        time: dayjs(item.createdAt).locale("th").format("HH:mm")
+        time: dayjs(item.createdAt).locale("th").format("HH:mm"),
       })["createdAt"];
       return item;
     });
@@ -140,7 +140,7 @@ function UpcomingCard({ props, type }) {
                   }`}
                   onClick={() =>
                     updateOrderStatusToSuccess(props.id, {
-                      status: "SUCCESS"
+                      status: "SUCCESS",
                     })
                   }
                 >
@@ -160,7 +160,7 @@ function UpcomingCard({ props, type }) {
               >
                 Start chatting now
                 {userUnseenMessages.length !== 0 ? (
-                  <div className="flex justify-center items-center w-[25px] h-[25px] rounded-full bg-[#E37383] text-white absolute -top-3 -right-3">
+                  <div className="flex justify-center   items-center w-[25px] h-[25px] rounded-full bg-[#E37383] text-white absolute -top-3 -right-3">
                     {userUnseenMessages.length}
                   </div>
                 ) : (

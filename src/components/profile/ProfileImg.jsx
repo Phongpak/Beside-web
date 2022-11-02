@@ -99,14 +99,11 @@ function ProfileImg({ profiles }) {
               {pics.map((item, index) => {
                 return (
                   <SwiperSlide className="w-[500px] " key={index}>
-                    <div
-                      className="flex flex-col  justify-center overflow-hidden"
-                      onClick={openModal}
-                    >
+                    <div className="flex   overflow-hidden" onClick={openModal}>
                       <img
                         src={item.Image}
                         alt="..."
-                        className="block w-96 h-60"
+                        className="block object-contain h-60"
                       />
                     </div>
                   </SwiperSlide>
