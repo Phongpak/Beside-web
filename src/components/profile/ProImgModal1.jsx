@@ -3,15 +3,19 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import ProfileImg from "../../image/profileImg.png";
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { useProfile } from "../../context/ProfileContext";
 
 function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 	const { user, updateUser, deleteProfileImage } = useAuth();
+	const { updateProfileImage } = useProfile();
 	const [file1, setFile1] = useState(null);
 	const inputEl1 = useRef();
 	const [file2, setFile2] = useState(null);
 	const inputEl2 = useRef();
 	const [file3, setFile3] = useState(null);
 	const inputEl3 = useRef();
+	const [showImgId, setShowImgId] = useState(null);
+	const [pics, setPics] = useState([]);
 
 	const handleClickSaveProPic = async (e) => {
 		try {
@@ -34,32 +38,42 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 	const handleClickDeleteProPic = async (id) => {
 		setPics((prev) => prev.filter((el) => el.id !== id));
 		await deleteProfileImage(id);
-		// window.location.reload();
-		// console.log(pics);
+	};
+	const handleClickShowProPic = async (id, input) => {
+		await updateProfileImage(id, input);
 	};
 
-	const [pics, setPics] = useState([]);
 	useEffect(() => {
 		const fetchPics = async () => {
 			try {
 				const res = await getProfileImages(user.id);
 				setPics(res.data.profileImages);
-				// console.log(res);
 			} catch (err) {
 				console.log(err);
 			}
 		};
 		fetchPics();
 		setLoading(false);
-	}, [user?.id]);
+	}, [user?.id, showImgId]);
+
+	useEffect(() => {
+		const fetchSelectedPic = async () => {
+			try {
+				const res = await getProfileImages(user.id);
+				const findId = res.data.profileImages.find(
+					(item) => item.isShow === true
+				).id;
+				setShowImgId(findId);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		fetchSelectedPic();
+		setLoading(false);
+	}, []);
 
 	const [loading, setLoading] = useState(true);
 	if (loading) return <div>Loading</div>;
-
-	// console.log(pics);
-	// console.log(pics[1]?.id);
-
-	// const [imgShow, setImgShow] = useState([true, true, true]);
 
 	return (
 		<>
@@ -70,17 +84,22 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 						className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
 					>
 						<div onClick={(e) => e.stopPropagation()} className="relative ">
-							<div className="border-4 border-[#9AC0B5]  rounded-lg min-w-[1300px] min-h-[500px] shadow-lg flex flex-row justify-center items-center w-full bg-white outline-none focus:outline-none ">
-								<div className="flex flex-col min-w-[725px] min-h-[400px] gap-[10px]">
+							<div className="border-4 border-[#9AC0B5] rounded-lg shadow-lg flex flex-row justify-center items-center bg-white outline-none focus:outline-none ">
+								<div className="flex flex-col p-10 border ">
 									<button className="self-end text-[30px] text-gray-400 mb-5">
-										<FontAwesomeIcon icon={faXmark} onClick={closeModal} />
+										<FontAwesomeIcon
+											icon={faXmark}
+											onClick={() => {
+												closeModal();
+												window.location.reload();
+											}}
+										/>
 									</button>
-
 									<div className="flex flex-row justify-center items-center gap-[25px] ">
-										<div className="flex flex-col gap-[15px] min-w-[325px] min-h-[350px] pt-10">
+										<div className="flex flex-col items-center  gap-[15px] w-[330px]  h-[350px] pt-10">
 											<input
 												type="file"
-												className="absolute"
+												className="absolute invisible "
 												ref={inputEl1}
 												onChange={(e) => {
 													console.log(e.target.files[0]);
@@ -95,11 +114,13 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 												className="relative pl-80 mt-[-50px]"
 												onClick={() => {
 													handleClickDeleteProPic(pics[0]?.id);
+													setFile1();
 												}}
 											>
 												<i className="fa-solid fa-xmark" />
 											</button>
-											<span
+											<div
+												className="flex justify-center h-[240px]   "
 												onClick={() => {
 													if (!pics[0]?.id) {
 														inputEl1.current.click();
@@ -107,7 +128,7 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 												}}
 											>
 												<img
-													className="relative block w-96 h-60"
+													className="relative h-full  "
 													src={
 														file1
 															? URL.createObjectURL(file1)
@@ -115,13 +136,44 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 													}
 													alt="Img"
 												/>
-											</span>
+												{/* <div className="border-4 border-dashed hover:border-green-600 w-96 h-60 bg-white  flex justify-center items-center ">
+                          {" "}
+                          click here to insert a first image{" "}
+                        </div> */}
+											</div>
+											{pics[0]?.id === showImgId ? (
+												<button
+													className="w-fit p-2 border-[#9AC0B5] border rounded-full hover:bg-[#9AC0B5] hover:text-white delay-20 transition"
+													onClick={() => {
+														handleClickShowProPic(pics[0]?.id, {
+															isShow: false
+														});
+														setShowImgId(null);
+													}}
+												>
+													Cancel Show
+												</button>
+											) : showImgId === null && pics[0] !== undefined ? (
+												<button
+													className="w-fit p-2 border-[#9AC0B5] border rounded-full hover:bg-[#9AC0B5] hover:text-white delay-20 transition"
+													onClick={() => {
+														handleClickShowProPic(pics[0]?.id, {
+															isShow: true
+														});
+														setShowImgId(pics[0]?.id);
+													}}
+												>
+													Show this photo as profile picture
+												</button>
+											) : (
+												""
+											)}
 										</div>
 
-										<div className="flex flex-col gap-[15px] min-w-[325px] min-h-[350px] pt-10">
+										<div className="flex flex-col items-center gap-[15px] w-[330px]  h-[350px] pt-10">
 											<input
 												type="file"
-												className="absolute"
+												className="absolute invisible"
 												ref={inputEl2}
 												onChange={(e) => {
 													console.log(e.target.files[0]);
@@ -136,12 +188,14 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 												className="relative pl-80 mt-[-50px]"
 												onClick={() => {
 													handleClickDeleteProPic(pics[1]?.id);
+													setFile2();
 												}}
 											>
 												<i className="fa-solid fa-xmark" />
 											</button>
 
-											<span
+											<div
+												className="flex justify-center h-[240px]"
 												onClick={() => {
 													if (!pics[1]?.id) {
 														inputEl2.current.click();
@@ -149,7 +203,7 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 												}}
 											>
 												<img
-													className="relative block w-96 h-60"
+													className="relative block  h-60"
 													src={
 														file2
 															? URL.createObjectURL(file2)
@@ -157,12 +211,39 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 													}
 													alt="Img"
 												/>
-											</span>
+											</div>
+											{pics[1]?.id === showImgId ? (
+												<button
+													className="w-fit p-2 border-[#9AC0B5] border rounded-full hover:bg-[#9AC0B5] hover:text-white delay-20 transition"
+													onClick={() => {
+														handleClickShowProPic(pics[1]?.id, {
+															isShow: false
+														});
+														setShowImgId(null);
+													}}
+												>
+													Cancel Show
+												</button>
+											) : showImgId === null && pics[1] !== undefined ? (
+												<button
+													className="w-fit p-2 border-[#9AC0B5] border rounded-full hover:bg-[#9AC0B5] hover:text-white delay-20 transition"
+													onClick={() => {
+														handleClickShowProPic(pics[1]?.id, {
+															isShow: true
+														});
+														setShowImgId(pics[1]?.id);
+													}}
+												>
+													Show this photo as profile picture
+												</button>
+											) : (
+												""
+											)}
 										</div>
-										<div className="flex flex-col gap-[15px] min-w-[325px] min-h-[350px] pt-10">
+										<div className="flex flex-col items-center gap-[15px] w-[330px]  h-[350px] pt-10">
 											<input
 												type="file"
-												className="absolute"
+												className="absolute invisible"
 												ref={inputEl3}
 												onChange={(e) => {
 													console.log(e.target.files[0]);
@@ -177,12 +258,14 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 												className="relative pl-80 mt-[-50px]"
 												onClick={() => {
 													handleClickDeleteProPic(pics[2]?.id);
+													setFile3();
 												}}
 											>
 												<i className="fa-solid fa-xmark" />
 											</button>
 
-											<span
+											<div
+												className="flex justify-center h-[240px]"
 												onClick={() => {
 													if (!pics[2]?.id) {
 														inputEl3.current.click();
@@ -190,7 +273,7 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 												}}
 											>
 												<img
-													className="relative block w-96 h-60"
+													className="relative block  h-60"
 													src={
 														file3
 															? URL.createObjectURL(file3)
@@ -198,7 +281,34 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 													}
 													alt="Img"
 												/>
-											</span>
+											</div>
+											{pics[2]?.id === showImgId ? (
+												<button
+													className="w-fit p-2 border-[#9AC0B5] border rounded-full hover:bg-[#9AC0B5] hover:text-white delay-20 transition"
+													onClick={() => {
+														handleClickShowProPic(pics[2]?.id, {
+															isShow: false
+														});
+														setShowImgId(null);
+													}}
+												>
+													Cancel Show
+												</button>
+											) : showImgId === null && pics[2] !== undefined ? (
+												<button
+													className="w-fit p-2 border-[#9AC0B5] border rounded-full hover:bg-[#9AC0B5] hover:text-white delay-20 transition"
+													onClick={() => {
+														handleClickShowProPic(pics[2]?.id, {
+															isShow: true
+														});
+														setShowImgId(pics[2]?.id);
+													}}
+												>
+													Show this photo as profile picture
+												</button>
+											) : (
+												""
+											)}
 										</div>
 									</div>
 

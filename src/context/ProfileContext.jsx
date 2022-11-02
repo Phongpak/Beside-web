@@ -9,8 +9,13 @@ function ProfileContextProvider({ children }) {
     return data;
   };
 
+  const updateProfileImage = async (id, input) => {
+    const data = await userService.updateProfileImage(id, input);
+    return data;
+  };
+
   return (
-    <ProfileContext.Provider value={{ getProfile }}>
+    <ProfileContext.Provider value={{ getProfile, updateProfileImage }}>
       {children}
     </ProfileContext.Provider>
   );
