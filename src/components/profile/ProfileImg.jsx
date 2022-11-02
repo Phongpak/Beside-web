@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "tw-elements";
 import { useAuth } from "../../context/AuthContext";
 import ProImgModal1 from "./ProImgModal1";
@@ -6,20 +6,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-// import "swiper/css/autoplay ";
-// import "swiper/css/scrollbar ";
 import { Pagination, Navigation } from "swiper";
 
 import ProfilePic from "../../image/profileImg.png";
 import { useLocation, useParams } from "react-router-dom";
 
-function ProfileImg({ profiles }) {
+function ProfileImg() {
   const { input } = useAuth();
   const { id } = useParams();
   const { pathname } = useLocation();
-
-  const [prevEl, setPrevEl] = useState(null);
-  const [nextEl, setNextEl] = useState(null);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -41,7 +36,6 @@ function ProfileImg({ profiles }) {
       try {
         const res = await getProfileImages(user.id);
         setPics(res.data.profileImages);
-        // console.log(res);
       } catch (err) {
         console.log(err);
       }
@@ -67,9 +61,7 @@ function ProfileImg({ profiles }) {
   const [loading, setLoading] = useState(true);
   if (loading) return <div>Loading</div>;
 
-  // if (!user || !profiles) {
-  //   return null;
-  // }
+  const orderImages = pics.sort((a, b) => b.isShow - a.isShow);
 
   return (
     <>
