@@ -7,7 +7,7 @@ function UserTabBar() {
 	const { user } = useAuth();
 	// console.log(pathname);
 	return (
-		<div className="flex justify-between pt-[20px] w-[1056px]">
+		<div className="flex justify-between pt-[20px]">
 			<Link
 				to={`/profile/${user?.id}`}
 				className={`cursor-pointer flex flex-row justify-center items-center  text-[#224957] border-2 border-[#9AC0B5] font-medium rounded-[15px] min-w-[180px] h-[50px] hover:bg-[#506369] ${
