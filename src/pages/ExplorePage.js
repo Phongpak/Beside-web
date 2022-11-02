@@ -13,12 +13,12 @@ function ExplorePage() {
   const [allProviders, setAllProviders] = useState(providers);
   const [loading, setLoading] = useState(true);
 
-  const maximumPrice = providers.map((item) => item.rate * multiplier);
+  const ProvidersPrice = providers.map((item) => item.rate * multiplier);
 
   const [filter, setFilter] = useState({
     gender: "",
     age: "",
-    price: [Math.min(...maximumPrice), Math.max(...maximumPrice)],
+    price: [Math.min(...ProvidersPrice), Math.max(...ProvidersPrice)],
     rating: 0,
   });
 
@@ -52,7 +52,11 @@ function ExplorePage() {
               end date : {book.appointmentDate} {book.toTime}
             </p>
           </div>
-          <FilterCard handleFilter={handleFilter} price={filter.price} />
+          <FilterCard
+            handleFilter={handleFilter}
+            price={filter.price}
+            ProvidersPrice={ProvidersPrice}
+          />
         </div>
         <div className="flex flex-col gap-8 w-1/2">
           {allProviders

@@ -20,8 +20,9 @@ function PriceCard({ provider, multiplier }) {
     return age;
   };
   let rating = provider?.provider[0]?.average_rating || 0;
+  let totalRating = provider?.provider[0]?.total_rating || 0;
   if (!isNaN(+rating)) {
-    rating = (Math.round(rating * 100) / 100).toFixed(2);
+    rating = (Math.round(rating * 100) / 100).toFixed(1);
   }
 
   useEffect(() => {
@@ -39,7 +40,9 @@ function PriceCard({ provider, multiplier }) {
         </h1>
         <div className="flex items-center gap-[5px] text-[#E6C3C1] ">
           <RatingStar rating={rating} />
-          <div>{rating}</div>
+
+          <div>{totalRating ? rating : "No Reviews"}</div>
+          <div>{totalRating ? `(${totalRating})` : ""}</div>
         </div>
         <div className="flex flex-row gap-2 ">
           <span className=" bg-[#9AC0B5] rounded-[10px] text-center  p-2">
