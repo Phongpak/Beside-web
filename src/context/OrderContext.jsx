@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import * as userService from "../api/userApi";
+import * as orderService from "../api/orderApi";
 
 const OrderContext = createContext();
 
@@ -9,6 +10,9 @@ function OrderContextProvider({ children }) {
     appointmentDate: "",
     fromTime: "",
     toTime: "",
+    lat: "",
+    lng: "",
+    description: "",
   });
   const [selected, setSelected] = useState(null);
   const [providers, setProviders] = useState([]);
@@ -35,6 +39,10 @@ function OrderContextProvider({ children }) {
     }
   };
 
+  const createOrder = async (input) => {
+    const res = await orderService.createOrder(input);
+  };
+
   return (
     <OrderContext.Provider
       value={{
@@ -46,6 +54,7 @@ function OrderContextProvider({ children }) {
         setSelected,
         handleSearchProvider,
         providers,
+        createOrder,
       }}
     >
       {children}

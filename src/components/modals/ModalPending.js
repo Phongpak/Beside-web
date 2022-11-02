@@ -4,25 +4,12 @@ import moment from "moment";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-// import "./styles.css";
-// import "swiper/css/navigation";
-// import "swiper/css/autoplay ";
-// import "swiper/css/scrollbar ";
 import { Pagination } from "swiper";
-// import { Pagination, Navigation } from "swiper";
 import proPic from "../../image/profileImg.png";
 import { useAuth } from "../../context/AuthContext";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 
 function ModalPending({ isOpen, closeModal, item, seeUser }) {
-  // console.log(seeUser);
-  // console.log(seeUser?.ProfileImages);
-
-  const { updateOrder, user, orders } = useAuth();
-  // console.log(orders);
-
-  const [input, setInput] = useState("");
+  const { updateOrder, user } = useAuth();
 
   const handleClick = async (input, id) => {
     try {
@@ -47,20 +34,17 @@ function ModalPending({ isOpen, closeModal, item, seeUser }) {
             >
               <div className="border-4 border-[#9AC0B5] rounded-lg min-w-[775px] min-h-[500px] shadow-lg relative flex flex-row justify-center items-center w-full bg-white outline-none focus:outline-none">
                 <div className="flex flex-col min-w-[725px] min-h-[400px] gap-[10px]">
-                  <button className="self-end text-[30px] text-gray-400 mr-6">
+                  <button className="self-end text-[30px] text-gray-400">
                     <FontAwesomeIcon icon={faXmark} onClick={closeModal} />
                   </button>
                   <div className="flex flex-row justify-center items-center gap-[25px]">
-                    <div className="flex flex-col gap-[15px] min-w-[325px] min-h-[350px]">
-                      <Link
-                        className="text-[20px] text-[#224957] font-semibold mx-auto"
-                        to={`/profile/${seeUser.id}`}
-                      >
+                    <div className="flex flex-col gap-[15px] w-[325px] min-h-[350px]">
+                      <div className="text-[20px] text-[#224957] font-medium">
                         {seeUser.penName}
-                      </Link>
+                      </div>
 
                       {seeUser?.ProfileImages.length ? (
-                        <div className="">
+                        <div className="my-[-70px] py-[-100px]">
                           <Swiper
                             slidesPerView={1}
                             spaceBetween={10}
@@ -70,14 +54,12 @@ function ModalPending({ isOpen, closeModal, item, seeUser }) {
                           >
                             {seeUser?.ProfileImages?.map((item, index) => {
                               return (
-                                <SwiperSlide className=" " key={index}>
-                                  <div className="flex flex-col  justify-center overflow-hidden pl-14">
-                                    <img
-                                      src={item.Image}
-                                      alt="..."
-                                      className="w-80 h-60"
-                                    />
-                                  </div>
+                                <SwiperSlide className="my-20 " key={index}>
+                                  <img
+                                    src={item.Image}
+                                    alt="..."
+                                    className="w-80 h-60"
+                                  />
                                 </SwiperSlide>
                               );
                             })}
@@ -89,7 +71,7 @@ function ModalPending({ isOpen, closeModal, item, seeUser }) {
                         </>
                       )}
                     </div>
-                    <div className="flex flex-row justify-center min-w-[325px] min-h-[330px] self-start border-4 border-[#9AC0B5] rounded-[20px] mr-9">
+                    <div className="flex flex-row justify-center w-[325px] min-h-[330px] self-start border-4 border-[#9AC0B5] rounded-[20px]">
                       <div className="flex flex-col w-[295px] h-[150px] pt-[10px] gap-[10px]">
                         <div className="flex flex-row gap-[20px] text-[#224957] text-[14px]">
                           <div className="flex flex-col justify-between w-[140px] gap-[10px] font-medium">

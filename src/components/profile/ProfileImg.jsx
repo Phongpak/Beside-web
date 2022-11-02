@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "tw-elements";
 import { useAuth } from "../../context/AuthContext";
 import ProImgModal1 from "./ProImgModal1";
@@ -6,23 +6,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper";
-// import "swiper/css/pagination";
-// import "swiper/css/navigation";
-// import "swiper/css/autoplay ";
-// import "swiper/css/scrollbar ";
-// import { Pagination, Navigation } from "swiper";
+import "swiper/css/navigation";
+import { Pagination, Navigation } from "swiper";
 
 import ProfilePic from "../../image/profileImg.png";
 import { useLocation, useParams } from "react-router-dom";
 
-function ProfileImg({ profiles }) {
+function ProfileImg() {
   const { input } = useAuth();
   const { id } = useParams();
   const { pathname } = useLocation();
-
-  const [prevEl, setPrevEl] = useState(null);
-  const [nextEl, setNextEl] = useState(null);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,7 +37,6 @@ function ProfileImg({ profiles }) {
       try {
         const res = await getProfileImages(user.id);
         setPics(res.data.profileImages);
-        // console.log(res);
       } catch (err) {
         console.log(err);
       }
@@ -70,9 +62,11 @@ function ProfileImg({ profiles }) {
   const [loading, setLoading] = useState(true);
   if (loading) return <div>Loading</div>;
 
-  // if (!user || !profiles) {
-  //   return null;
-  // }
+  const myOrderImages = pics.sort((a, b) => b.isShow - a.isShow);
+  const otherOrderImages = providerPics.sort((a, b) => b.isShow - a.isShow);
+  console.log("myOrderImages", myOrderImages);
+  console.log("otherOrderImages", otherOrderImages);
+  console.log("id", id);
 
   return (
     <>
@@ -97,28 +91,41 @@ function ProfileImg({ profiles }) {
                 }
               }}
               loop={true}
-              pagination={true}
-              modules={[Pagination]}
+              modules={[Pagination, Navigation]}
             >
-              {pics.map((item, index) => {
-                return (
-                  <div>
-                    <SwiperSlide className="" key={index}>
-                      <div
-                        className="flex flex-col  justify-center overflow-hidden"
-                        onClick={openModal}
-                      >
-                        <img
-                          src={item.Image}
-                          alt="..."
-                          className=" block w-96 h-60"
-                          // onClick={openModal}
-                        />
-                      </div>
-                    </SwiperSlide>
-                  </div>
-                );
-              })}
+              {user.id === +id || id === undefined
+                ? myOrderImages.map((item, index) => {
+                    return (
+                      <SwiperSlide className="w-[500px] " key={index}>
+                        <div
+                          className="flex flex-col  justify-center overflow-hidden"
+                          onClick={openModal}
+                        >
+                          <img
+                            src={item.Image}
+                            alt="..."
+                            className="block w-96 h-60 object-contain"
+                          />
+                        </div>
+                      </SwiperSlide>
+                    );
+                  })
+                : otherOrderImages.map((item, index) => {
+                    return (
+                      <SwiperSlide className="w-[500px] " key={index}>
+                        <div
+                          className="flex flex-col  justify-center overflow-hidden"
+                          onClick={openModal}
+                        >
+                          <img
+                            src={item.Image}
+                            alt="..."
+                            className="block w-96 h-60 object-contain"
+                          />
+                        </div>
+                      </SwiperSlide>
+                    );
+                  })}
             </Swiper>
             <ProImgModal1
               isOpen={isOpen}
@@ -130,7 +137,7 @@ function ProfileImg({ profiles }) {
           </div>
         ) : (
           <div className="w-[500px]">
-            <img src={ProfilePic} className="w-60 h-96" onClick={openModal} />
+            <img src={ProfilePic} className="w-96 h-60" onClick={openModal} />
             <ProImgModal1
               isOpen={isOpen}
               closeModal={closeModal}
@@ -156,20 +163,16 @@ function ProfileImg({ profiles }) {
               }
             }}
             loop={true}
-            pagination={true}
-            modules={[Pagination]}
+            modules={[Pagination, Navigation]}
           >
             {providerPics.map((item, index) => {
               return (
-                <SwiperSlide className="" key={index}>
-                  {/* <div className="flex flex-col  justify-center overflow-hidden">
-                    <img src={item.Image} alt="..." className="w-80 h-60" />
-                  </div> */}
-                  <div className="flex flex-col  justify-center overflow-hidden">
+                <SwiperSlide className="w-[500px]" key={index}>
+                  <div className="flex flex-col justify-center overflow-hidden">
                     <img
                       src={item.Image}
                       alt="..."
-                      className=" block w-96 h-60"
+                      className="block w-96 h-60"
                     />
                   </div>
                 </SwiperSlide>
@@ -186,7 +189,7 @@ function ProfileImg({ profiles }) {
         </div>
       ) : (
         <>
-          <img src={ProfilePic} className="w-80 h-60 mr-40" />
+          <img src={ProfilePic} className="w-96 h-60" />
           <ProImgModal1
             isOpen={isOpen}
             closeModal={closeModal}

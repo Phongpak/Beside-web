@@ -50,6 +50,7 @@ function BookComponent() {
         <div className="flex space-x-6">
           <textarea
             type="text"
+            onChange={handleBook}
             name="description"
             id="description"
             className="text-[#98ABA7] text-sm rounded-lg h-[20vh] w-full placeholder-[#98ABA7] bg-white"

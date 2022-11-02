@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faStar } from "@fortawesome/free-solid-svg-icons";
-function FilterCard({ handleFilter, price }) {
+function FilterCard({ handleFilter, price, ProvidersPrice }) {
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
   const [review, setReview] = useState(0);
@@ -61,13 +60,13 @@ function FilterCard({ handleFilter, price }) {
           name="price"
           value={price}
           onChange={handleFilter}
-          min={100}
-          max={10000}
+          min={Math.min(...ProvidersPrice)}
+          max={Math.max(...ProvidersPrice)}
           valueLabelDisplay="auto"
           getAriaValueText={valuetext}
         />
       </div>
-      <div className="flex mt-4 justify-center">Price Range</div>
+      <div className="flex mt-4 justify-center">Review Rating</div>
       <div className="flex flex-row justify-between mt-2 ">
         {stars.map((item, index) => (
           <FontAwesomeIcon

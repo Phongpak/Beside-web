@@ -10,8 +10,9 @@ import {
   faMoneyCheckDollar,
 } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../context/AuthContext";
-import GoogleMapContainer from "../GoogleMapContainer";
+import GoogleMapContainerLocation from "../GoogleMapContainerLocation";
 import { useParams } from "react-router-dom";
+
 // import {
 //   faSquareFacebook,
 //   faSquareInstagram
@@ -26,7 +27,8 @@ function Informatio({
   AllOrder,
 }) {
   const { isEditing, user } = useAuth();
-  // console.log( setInput);
+  // console.log(input);
+
   const { id } = useParams();
 
   if (!user || !profiles[0]) {
@@ -153,7 +155,7 @@ function Informatio({
                     : profiles[0]?.location || "-"}
                 </div>
               ) : (
-                <GoogleMapContainer
+                <GoogleMapContainerLocation
                   setInput={setInput}
                   input={input}
                   profiles={profiles}

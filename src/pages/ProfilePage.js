@@ -47,10 +47,12 @@ function ProfilePage() {
     useAuth();
   const [input, setInput] = useState({});
   const { startLoading, stopLoading } = useLoading();
-
+  console.log("input", input);
   const myOrder = orders.filter((item) => item?.provider?.id == id);
   const AllOrder = allOrders.filter(
-    (item) => item?.provider?.id == id && item?.status === "SUCCESS"
+    (item) =>
+      item?.provider?.id == id &&
+      (item?.status === "REJECT" || item?.status === "SUCCESS")
   );
   console.log("AllOrder", AllOrder);
   useEffect(() => {
