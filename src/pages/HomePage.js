@@ -13,6 +13,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 function HomePage() {
+  // const ref =
+
   return (
     <>
       <div className="px-40 py-2 flex w-full justify-between items-center absolute z-10  ">
