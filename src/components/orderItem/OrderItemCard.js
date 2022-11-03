@@ -16,7 +16,7 @@ function OrderItemCard({ item }) {
 									item.customer.ProfileImages.find(
 										(item) => item.isShow === true
 									)?.Image ||
-									item.customer.ProfileImages[0] ||
+									item.customer?.ProfileImages[0] ||
 									proPic
 								}
 							/>
@@ -31,7 +31,7 @@ function OrderItemCard({ item }) {
 									item.provider.ProfileImages?.find(
 										(item) => item.isShow === true
 									)?.Image ||
-									item.provider.ProfileImages[0] ||
+									item.provider?.ProfileImages[0] ||
 									proPic
 								}
 							/>
