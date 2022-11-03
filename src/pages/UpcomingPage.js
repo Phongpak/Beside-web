@@ -22,7 +22,7 @@ function Upcoming() {
 	return (
 		<>
 			<Bio />
-			<div className="flex flex-col gap-[20px] w-[100vw] px-60">
+			<div className="flex flex-col gap-[20px] w-[100%] px-60">
 				<UserTabBar />
 				<input
 					className="min-w-[750px] h-[30px] rounded-[20px] border-2 border-[#9AC0B5] pl-[20px] placeholder-[#C4C4C4]"

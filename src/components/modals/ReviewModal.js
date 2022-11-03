@@ -4,9 +4,6 @@ import proPic from "../../image/profileImg.png";
 import { useAuth } from "../../context/AuthContext";
 
 function ReviewModal({ isOpenReview, closeReviewModal, seeUser, item }) {
-	const { user } = useAuth();
-	//   console.log(seeUser);
-
 	const star = [];
 	for (let i = 1; i <= item.customerReviewRating; i++) {
 		star.push(i);
@@ -43,7 +40,7 @@ function ReviewModal({ isOpenReview, closeReviewModal, seeUser, item }) {
 											src={
 												seeUser?.ProfileImages.find(
 													(item) => item.isShow === true
-												).Image ||
+												)?.Image ||
 												seeUser?.ProfileImages[0]?.Image ||
 												proPic
 											}

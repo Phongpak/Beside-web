@@ -84,7 +84,7 @@ function UpcomingCard({ props, type }) {
 	return (
 		<>
 			<div
-				className={`flex flex-row justify-center items-center min-w-[1056px] h-[170px] rounded-[15px] border-4 ${
+				className={`flex flex-row justify-center items-center min-w-[1039.2px] h-[170px] rounded-[15px] border-4 ${
 					(type === "all" && user.id === props.providerId) ||
 					(type === "customer" && user.id === props.providerId)
 						? "border-[#E8D3D0]"

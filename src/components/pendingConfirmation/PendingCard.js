@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 function PendingCard({ item }) {
 	const [isOpen, setIsOpen] = useState(false);
-	// console.log(item);
 
 	const { user } = useAuth();
 
@@ -23,12 +22,10 @@ function PendingCard({ item }) {
 		setIsOpen(false);
 	};
 
-	// console.log(item);
-	// console.log(seeUser);
 	return (
 		<>
 			<div
-				className={`flex flex-row justify-center items-center min-w-[1056px] h-[170px] border-4 border-${
+				className={`flex flex-row justify-center items-center min-w-[1039.2px] h-[170px] border-4 border-${
 					item.customerId === user.id ? "[#9AC0B5]" : "[#E8D3D0]"
 				} rounded-[15px]`}
 			>

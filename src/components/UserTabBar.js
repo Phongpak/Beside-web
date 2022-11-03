@@ -5,7 +5,6 @@ import { useAuth } from "../context/AuthContext";
 function UserTabBar() {
 	const { pathname } = useLocation();
 	const { user } = useAuth();
-	// console.log(pathname);
 	return (
 		<div className="flex justify-between pt-[20px]">
 			<Link

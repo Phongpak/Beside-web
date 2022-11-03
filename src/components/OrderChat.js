@@ -17,6 +17,16 @@ function OrderChat({
 	const [currentMessage, setCurrentMessage] = useState("");
 	const [messageList, setMessageList] = useState([]);
 
+	const timeHour =
+		new Date(Date.now()).getHours() >= 0 && new Date(Date.now()).getHours() <= 9
+			? "0" + new Date(Date.now()).getHours()
+			: "" + new Date(Date.now()).getHours();
+	const timeMinute =
+		new Date(Date.now()).getMinutes() >= 0 &&
+		new Date(Date.now()).getMinutes() <= 9
+			? "0" + new Date(Date.now()).getMinutes()
+			: "" + new Date(Date.now()).getMinutes();
+
 	const sendMessage = async () => {
 		if (currentMessage !== "") {
 			const messageData = {
@@ -24,10 +34,7 @@ function OrderChat({
 				authorId: myId,
 				author: myName,
 				message: currentMessage,
-				time:
-					new Date(Date.now()).getHours() +
-					":" +
-					new Date(Date.now()).getMinutes()
+				time: timeHour + ":" + timeMinute
 			};
 			await socket.emit("send_message", messageData);
 			setMessageList((list) => [...list, messageData]);

@@ -57,7 +57,6 @@ function ModalPending({ isOpen, closeModal, item, seeUser }) {
 														modules={[Pagination]}
 													>
 														{orderImages.map((item, index) => {
-															console.log("item", item);
 															return (
 																<SwiperSlide className="my-20 flex" key={index}>
 																	<img

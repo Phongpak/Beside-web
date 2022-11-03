@@ -49,7 +49,6 @@ function ProfileImg() {
 			try {
 				const res = await getProfileImages(id);
 				setProviderPics(res.data.profileImages);
-				console.log(res.data.profileImages);
 			} catch (err) {
 				console.log(err);
 			}
@@ -63,9 +62,6 @@ function ProfileImg() {
 
 	const myOrderImages = pics.sort((a, b) => b.isShow - a.isShow);
 	const otherOrderImages = providerPics.sort((a, b) => b.isShow - a.isShow);
-	console.log("myOrderImages", myOrderImages);
-	console.log("otherOrderImages", otherOrderImages);
-	console.log("id", id);
 
 	return (
 		<>

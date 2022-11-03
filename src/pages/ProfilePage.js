@@ -15,8 +15,6 @@ function ProfilePage() {
 	const { getProfile } = useProfile();
 	const { book, providers } = useOrder();
 	const [profiles, setProfiles] = useState([]);
-	// console.log("book", book);
-	// console.log("providers", providers);
 
 	useEffect(() => {
 		const profileData = async () => {
@@ -34,27 +32,23 @@ function ProfilePage() {
 	useEffect(() => {
 		const orderData = async () => {
 			let allOrder = await getMyOrders(id);
-			console.log("allOrder", allOrder);
 			setAllOrders(allOrder.data.orders);
 		};
 		if (id) {
 			orderData();
 		}
 	}, [id]);
-	// console.log("allOrders", allOrders);
 
 	const { user, updateUser, isEditing, setIsEditing, orders, getMyOrders } =
 		useAuth();
 	const [input, setInput] = useState({});
 	const { startLoading, stopLoading } = useLoading();
-	console.log("input", input);
 	const myOrder = orders.filter((item) => item?.provider?.id == id);
 	const AllOrder = allOrders.filter(
 		(item) =>
 			item?.provider?.id == id &&
 			(item?.status === "REJECT" || item?.status === "SUCCESS")
 	);
-	console.log("AllOrder", AllOrder);
 	useEffect(() => {
 		setInput((p) => {
 			return {
@@ -74,10 +68,7 @@ function ProfilePage() {
 	const multiplier =
 		+book?.toTime?.split(":")[0] - book?.fromTime?.split(":")[0];
 
-	// console.log("multiplier", multiplier);
-
 	const totalPrice = multiplier * providers[0]?.rate;
-	// console.log("totalPrice", totalPrice);
 
 	const handleChangeInput = (e) => {
 		setInput({ ...input, [e.target.name]: e.target.value });
