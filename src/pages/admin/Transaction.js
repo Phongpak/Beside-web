@@ -60,19 +60,19 @@ function Transaction() {
 					onClick={openALL}
 					className={`cursor-pointer flex flex-row justify-center items-center ${
 						type == ""
-							? "bg-[#98ADC0] text-white border-0"
-							: "bg-white text-[#224957]  border-2 border-[#98ADC0]"
-					}   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#98ADC0] hover:text-white transition delay-20 hover:border-0`}
+							? "bg-[#506369] text-white border-0"
+							: "bg-white text-[#224957]  border-2 border-[#9AC0B5]"
+					}   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0`}
 				>
-					ALL
+					All
 				</div>
 				<div
 					onClick={openTopUp}
 					className={`cursor-pointer flex flex-row justify-center items-center ${
 						type == "TOPUP"
-							? "bg-[#98ADC0] text-white border-0"
-							: "bg-white text-[#224957]  border-2 border-[#98ADC0]"
-					}   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#98ADC0] hover:text-white transition delay-20 hover:border-0`}
+							? "bg-[#506369] text-white border-0"
+							: "bg-white text-[#224957]  border-2 border-[#9AC0B5]"
+					}   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0`}
 				>
 					Top up
 				</div>
@@ -80,26 +80,27 @@ function Transaction() {
 					onClick={openWithdraw}
 					className={`cursor-pointer flex flex-row justify-center items-center ${
 						type == "WITHDRAW"
-							? "bg-[#98ADC0] text-white border-0"
+							? "bg-[#506369] text-white border-0"
 							: "bg-white text-[#224957]  border-2 border-[#9AC0B5]"
-					}   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#98ADC0] hover:text-white transition delay-20 hover:border-0`}
+					}   text-[14px] font-medium rounded-[15px] min-w-[130px] h-[30px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-0`}
 				>
 					Withdraw
 				</div>
 			</div>
 
 			<div className="text-[#C4C4C4]">Recents :</div>
-
-			{transactions
-				.filter((item) => {
-					if (!type) {
-						return item.status.includes(status) && item.task !== "ORDER";
-					}
-					return item.status.includes(status) && item.task.includes(type);
-				})
-				.map((item, index) => (
-					<TransactionCard key={index} transaction={item} />
-				))}
+			<div className="flex flex-col gap-[20px] mb-[20px]">
+				{transactions
+					.filter((item) => {
+						if (!type) {
+							return item.status.includes(status) && item.task !== "ORDER";
+						}
+						return item.status.includes(status) && item.task.includes(type);
+					})
+					.map((item, index) => (
+						<TransactionCard key={index} transaction={item} />
+					))}
+			</div>
 		</div>
 	);
 }

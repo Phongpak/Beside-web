@@ -9,6 +9,7 @@ import Bio from "../components/profile/Bio";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import moment from "moment";
+import dayjs from "dayjs";
 
 function WalletHistory() {
 	const { getTransactionByUserId } = useAuth();
@@ -155,9 +156,10 @@ function WalletHistory() {
 												{moment(item.createdAt).format("dddd, MMMM Do YYYY")}
 											</div>
 											<div>
-												{moment(item.createdAt)
+												{/* {moment(item.createdAt)
 													.subtract(7, "hours")
-													.format("HH:mm ")}
+													.format("HH:mm ")} */}
+												{dayjs(item.createdAt).locale("th").format("HH:mm:ss")}
 											</div>
 											<div>{item.task}</div>
 											<div>{item.amount} THB</div>
