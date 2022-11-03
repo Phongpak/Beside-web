@@ -11,31 +11,6 @@ import ModalProviderRequest from "../modals/ModalProviderRequest";
 import { useOrder } from "../../context/OrderContext";
 import { useLoading } from "../../context/LoadingContext";
 
-<<<<<<< HEAD
-function Bio({
-  input,
-  handleChangeInput,
-  setInput,
-  profiles,
-  myOrder,
-  AllOrder,
-  totalPrice
-}) {
-  const { pathname } = useLocation();
-  const { id } = useParams();
-  const { book, providers, createOrder } = useOrder();
-  const { user, toggleEditing, isEditing } = useAuth();
-  console.log("book", book);
-  const [order, setOrder] = useState({
-    appointmentDate: book?.appointmentDate,
-    fromTime: book?.fromTime,
-    toTime: book?.toTime,
-    rentPriceTotal: totalPrice,
-    description: book?.description,
-    lat: book?.lat,
-    lng: book?.lng,
-    location: book?.location,
-=======
 function Bio({ input, handleChangeInput, profiles, AllOrder, totalPrice }) {
 	const { pathname } = useLocation();
 	const { id } = useParams();
@@ -50,7 +25,6 @@ function Bio({ input, handleChangeInput, profiles, AllOrder, totalPrice }) {
 		lat: book?.lat,
 		lng: book?.lng,
 		location: book?.location,
->>>>>>> a804d45a7f3dade34df5eafab4867fccea369b67
 
 		customerId: user?.id,
 		providerId: id
