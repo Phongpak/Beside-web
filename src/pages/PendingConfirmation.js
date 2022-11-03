@@ -6,7 +6,6 @@ import { useAuth } from "../context/AuthContext";
 
 function PendingConfirmation() {
 	const { user, orders } = useAuth();
-	// console.log(user.providerId !== user.id);
 	const [searchTerm, setSearchTerm] = useState("");
 	const changeSearchTerm = (text) => {
 		setSearchTerm(text);
@@ -18,7 +17,7 @@ function PendingConfirmation() {
 		<>
 			<Bio />
 
-			<div className="flex flex-col gap-[20px] w-[100vw] px-60">
+			<div className="flex flex-col gap-[20px] w-[100%] px-60 pb-[20px]">
 				<UserTabBar />
 				<input
 					className="min-w-[750px] h-[30px] rounded-[20px] border-2 border-[#9AC0B5] pl-[20px] placeholder-[#C4C4C4]"

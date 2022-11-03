@@ -4,9 +4,6 @@ import proPic from "../../image/profileImg.png";
 import { useAuth } from "../../context/AuthContext";
 
 function ReviewModal({ isOpenReview, closeReviewModal, seeUser, item }) {
-	const { user } = useAuth();
-	//   console.log(seeUser);
-
 	const star = [];
 	for (let i = 1; i <= item.customerReviewRating; i++) {
 		star.push(i);
@@ -40,7 +37,13 @@ function ReviewModal({ isOpenReview, closeReviewModal, seeUser, item }) {
 									<div className="flex justify-center items-center border w-[120px] h-[120px] rounded-[100%] overflow-hidden mt-[20px]">
 										<img
 											className="h-full"
-											src={seeUser?.ProfileImages[0]?.Image || proPic}
+											src={
+												seeUser?.ProfileImages.find(
+													(item) => item.isShow === true
+												)?.Image ||
+												seeUser?.ProfileImages[0]?.Image ||
+												proPic
+											}
 										/>
 									</div>
 									<div className="text-[#224957] text-[20px] font-medium">

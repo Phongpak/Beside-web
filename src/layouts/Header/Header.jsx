@@ -10,11 +10,13 @@ function Header() {
 
   return (
     <div className="lg:px-40 px-10 py-2 flex w-full justify-between items-center bg-[#506369]  ">
-      <img
-        className="lg:scale-75 sm:scale-25 scale-50 "
-        src={logo1}
-        alt="logo"
-      />
+      <Link to="/">
+        <img
+          className="lg:scale-75 sm:scale-25 scale-50 "
+          src={logo1}
+          alt="logo"
+        />
+      </Link>
       <div className=" w-3/5 gap-10 lg:flex items-center hidden justify-end">
         <Link
           to="/"
