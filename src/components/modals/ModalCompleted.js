@@ -6,7 +6,6 @@ import { useAuth } from "../../context/AuthContext";
 
 function ModalCompleted({ isOpen, closeModal, seeUser, item }) {
 	const { user, updateOrder } = useAuth();
-	// console.log(seeUser);
 	const [currentValue, setCurrentValue] = useState(0);
 	const [hoverValue, setHoverValue] = useState(undefined);
 	const [review, setReview] = useState(0);
@@ -70,7 +69,13 @@ function ModalCompleted({ isOpen, closeModal, seeUser, item }) {
 									<div className="flex justify-center items-center border w-[120px] h-[120px] rounded-[100%] overflow-hidden mt-[20px]">
 										<img
 											className="h-full"
-											src={seeUser?.ProfileImages[0]?.Image || proPic}
+											src={
+												seeUser?.ProfileImages.find(
+													(item) => item.isShow === true
+												)?.Image ||
+												seeUser?.ProfileImages[0]?.Image ||
+												proPic
+											}
 										/>
 									</div>
 									<div className="text-[#224957] text-[20px] font-medium">
@@ -89,7 +94,6 @@ function ModalCompleted({ isOpen, closeModal, seeUser, item }) {
 											<FontAwesomeIcon
 												onClick={() => {
 													const score = index + 1;
-													console.log(score);
 													setReview(score);
 													handleMouseClick(index + 1);
 												}}

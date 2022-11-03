@@ -3,18 +3,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import GoogleMapContainerCard from "./GoogleMapContainerCard";
 import dateFormat from "dateformat";
+import proPic from "../image/profileImg.png";
 function ReviewCardByUser({ item }) {
-  console.log("item", item);
   const arrLocation = item?.location.split(",");
-  // console.log("arrLocation", arrLocation);
 
   const reviewDate = dateFormat(item?.createdAt, "dd/mm/yyyy");
-  // console.log("reviewDate", reviewDate);
 
   const star = [];
   for (let i = 1; i <= item.providerReviewRating; i++) {
     star.push(i);
   }
+
+  console.log(item.customer);
   return (
     <div className="flex justify-center items-center w-96 h-56 border-2 border-[#9AC0B5] rounded-xl">
       <div className="flex justify-between flex-row w-[90%] h-[90%] gap-[10px]">
@@ -34,9 +34,16 @@ function ReviewCardByUser({ item }) {
           <div className="flex justify-center items-center w-[140px] h-[80px] border-2 border-[#9AC0B5] rounded-[5px]">
             <div className="flex flex-row gap-[5px] w-[90%] h-[90%]">
               <div className="flex h-7 w-fit ">
+                {item?.customer?.iss}
                 <img
                   className="rounded-full border border-gray-100 shadow-sm"
-                  src={item?.customer?.ProfileImages[0]?.Image}
+                  src={
+                    item?.customer?.ProfileImages.find(
+                      (item) => item.isShow === true
+                    )?.Image ||
+                    item?.customer?.ProfileImages[0]?.Image ||
+                    proPic
+                  }
                   width="30"
                 />
               </div>

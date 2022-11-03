@@ -48,7 +48,8 @@ export default function MyCombobox({ setSelected, selected }) {
         onChange={(event) => setValue(event.target.value)}
         value={value}
         disabled={!ready}
-        className="w-full rounded p-3"
+        className="w-full rounded p-3 border"
+        placeholder="Enter destination "
       />
       <Combobox.Options>
         {status === "OK"

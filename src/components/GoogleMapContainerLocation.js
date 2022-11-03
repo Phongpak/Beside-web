@@ -6,31 +6,24 @@ import {
   ComboboxInput,
   ComboboxList,
   ComboboxOption,
-  ComboboxPopover,
+  ComboboxPopover
 } from "@reach/combobox";
 import { getLatLng } from "react-places-autocomplete";
 import { useAuth } from "../context/AuthContext";
 
 export default function GoogleMapContainerLocation({ setInput, input }) {
-  console.log(setInput);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCEgnqaYKv_x_EQEXkA2qCgSzgqXJPDloA",
-    libraries: ["places"],
+    libraries: ["places"]
   });
   if (!isLoaded) return <div>Loading...</div>;
   return <Map setInput={setInput} input={input} />;
 }
 function Map({ setInput, input }) {
-  console.log(setInput);
   const { user } = useAuth();
   const center = useMemo(() => ({ lat: 13.7340977, lng: 100.5164019 }), []);
-  // const location = useMemo(() => ({ lat: user?.lat, lng: user?.lng }), []);
-  // console.log("location", location);
   const [selected, setSelected] = useState(null);
 
-  // const { input } = useAuth();
-  console.log(input);
-  console.log(selected);
   return (
     <>
       <div className="places-container">
@@ -58,13 +51,12 @@ const PlacesAutocomplete = ({ setSelected, setInput, input }) => {
     value,
     setValue,
     suggestions: { status, data },
-    clearSuggestions,
+    clearSuggestions
   } = usePlacesAutocomplete();
 
   const handleSelect = async (address) => {
     setValue(address, false);
     clearSuggestions();
-    console.log(address);
     const results = await getGeocode({ address });
 
     const { lat, lng } = await getLatLng(results[0]);
@@ -73,10 +65,7 @@ const PlacesAutocomplete = ({ setSelected, setInput, input }) => {
     const Lng = pin?.lng?.toString();
 
     setInput({ ...input, lng: Lng, lat: Lat, location: address });
-    console.log("input", input);
     setSelected({ lat, lng });
-    // setSelected(kuy?.lat);
-    // setSelected(kuy?.lng);
   };
   return (
     <Combobox onSelect={handleSelect}>

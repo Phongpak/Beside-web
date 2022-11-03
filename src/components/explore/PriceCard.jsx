@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 import RatingStar from "../ui/RatingStar";
 
 function PriceCard({ provider, multiplier }) {
+  console.log(provider);
   const { birthDate } = provider;
+  console.log(provider?.ProfileImages[0]?.Image);
   const calculateAge = (dob) => {
     let today = new Date();
     let age = today.getFullYear() - dob.split("-")[0];
@@ -17,6 +19,7 @@ function PriceCard({ provider, multiplier }) {
         age = age - 1;
       }
     }
+
     return age;
   };
   let rating = provider?.provider[0]?.average_rating || 0;
@@ -29,13 +32,18 @@ function PriceCard({ provider, multiplier }) {
     provider.age = calculateAge(birthDate);
   }, []);
 
+  console.log(provider);
+
   return (
     <div className="flex flex-row justify-center items-center gap-4 p-3 border-4  border-[#9AC0B5] rounded-[15px] ">
       <div className="flex justify-center items-center border w-[270px]  overflow-hidden ">
-        <img className="h-full " src={suzy || provider.image} />
+        <img
+          className="h-full "
+          src={provider?.ProfileImages[0]?.Image || suzy}
+        />
       </div>
-      <div className="flex flex-col gap-3 ">
-        <h1 className=" text-[#224957] text-3xl font-bold ">
+      <div className="flex flex-col gap-3 w-52">
+        <h1 className=" text-[#224957] text-3xl font-bold">
           {provider.penName}
         </h1>
         <div className="flex items-center gap-[5px] text-[#E6C3C1] ">
@@ -46,7 +54,7 @@ function PriceCard({ provider, multiplier }) {
         </div>
         <div className="flex flex-row gap-2 ">
           <span className=" bg-[#9AC0B5] rounded-[10px] text-center  p-2">
-            {provider.hobby}
+            {provider.description}
           </span>
         </div>
 
@@ -54,16 +62,20 @@ function PriceCard({ provider, multiplier }) {
           <div className="flex flex-col   font-semibold  ">
             <div>Age:</div>
             <div>Gender:</div>
-            <div className="">Description:</div>
+            {/* <div className="">Description:</div> */}
           </div>
           <div className="flex flex-col w-2/5 font-medium ">
-            <div>{provider.age}</div>
+            <div>
+              {calculateAge(birthDate)}
+              {/* {provider.age}  */}
+              years
+            </div>
             <div>{provider.gender}</div>
-            <div className="">{provider.description}</div>
+            {/* <div className="">{provider.description}</div> */}
           </div>
         </div>
       </div>
-      <div className=" flex flex-col gap-2 border-2 border-[#9AC0B5] rounded-xl py-8 px-4 text-center">
+      <div className=" flex flex-col gap-2 border-2 border-[#9AC0B5] rounded-xl py-8 px-4 text-center w-36">
         <p className="font-medium  text-[#224957]">Price</p>
         <p className=" text-[#224957] text-3xl  font-bold">
           {+provider.rate * multiplier}
@@ -73,7 +85,7 @@ function PriceCard({ provider, multiplier }) {
         <div>
           <Link
             to={`/profile/${provider.id}`}
-            className="mt-[30px] p-1 items-center  font-medium text-[#224957] w-[150px] h-[40px] border-2 border-[#9AC0B5] rounded-[10px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-[#506369]"
+            className="mt-[40px] p-2 items-center  font-medium text-[#224957] w-[150px] h-[40px] border-2 border-[#9AC0B5] rounded-[10px] hover:bg-[#506369] hover:text-white transition delay-20 hover:border-[#506369]"
           >
             More details
           </Link>

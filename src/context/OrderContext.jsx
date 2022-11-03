@@ -1,27 +1,31 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import * as userService from "../api/userApi";
 import * as orderService from "../api/orderApi";
+import {
+  addBooking,
+  getBooking,
+  removeBooking,
+  addSelected,
+  getSelected,
+  removeSelected
+} from "../utilities/localStorage";
 
 const OrderContext = createContext();
 
 function OrderContextProvider({ children }) {
   const [book, setBook] = useState({
-    location: "",
-    appointmentDate: "",
-    fromTime: "",
-    toTime: "",
-    lat: "",
-    lng: "",
-    description: "",
+    // location: "",
+    // appointmentDate: "",
+    // fromTime: "",
+    // toTime: "",
+    // lat: "",
+    // lng: "",
+    // description: ""
   });
   const [selected, setSelected] = useState(null);
   const [providers, setProviders] = useState([]);
   const handleBook = (e) => {
     setBook({ ...book, [e.target.name]: e.target.value });
-  };
-
-  const handleSearchProvider = () => {
-    getProviderByLatLng();
   };
 
   const getProviderByLatLng = async () => {
@@ -33,10 +37,43 @@ function OrderContextProvider({ children }) {
         5,
         order
       );
+      // alert("selected");
+      console.log(selected);
       setProviders(res.data.finalAvailableProviders);
     } catch (err) {
       console.log(err);
     }
+  };
+  useEffect(() => {
+    const fetchProvider = async () => {
+      try {
+        if (JSON.parse(getBooking())) {
+          setBook(JSON.parse(getBooking()));
+        }
+        if (JSON.parse(getSelected())) {
+          setSelected(JSON.parse(getSelected()));
+        }
+        // alert("5555");
+        const res = await userService.getProviderByLatLng(
+          selected.lat,
+          selected.lng,
+          5,
+          book
+        );
+        setProviders(res.data.finalAvailableProviders);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchProvider();
+    console.log(book);
+  }, [book.location]);
+
+  const handleSearchProvider = () => {
+    getProviderByLatLng();
+    // console.log(book);
+    addBooking(JSON.stringify(book));
+    addSelected(JSON.stringify(selected));
   };
 
   const createOrder = async (input) => {
@@ -54,7 +91,7 @@ function OrderContextProvider({ children }) {
         setSelected,
         handleSearchProvider,
         providers,
-        createOrder,
+        createOrder
       }}
     >
       {children}
