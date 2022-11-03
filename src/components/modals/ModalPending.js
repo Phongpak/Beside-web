@@ -59,11 +59,11 @@ function ModalPending({ isOpen, closeModal, item, seeUser }) {
 														{orderImages.map((item, index) => {
 															console.log("item", item);
 															return (
-																<SwiperSlide className="my-20 " key={index}>
+																<SwiperSlide className="my-20 flex" key={index}>
 																	<img
 																		src={item.Image}
 																		alt="..."
-																		className="w-80 h-60"
+																		className="h-60"
 																	/>
 																</SwiperSlide>
 															);
