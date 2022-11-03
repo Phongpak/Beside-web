@@ -1,15 +1,46 @@
 import React from "react";
 import moment from "moment";
+import proPic from "../../image/profileImg.png";
 
 function OrderItemCard({ item }) {
 	return (
 		<>
 			<div className="flex flex-row justify-between items-center min-w-[1056px]  border-4 border-[#9AC0B5] rounded-[15px] p-5">
-				<div className=" border-4 border-[#9AC0B5]  w-60 h-60 justify-between "></div>
-
+				<div className="w-[300px] h-60 flex justify-center items-center gap-[20px]">
+					<div className="flex flex-col items-center gap-2">
+						<div>Customer</div>
+						<div className="flex justify-center items-center border w-[100px] h-[100px] rounded-[100%] overflow-hidden">
+							<img
+								className="h-full"
+								src={
+									item.customer.ProfileImages.find(
+										(item) => item.isShow === true
+									)?.Image ||
+									item.customer.ProfileImages[0] ||
+									proPic
+								}
+							/>
+						</div>
+					</div>
+					<div className="flex flex-col items-center gap-2">
+						<div>Provider</div>
+						<div className="flex justify-center items-center border w-[100px] h-[100px] rounded-[100%] overflow-hidden">
+							<img
+								className="h-full"
+								src={
+									item.provider.ProfileImages?.find(
+										(item) => item.isShow === true
+									)?.Image ||
+									item.provider.ProfileImages[0] ||
+									proPic
+								}
+							/>
+						</div>
+					</div>
+				</div>
 				<div>
-					<div className="flex flex-row gap-20 h-[100%] text-[#224957] ">
-						<div className="flex flex-col  font-medium gap-5 ">
+					<div className="flex flex-row h-[100%] text-[#224957] ">
+						<div className="flex flex-col font-medium gap-5 w-[100px]">
 							<div>Customer:</div>
 							<div>Provider:</div>
 							<div>Date:</div>
@@ -30,7 +61,7 @@ function OrderItemCard({ item }) {
 							<div>{item.location} </div>
 							<div>{item.rentPriceTotal} THB </div>
 						</div>
-						<div className="flex self-end gap-5 w-60 justify-end">
+						<div className="flex self-end gap-5 w-[200px] justify-end">
 							{item.status === "PENDING" && (
 								<div className="text-[#224957] justify-center items-center p-3 border-2 border-[#E6C3C1] rounded-[20px] ">
 									Pending Confirmation
