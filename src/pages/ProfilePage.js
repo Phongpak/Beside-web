@@ -51,7 +51,7 @@ function ProfilePage() {
       item?.provider?.id == id &&
       (item?.status === "REJECT" || item?.status === "SUCCESS")
   );
-  console.log("AllOrder", AllOrder);
+  // console.log("AllOrder", AllOrder);
   useEffect(() => {
     setInput((p) => {
       return {
@@ -70,38 +70,14 @@ function ProfilePage() {
   }, [user]);
   const multiplier =
     +book?.toTime?.split(":")[0] - book?.fromTime?.split(":")[0];
-=======
-	const { user, updateUser, isEditing, setIsEditing, orders, getMyOrders } =
-		useAuth();
-	const [input, setInput] = useState({});
-	const { startLoading, stopLoading } = useLoading();
-	const myOrder = orders.filter((item) => item?.provider?.id == id);
-	const AllOrder = allOrders.filter(
-		(item) =>
-			item?.provider?.id == id &&
-			(item?.status === "REJECT" || item?.status === "SUCCESS")
-	);
-	useEffect(() => {
-		setInput((p) => {
-			return {
-				penName: user?.penName || user?.firstName,
-				description: user?.description,
-				rate: user?.rate,
-				gender: user?.gender,
-				sexuallyInterested: user?.sexuallyInterested,
-				language: user?.language,
-				hobby: user?.hobby,
-				lat: user?.lat,
-				lng: user?.lng,
-				location: user?.location
-			};
-		});
-	}, [user]);
-	const multiplier =
-		+book?.toTime?.split(":")[0] - book?.fromTime?.split(":")[0];
->>>>>>> a804d45a7f3dade34df5eafab4867fccea369b67
 
-	const totalPrice = multiplier * providers[0]?.rate;
+  // console.log("multiplier", multiplier);
+
+  const xid = providers.findIndex((el) => el.id === +id);
+  console.log(xid);
+
+  const totalPrice = multiplier * providers[xid]?.rate;
+  // console.log("totalPrice", totalPrice);
 
 	const handleChangeInput = (e) => {
 		setInput({ ...input, [e.target.name]: e.target.value });

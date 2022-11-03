@@ -205,7 +205,7 @@ function ProfileImg() {
         </div>
       ) : (
         <>
-          <img src={ProfilePic} className="w-96 h-60" />
+          <img src={ProfilePic} className="w-96 h-60 mr-32" />
           <ProImgModal1
             isOpen={isOpen}
             closeModal={closeModal}
