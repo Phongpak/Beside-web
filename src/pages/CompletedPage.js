@@ -12,36 +12,22 @@ function Completed() {
 		setSearchTerm(text);
 	};
 
-	const [searchStatus, setSearchStatus] = useState("");
+	// const [searchStatus, setSearchStatus] = useState("");
 
 	const [searchUserType, setSearchUserType] = useState("");
 
 	return (
 		<>
 			<Bio />
-			<div className="flex flex-col gap-[20px] w-[100%] px-60">
+			<div className="flex flex-col gap-[20px] w-[100%] px-60 pb-[20px]">
 				<UserTabBar />
-				<div className="flex flex-row gap-[10px]">
-					<input
-						className="min-w-[750px] h-[30px] rounded-[20px] border-2 border-[#9AC0B5] pl-[20px] placeholder-[#C4C4C4]"
-						placeholder="Search here..."
-						onChange={(event) => {
-							changeSearchTerm(event.target.value);
-						}}
-					/>
-					<select
-						className="min-w-[200px] h-[30px] rounded-[20px] border-2 border-[#9AC0B5] text-[#224957] pl-[10px]"
-						name="status"
-						onChange={(event) => {
-							setSearchStatus(event.target.value);
-						}}
-					>
-						<option value={""}>All</option>
-						<option value="completed">Completed</option>
-						<option value="waiting-for-review">Waiting for review</option>
-						<option value="REJECT">Rejected</option>
-					</select>
-				</div>
+				<input
+					className="min-w-[750px] h-[30px] rounded-[20px] border-2 border-[#9AC0B5] pl-[20px] placeholder-[#C4C4C4]"
+					placeholder="Search here..."
+					onChange={(event) => {
+						changeSearchTerm(event.target.value);
+					}}
+				/>
 				<div className="flex flex-row gap-[10px]">
 					<button
 						onClick={(event) => setSearchUserType(event.target.value)}
@@ -91,17 +77,13 @@ function Completed() {
 						if (searchUserType === "") {
 							return (
 								(item.status === "SUCCESS" || item.status === "REJECT") &&
-								item.rentPriceTotal.toString().includes(searchTerm) &&
-								item.status.toLowerCase().includes(searchStatus.toLowerCase())
+								item.rentPriceTotal.toString().includes(searchTerm)
 							);
 						}
 						if (searchUserType === "provider") {
 							return (
 								(item.status === "SUCCESS" || item.status === "REJECT") &&
 								item.rentPriceTotal.toString().includes(searchTerm) &&
-								item.status
-									.toLowerCase()
-									.includes(searchStatus.toLowerCase()) &&
 								item.customerId === user.id
 							);
 						}
@@ -109,9 +91,6 @@ function Completed() {
 							return (
 								(item.status === "SUCCESS" || item.status === "REJECT") &&
 								item.rentPriceTotal.toString().includes(searchTerm) &&
-								item.status
-									.toLowerCase()
-									.includes(searchStatus.toLowerCase()) &&
 								item.providerId === user.id
 							);
 						}

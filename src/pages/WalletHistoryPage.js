@@ -42,7 +42,7 @@ function WalletHistory() {
 	return (
 		<>
 			<Bio />
-			<div className="flex flex-col gap-[20px] w-[100%] px-60">
+			<div className="flex flex-col gap-[20px] w-[100%] px-60 pb-[20px]">
 				<UserTabBar />
 				<div className="flex flex-row gap-[10px]">
 					<input
