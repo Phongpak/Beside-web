@@ -13,6 +13,21 @@ function BookComponent() {
     setSelected,
     handleSearchProvider,
   } = useOrder();
+  useEffect(() => {
+    const calNewToTime = () => {
+      const hourFromTime = +book.fromTime.split(":")[0];
+      let newToTime = ":00:00";
+      if (hourFromTime <= 8) {
+        newToTime = "0" + (hourFromTime + 1) + newToTime;
+      } else {
+        newToTime = hourFromTime + 1 + newToTime;
+      }
+      return newToTime;
+    };
+    const newToTime = calNewToTime();
+
+    setBook({ ...book, toTime: newToTime });
+  }, [book.fromTime]);
   return (
     <div className="flex flex-col items-center justify-center  mx-auto absolute top-[10%] w-full ">
       <div className=" bg-[#F5F5F5] rounded-2xl shadow flex gap-4 flex-col h-[800px]  w-2/3 px-10 py-6 justify-center">
@@ -42,6 +57,7 @@ function BookComponent() {
                 name={"toTime"}
                 onChange={handleBook}
                 fromTime={book.fromTime ? book.fromTime : 0}
+                toTime={24}
               />
             </div>
           </div>

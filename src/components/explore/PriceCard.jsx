@@ -7,6 +7,7 @@ import RatingStar from "../ui/RatingStar";
 
 function PriceCard({ provider, multiplier }) {
   const { birthDate } = provider;
+  console.log(provider?.ProfileImages[0]?.Image);
   const calculateAge = (dob) => {
     let today = new Date();
     let age = today.getFullYear() - dob.split("-")[0];
@@ -17,6 +18,7 @@ function PriceCard({ provider, multiplier }) {
         age = age - 1;
       }
     }
+
     return age;
   };
   let rating = provider?.provider[0]?.average_rating || 0;
@@ -28,11 +30,13 @@ function PriceCard({ provider, multiplier }) {
   useEffect(() => {
     provider.age = calculateAge(birthDate);
   }, []);
-
   return (
     <div className="flex flex-row justify-center items-center gap-4 p-3 border-4  border-[#9AC0B5] rounded-[15px] ">
       <div className="flex justify-center items-center border w-[270px]  overflow-hidden ">
-        <img className="h-full " src={suzy || provider.image} />
+        <img
+          className="h-full "
+          src={provider?.ProfileImages[0]?.Image || suzy}
+        />
       </div>
       <div className="flex flex-col gap-3 ">
         <h1 className=" text-[#224957] text-3xl font-bold ">
