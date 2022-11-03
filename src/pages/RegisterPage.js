@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import Loading from "../../src/context/Loading";
 
 function RegisterPage() {
+  const [loading, setLoading] = useState(false);
   const { register } = useAuth();
   const [input, setInput] = useState({
     firstName: "",
@@ -13,12 +15,12 @@ function RegisterPage() {
     gender: "NOT_SPECIFIC",
     password: "",
     nationality: "",
-    age: "",
+    age: ""
   });
   const [isPasswordMatched, setIsPasswordMatched] = useState(false);
   const [passwordInput, setPasswordInput] = useState({
     password: "",
-    confirmPassword: "",
+    confirmPassword: ""
   });
 
   const [image, setImage] = useState(null);
@@ -29,8 +31,9 @@ function RegisterPage() {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
   const handleSubmitForm = async (e) => {
-    e.preventDefault();
     try {
+      setLoading(true);
+      e.preventDefault();
       const formData = new FormData();
       for (const key in input) {
         formData.append(`${key}`, input[key]);
@@ -43,10 +46,12 @@ function RegisterPage() {
       }
       const res = await register(formData);
       console.log(res);
-      alert(`555${res?.data?.message}`);
+      alert("Success register, please wait for admin verification");
       navigate("/login");
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
   const validatePassword = () => {

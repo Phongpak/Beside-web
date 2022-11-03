@@ -6,16 +6,16 @@ import {
   ComboboxInput,
   ComboboxList,
   ComboboxOption,
-  ComboboxPopover,
+  ComboboxPopover
 } from "@reach/combobox";
 import { getLatLng } from "react-places-autocomplete";
 import { useAuth } from "../context/AuthContext";
 
 export default function GoogleMapContainerLocation({ setInput, input }) {
-  console.log(setInput);
+  // console.log(setInput);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCEgnqaYKv_x_EQEXkA2qCgSzgqXJPDloA",
-    libraries: ["places"],
+    libraries: ["places"]
   });
   if (!isLoaded) return <div>Loading...</div>;
   return <Map setInput={setInput} input={input} />;
@@ -30,7 +30,7 @@ function Map({ setInput, input }) {
 
   // const { input } = useAuth();
   console.log(input);
-  console.log(selected);
+  // console.log(selected);
   return (
     <>
       <div className="places-container">
@@ -58,7 +58,7 @@ const PlacesAutocomplete = ({ setSelected, setInput, input }) => {
     value,
     setValue,
     suggestions: { status, data },
-    clearSuggestions,
+    clearSuggestions
   } = usePlacesAutocomplete();
 
   const handleSelect = async (address) => {

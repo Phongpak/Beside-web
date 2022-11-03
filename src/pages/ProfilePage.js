@@ -54,7 +54,7 @@ function ProfilePage() {
       item?.provider?.id == id &&
       (item?.status === "REJECT" || item?.status === "SUCCESS")
   );
-  console.log("AllOrder", AllOrder);
+  // console.log("AllOrder", AllOrder);
   useEffect(() => {
     setInput((p) => {
       return {
@@ -76,7 +76,10 @@ function ProfilePage() {
 
   // console.log("multiplier", multiplier);
 
-  const totalPrice = multiplier * providers[0]?.rate;
+  const xid = providers.findIndex((el) => el.id === +id);
+  console.log(xid);
+
+  const totalPrice = multiplier * providers[xid]?.rate;
   // console.log("totalPrice", totalPrice);
 
   const handleChangeInput = (e) => {

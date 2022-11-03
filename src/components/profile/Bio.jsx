@@ -36,7 +36,7 @@ function Bio({
     location: book?.location,
 
     customerId: user?.id,
-    providerId: id,
+    providerId: id
   });
 
   const navigate = useNavigate();
@@ -117,7 +117,7 @@ function Bio({
                   : user?.penName || user?.firstName}
               </div>
             )}
-            <p className="text-[#818182]">Active 6 minutes ago</p>
+            {/* <p className="text-[#818182]">Active 6 minutes ago</p> */}
           </div>
 
           {avgRating && avgRating > 0 ? (
@@ -200,7 +200,7 @@ function Bio({
             </div>
           ) : user?.id !== profiles[0]?.id ? (
             <>
-              <div className="">{totalPrice} Bath</div>
+              {totalPrice ? <div className="">{totalPrice || 0} THB </div> : ""}
               <div
                 onClick={handleClickCreateOrder}
                 className="flex justify-around cursor-pointer items-center hover:border-none hover:bg-[#9AC0B5] hover:text-white text-[#224957] bg-white border-2 border-[#9AC0B5] w-[170px] h-[30px] rounded-[50px]"
@@ -217,45 +217,44 @@ function Bio({
           )}
           <div className="flex flex-row gap-[20px]">
             {pathname == `/profile/${user?.id}` ? (
-              <div
+              <button
                 onClick={openModalWallet}
                 className="flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[180px] h-[60px]"
               >
-                Wallet: {user?.wallet}
-                THB
-              </div>
+                Wallet: {user?.wallet}&nbsp; THB
+              </button>
             ) : (
               ""
             )}
             {/* )} */}
 
             {user.providerRequestStatus === "SUCCESS" ? (
-              <div
+              <button
                 onClick={openModalAvailable}
                 className={`flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[140px] h-[60px] ${
                   Boolean(pathname !== `/profile/${user?.id}`) && "invisible"
                 }`}
               >
                 Availability
-              </div>
+              </button>
             ) : (
-              <div
+              <button
                 onClick={openModalProviderRequest}
                 className={`flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[140px] h-[60px] ${
                   Boolean(pathname !== `/profile/${user?.id}`) && "invisible"
                 }`}
               >
                 Be a Provider !
-              </div>
+              </button>
             )}
-            <div
+            <button
               className={`flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[140px] h-[60px] ${
                 Boolean(pathname !== `/profile/${user?.id}`) && "invisible"
               }`}
               onClick={toggleEditing}
             >
               Edit profile
-            </div>
+            </button>
           </div>
         </div>
       </div>
