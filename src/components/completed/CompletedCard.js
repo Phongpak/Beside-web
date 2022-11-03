@@ -11,15 +11,11 @@ import YourreviewModal from "../modals/YourreviewModal";
 import { Link } from "react-router-dom";
 
 function CompletedCard({ item }) {
-	// console.log(item.customerReviewRating);
-	// console.log(item.providerReviewRating);
 	const { user } = useAuth();
 
 	const [seeUser, setSeeUser] = useState(
 		item.customer.id == user.id ? item.provider : item.customer
 	);
-
-	// console.log(seeUser);
 
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -61,7 +57,7 @@ function CompletedCard({ item }) {
 	return (
 		<>
 			<div
-				className={`flex flex-row justify-center items-center min-w-[1056px] h-[170px] border-4 border-${
+				className={`flex flex-row justify-center items-center min-w-[1039.2px] h-[170px] border-4 border-${
 					item.customerId === user.id ? "[#9AC0B5]" : "[#E8D3D0]"
 				} rounded-[15px]`}
 			>

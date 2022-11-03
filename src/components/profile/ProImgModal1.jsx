@@ -102,9 +102,7 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 												className="absolute invisible "
 												ref={inputEl1}
 												onChange={(e) => {
-													console.log(e.target.files[0]);
 													if (e.target.files[0]) {
-														console.log(e.target.files);
 														setFile1(e.target.files[0]);
 													}
 												}}
@@ -136,10 +134,6 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 													}
 													alt="Img"
 												/>
-												{/* <div className="border-4 border-dashed hover:border-green-600 w-96 h-60 bg-white  flex justify-center items-center ">
-                          {" "}
-                          click here to insert a first image{" "}
-                        </div> */}
 											</div>
 											{pics[0]?.id === showImgId ? (
 												<button
@@ -176,9 +170,7 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 												className="absolute invisible"
 												ref={inputEl2}
 												onChange={(e) => {
-													console.log(e.target.files[0]);
 													if (e.target.files[0]) {
-														console.log(e.target.files);
 														setFile2(e.target.files[0]);
 													}
 												}}
@@ -246,9 +238,7 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 												className="absolute invisible"
 												ref={inputEl3}
 												onChange={(e) => {
-													console.log(e.target.files[0]);
 													if (e.target.files[0]) {
-														console.log(e.target.files);
 														setFile3(e.target.files[0]);
 													}
 												}}

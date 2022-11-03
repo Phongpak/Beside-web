@@ -11,6 +11,10 @@ import { useAuth } from "../../context/AuthContext";
 function ModalPending({ isOpen, closeModal, item, seeUser }) {
 	const { updateOrder, user } = useAuth();
 
+	const orderImages = seeUser?.ProfileImages?.sort(
+		(a, b) => b.isShow - a.isShow
+	);
+
 	const handleClick = async (input, id) => {
 		try {
 			await updateOrder({ status: input }, id);
@@ -52,13 +56,13 @@ function ModalPending({ isOpen, closeModal, item, seeUser }) {
 														pagination={true}
 														modules={[Pagination]}
 													>
-														{seeUser?.ProfileImages?.map((item, index) => {
+														{orderImages.map((item, index) => {
 															return (
-																<SwiperSlide className="my-20 " key={index}>
+																<SwiperSlide className="my-20 flex" key={index}>
 																	<img
 																		src={item.Image}
 																		alt="..."
-																		className="w-80 h-60"
+																		className="h-60"
 																	/>
 																</SwiperSlide>
 															);

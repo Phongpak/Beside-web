@@ -49,7 +49,6 @@ function ProfileImg() {
 			try {
 				const res = await getProfileImages(id);
 				setProviderPics(res.data.profileImages);
-				console.log(res.data.profileImages);
 			} catch (err) {
 				console.log(err);
 			}
@@ -63,9 +62,6 @@ function ProfileImg() {
 
 	const myOrderImages = pics.sort((a, b) => b.isShow - a.isShow);
 	const otherOrderImages = providerPics.sort((a, b) => b.isShow - a.isShow);
-	console.log("myOrderImages", myOrderImages);
-	console.log("otherOrderImages", otherOrderImages);
-	console.log("id", id);
 
 	return (
 		<>
@@ -136,7 +132,11 @@ function ProfileImg() {
 					</div>
 				) : (
 					<div className="w-[500px]">
-						<img src={ProfilePic} className="w-96 h-60" onClick={openModal} />
+						<img
+							src={ProfilePic}
+							className="w-96 h-60 object-contain"
+							onClick={openModal}
+						/>
 						<ProImgModal1
 							isOpen={isOpen}
 							closeModal={closeModal}
@@ -171,7 +171,7 @@ function ProfileImg() {
 										<img
 											src={item.Image}
 											alt="..."
-											className="block w-96 h-60"
+											className="block w-96 h-60 object-contain"
 										/>
 									</div>
 								</SwiperSlide>
@@ -188,7 +188,7 @@ function ProfileImg() {
 				</div>
 			) : (
 				<>
-					<img src={ProfilePic} className="w-96 h-60" />
+					<img src={ProfilePic} className="w-96 h-60 object-contain" />
 					<ProImgModal1
 						isOpen={isOpen}
 						closeModal={closeModal}

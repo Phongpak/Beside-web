@@ -7,6 +7,10 @@ import { useAuth } from "../context/AuthContext";
 function Upcoming() {
 	const [type, setType] = useState("all");
 	const { user, orders } = useAuth();
+	const [searchTerm, setSearchTerm] = useState("");
+	const changeSearchTerm = (text) => {
+		setSearchTerm(text);
+	};
 
 	const openAll = () => {
 		setType("all");
@@ -22,11 +26,14 @@ function Upcoming() {
 	return (
 		<>
 			<Bio />
-			<div className="flex flex-col gap-[20px] w-[100vw] px-60">
+			<div className="flex flex-col gap-[20px] w-[100%] px-60 pb-[20px]">
 				<UserTabBar />
 				<input
 					className="min-w-[750px] h-[30px] rounded-[20px] border-2 border-[#9AC0B5] pl-[20px] placeholder-[#C4C4C4]"
 					placeholder="Search here..."
+					onChange={(event) => {
+						changeSearchTerm(event.target.value);
+					}}
 				/>
 				<div className="flex flex-row gap-[10px]">
 					<div
@@ -63,18 +70,29 @@ function Upcoming() {
 				<div className="text-[#C4C4C4]">Recents :</div>
 				{type === "all"
 					? orders.map((item) => {
-							if (item.status === "INPROGRESS") {
+							if (
+								item.status === "INPROGRESS" &&
+								item.rentPriceTotal.toString().includes(searchTerm)
+							) {
 								return <UpcomingCard props={item} type={type} />; // show all
 							}
 					  })
 					: type === "provider"
 					? orders.map((item) => {
-							if (item.customerId === user.id && item.status === "INPROGRESS") {
+							if (
+								item.customerId === user.id &&
+								item.status === "INPROGRESS" &&
+								item.rentPriceTotal.toString().includes(searchTerm)
+							) {
 								return <UpcomingCard props={item} type={type} />; // show provider ของ customer
 							}
 					  })
 					: orders.map((item) => {
-							if (item.providerId === user.id && item.status === "INPROGRESS") {
+							if (
+								item.providerId === user.id &&
+								item.status === "INPROGRESS" &&
+								item.rentPriceTotal.toString().includes(searchTerm)
+							) {
 								return <UpcomingCard props={item} type={type} />; // show customer ของ provider
 							}
 					  })}
