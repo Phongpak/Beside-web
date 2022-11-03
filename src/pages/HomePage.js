@@ -10,25 +10,45 @@ import dating from "../images/dating.webp";
 import tutor from "../images/tutor.webp";
 import diving from "../images/diving.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { faCircleChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { useRef } from "react";
+import DropdownNav from "../components/dropdownNav";
+import { useAuth } from "../context/AuthContext";
 
 function HomePage() {
-  // const ref =
+  const ref = useRef(null);
+  const { user } = useAuth();
+  const handleClick = () => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <>
       <div className="px-40 py-2 flex w-full justify-between items-center absolute z-10  ">
         <img className="scale-75" src={logo1} alt="logo" />
-        <div className=" w-1/3 gap-10 flex flex-row">
+        <div className=" w-1/2 justify-end  gap-6 flex flex-row">
           <a className="text-[#809490] font-bold lg:text-2xl text-xl hover:text-[#98ABA7] ">
             Home
           </a>
-          <a className="text-[#809490] font-bold lg:text-2xl text-xl hover:text-[#98ABA7] ">
+          <a
+            onClick={handleClick}
+            className="text-[#809490] font-bold lg:text-2xl text-xl hover:text-[#98ABA7] "
+          >
             About us
           </a>
           <a className="text-[#809490] font-bold lg:text-2xl text-xl hover:text-[#98ABA7] ">
             How to booking
           </a>
+          {!user ? (
+            <Link
+              to="/login"
+              className="text-[#809490] font-bold lg:text-2xl text-xl hover:text-[#98ABA7]  "
+            >
+              Sign in
+            </Link>
+          ) : (
+            <DropdownNav />
+          )}
         </div>
       </div>
       <div className="relative">
@@ -47,24 +67,26 @@ function HomePage() {
           Book your company with the most reasonable rates here.
         </p>
 
-        <Link
-          to="/booknow"
-          className="bg-[#9AC0B5] absolute text-[30px] rounded-[20px] text-white top-[650px] left-1/2 -translate-x-1/2 -translate-y-1/2 p-[20px] "
-        >
-          Book now
-        </Link>
-
-        <div className="flex flex-row">
-          <p className="scale-800 absolute top-[770px] left-[1220px] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[100px] text-[30px] text-white">
-            Scroll
-          </p>
-          <FontAwesomeIcon
-            icon={faAngleDown}
-            className="mx-auto mt-[-100px] text-4xl text-white"
-          />
+        <div className="flex flex-col w-full h-96  top-[70%]  absolute items-center gap-9 ">
+          <Link
+            to="/booknow"
+            className="bg-[#9AC0B5] h-fit w-fit text-[30px] rounded-[20px] text-white text-center  px-6 py-4 "
+          >
+            Book now
+          </Link>
+          <div className="flex flex-col cursor-pointer" onClick={handleClick}>
+            <p className="  font-bold text-2xl  text-white">Scroll</p>
+            <FontAwesomeIcon
+              icon={faCircleChevronDown}
+              className=" text-4xl rounded-full w-16 h-16  text-white"
+            />
+          </div>
         </div>
       </div>
-      <h1 className="pt-[80px]  text-[#224957]  text-[40px] text-center">
+      <h1
+        ref={ref}
+        className="pt-[80px]  text-[#224957]  text-[40px] text-center"
+      >
         It doesn't matter where you're going, it's who you have beside you.
       </h1>
 
