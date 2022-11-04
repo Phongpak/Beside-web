@@ -7,20 +7,20 @@ import {
   removeBooking,
   addSelected,
   getSelected,
-  removeSelected
+  removeSelected,
 } from "../utilities/localStorage";
 
 const OrderContext = createContext();
 
 function OrderContextProvider({ children }) {
   const [book, setBook] = useState({
-    // location: "",
-    // appointmentDate: "",
-    // fromTime: "",
-    // toTime: "",
-    // lat: "",
-    // lng: "",
-    // description: ""
+    location: "",
+    appointmentDate: "",
+    fromTime: "",
+    toTime: "",
+    lat: "",
+    lng: "",
+    description: "",
   });
   const [selected, setSelected] = useState(null);
   const [providers, setProviders] = useState([]);
@@ -44,30 +44,30 @@ function OrderContextProvider({ children }) {
       console.log(err);
     }
   };
-  useEffect(() => {
-    const fetchProvider = async () => {
-      try {
-        if (JSON.parse(getBooking())) {
-          setBook(JSON.parse(getBooking()));
-        }
-        if (JSON.parse(getSelected())) {
-          setSelected(JSON.parse(getSelected()));
-        }
-        // alert("5555");
-        const res = await userService.getProviderByLatLng(
-          selected.lat,
-          selected.lng,
-          5,
-          book
-        );
-        setProviders(res.data.finalAvailableProviders);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchProvider();
-    console.log(book);
-  }, [book.location]);
+  // useEffect(() => {
+  //   const fetchProvider = async () => {
+  //     try {
+  // if (JSON.parse(getBooking())) {
+  //   setBook(JSON.parse(getBooking()));
+  // }
+  // if (JSON.parse(getSelected())) {
+  //   setSelected(JSON.parse(getSelected()));
+  // }
+  // alert("5555");
+  //       const res = await userService.getProviderByLatLng(
+  //         selected.lat,
+  //         selected.lng,
+  //         5,
+  //         book
+  //       );
+  //       setProviders(res.data.finalAvailableProviders);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchProvider();
+  //   console.log(book);
+  // }, [book.location]);
 
   const handleSearchProvider = () => {
     getProviderByLatLng();
@@ -91,7 +91,7 @@ function OrderContextProvider({ children }) {
         setSelected,
         handleSearchProvider,
         providers,
-        createOrder
+        createOrder,
       }}
     >
       {children}

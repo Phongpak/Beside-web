@@ -30,7 +30,7 @@ function BookComponent() {
   }, [book.fromTime]);
   return (
     <div className="flex flex-col items-center justify-center  mx-auto absolute top-[10%] w-full ">
-      <div className=" bg-[#F5F5F5] rounded-2xl shadow flex gap-4 flex-col h-[800px]  w-2/3 px-10 py-6 justify-center">
+      <div className=" bg-[#F5F5F5] rounded-2xl shadow flex gap-4 flex-col h-[600px]  w-2/3 px-10 py-6 justify-center">
         <GoogleMapContainer
           selected={selected}
           setSelected={setSelected}
