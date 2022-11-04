@@ -45,13 +45,11 @@ function ProfileImg() {
     setLoading(false);
   }, [user?.id]);
 
-<<<<<<< HEAD
   useEffect(() => {
     const fetchProviderPics = async () => {
       try {
         const res = await getProfileImages(id);
         setProviderPics(res.data.profileImages);
-        console.log(res.data.profileImages);
       } catch (err) {
         console.log(err);
       }
@@ -59,30 +57,12 @@ function ProfileImg() {
     fetchProviderPics();
     setLoading(false);
   }, [id]);
-=======
-	useEffect(() => {
-		const fetchProviderPics = async () => {
-			try {
-				const res = await getProfileImages(id);
-				setProviderPics(res.data.profileImages);
-			} catch (err) {
-				console.log(err);
-			}
-		};
-		fetchProviderPics();
-		setLoading(false);
-	}, [id]);
->>>>>>> a804d45a7f3dade34df5eafab4867fccea369b67
 
   const [loading, setLoading] = useState(true);
   if (loading) return <div>Loading</div>;
 
-<<<<<<< HEAD
   const myOrderImages = pics.sort((a, b) => b.isShow - a.isShow);
   const otherOrderImages = providerPics.sort((a, b) => b.isShow - a.isShow);
-  console.log("myOrderImages", myOrderImages);
-  console.log("otherOrderImages", otherOrderImages);
-  console.log("id", id);
 
   return (
     <>
@@ -153,7 +133,11 @@ function ProfileImg() {
           </div>
         ) : (
           <div className="w-[500px]">
-            <img src={ProfilePic} className="w-96 h-60" onClick={openModal} />
+            <img
+              src={ProfilePic}
+              className="w-96 h-60 object-contain"
+              onClick={openModal}
+            />
             <ProImgModal1
               isOpen={isOpen}
               closeModal={closeModal}
@@ -188,7 +172,7 @@ function ProfileImg() {
                     <img
                       src={item.Image}
                       alt="..."
-                      className="block w-96 h-60"
+                      className="block w-96 h-60 object-contain"
                     />
                   </div>
                 </SwiperSlide>
@@ -205,7 +189,7 @@ function ProfileImg() {
         </div>
       ) : (
         <>
-          <img src={ProfilePic} className="w-96 h-60 mr-32" />
+          <img src={ProfilePic} className="w-96 h-60 object-contain" />
           <ProImgModal1
             isOpen={isOpen}
             closeModal={closeModal}
@@ -217,148 +201,6 @@ function ProfileImg() {
       )}
     </>
   );
-=======
-	const myOrderImages = pics.sort((a, b) => b.isShow - a.isShow);
-	const otherOrderImages = providerPics.sort((a, b) => b.isShow - a.isShow);
-
-	return (
-		<>
-			{user?.id == id ||
-			pathname == "/pending" ||
-			pathname == "/upcoming" ||
-			pathname == "/completed" ||
-			pathname == "/wallethistory" ? (
-				pics.length ? (
-					<div className="w-[500px]">
-						<Swiper
-							breakpoints={{
-								1280: {
-									slidesPerView: 1,
-									spaceBetween: 1,
-									slidesPerGroup: 1
-								},
-								1440: {
-									slidesPerView: 1,
-									spaceBetween: 1,
-									slidesPerGroup: 1
-								}
-							}}
-							loop={true}
-							modules={[Pagination, Navigation]}
-						>
-							{user.id === +id || id === undefined
-								? myOrderImages.map((item, index) => {
-										return (
-											<SwiperSlide className="w-[500px] " key={index}>
-												<div
-													className="flex flex-col  justify-center overflow-hidden"
-													onClick={openModal}
-												>
-													<img
-														src={item.Image}
-														alt="..."
-														className="block w-96 h-60 object-contain"
-													/>
-												</div>
-											</SwiperSlide>
-										);
-								  })
-								: otherOrderImages.map((item, index) => {
-										return (
-											<SwiperSlide className="w-[500px] " key={index}>
-												<div
-													className="flex flex-col  justify-center overflow-hidden"
-													onClick={openModal}
-												>
-													<img
-														src={item.Image}
-														alt="..."
-														className="block w-96 h-60 object-contain"
-													/>
-												</div>
-											</SwiperSlide>
-										);
-								  })}
-						</Swiper>
-						<ProImgModal1
-							isOpen={isOpen}
-							closeModal={closeModal}
-							input={input}
-							getProfileImages={getProfileImages}
-							user={user}
-						/>
-					</div>
-				) : (
-					<div className="w-[500px]">
-						<img
-							src={ProfilePic}
-							className="w-96 h-60 object-contain"
-							onClick={openModal}
-						/>
-						<ProImgModal1
-							isOpen={isOpen}
-							closeModal={closeModal}
-							input={input}
-							getProfileImages={getProfileImages}
-							user={user}
-						/>
-					</div>
-				)
-			) : providerPics.length ? (
-				<div className="w-[500px]">
-					<Swiper
-						breakpoints={{
-							1280: {
-								slidesPerView: 1,
-								spaceBetween: 1,
-								slidesPerGroup: 1
-							},
-							1440: {
-								slidesPerView: 1,
-								spaceBetween: 1,
-								slidesPerGroup: 1
-							}
-						}}
-						loop={true}
-						modules={[Pagination, Navigation]}
-					>
-						{providerPics.map((item, index) => {
-							return (
-								<SwiperSlide className="w-[500px]" key={index}>
-									<div className="flex flex-col justify-center overflow-hidden">
-										<img
-											src={item.Image}
-											alt="..."
-											className="block w-96 h-60 object-contain"
-										/>
-									</div>
-								</SwiperSlide>
-							);
-						})}
-					</Swiper>
-					<ProImgModal1
-						isOpen={isOpen}
-						closeModal={closeModal}
-						input={input}
-						getProfileImages={getProfileImages}
-						user={user}
-					/>
-				</div>
-			) : (
-				<>
-					<img src={ProfilePic} className="w-96 h-60 object-contain" />
-					<ProImgModal1
-						isOpen={isOpen}
-						closeModal={closeModal}
-						input={input}
-						getProfileImages={getProfileImages}
-						user={user}
-					/>
-				</>
-			)}
-		</>
-	);
->>>>>>> a804d45a7f3dade34df5eafab4867fccea369b67
 }
 
 export default ProfileImg;

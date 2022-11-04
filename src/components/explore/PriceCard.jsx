@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeftRight, faStar } from "@fortawesome/free-solid-svg-icons";
-import suzy from "../../images/suzy.png";
+import proPic from "../../image/profileImg.png";
 import { Link } from "react-router-dom";
 import RatingStar from "../ui/RatingStar";
 
@@ -36,10 +36,15 @@ function PriceCard({ provider, multiplier }) {
 
   return (
     <div className="flex flex-row justify-center items-center gap-4 p-3 border-4  border-[#9AC0B5] rounded-[15px] ">
-      <div className="flex justify-center items-center border w-[270px]  overflow-hidden ">
+      <div className="flex justify-center items-center border overflow-hidden ">
         <img
-          className="h-full "
-          src={provider?.ProfileImages[0]?.Image || suzy}
+          className=" w-60 h-52 "
+          src={
+            provider?.ProfileImages.find((item) => item.isShow === true)
+              ?.Image ||
+            provider?.ProfileImages[0]?.Image ||
+            proPic
+          }
         />
       </div>
       <div className="flex flex-col gap-3 w-52">
@@ -66,7 +71,7 @@ function PriceCard({ provider, multiplier }) {
           </div>
           <div className="flex flex-col w-2/5 font-medium ">
             <div>
-              {calculateAge(birthDate)}
+              {calculateAge(birthDate)}&nbsp;
               {/* {provider.age}  */}
               years
             </div>

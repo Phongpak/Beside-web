@@ -11,35 +11,34 @@ import ReviewCardByUser from "../components/ReviewCardByUser";
 import { useOrder } from "../context/OrderContext";
 
 function ProfilePage() {
-	const { id } = useParams();
-	const { getProfile } = useProfile();
-	const { book, providers } = useOrder();
-	const [profiles, setProfiles] = useState([]);
+  const { id } = useParams();
+  const { getProfile } = useProfile();
+  const { book, providers } = useOrder();
+  const [profiles, setProfiles] = useState([]);
 
-	useEffect(() => {
-		const profileData = async () => {
-			let profile = await getProfile(id);
+  useEffect(() => {
+    const profileData = async () => {
+      let profile = await getProfile(id);
 
-			setProfiles(profile.data.user);
-		};
-		if (id) {
-			profileData();
-		}
-	}, [id]);
+      setProfiles(profile.data.user);
+    };
+    if (id) {
+      profileData();
+    }
+  }, [id]);
 
-	const [allOrders, setAllOrders] = useState([]);
+  const [allOrders, setAllOrders] = useState([]);
 
-	useEffect(() => {
-		const orderData = async () => {
-			let allOrder = await getMyOrders(id);
-			setAllOrders(allOrder.data.orders);
-		};
-		if (id) {
-			orderData();
-		}
-	}, [id]);
+  useEffect(() => {
+    const orderData = async () => {
+      let allOrder = await getMyOrders(id);
+      setAllOrders(allOrder.data.orders);
+    };
+    if (id) {
+      orderData();
+    }
+  }, [id]);
 
-<<<<<<< HEAD
   const { user, updateUser, isEditing, setIsEditing, orders, getMyOrders } =
     useAuth();
   const [input, setInput] = useState({});
@@ -79,76 +78,76 @@ function ProfilePage() {
   const totalPrice = multiplier * providers[xid]?.rate;
   // console.log("totalPrice", totalPrice);
 
-	const handleChangeInput = (e) => {
-		setInput({ ...input, [e.target.name]: e.target.value });
-	};
+  const handleChangeInput = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
 
-	const handleClickSave = async (e) => {
-		try {
-			startLoading();
-			await updateUser(input, user.id);
-			setIsEditing(false);
-		} catch (err) {
-			console.log(err);
-		} finally {
-			stopLoading();
-		}
-	};
+  const handleClickSave = async (e) => {
+    try {
+      startLoading();
+      await updateUser(input, user.id);
+      setIsEditing(false);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      stopLoading();
+    }
+  };
 
-	return (
-		<div>
-			<Bio
-				totalPrice={totalPrice}
-				input={input}
-				handleChangeInput={handleChangeInput}
-				setInput={setInput}
-				profiles={profiles}
-				myOrder={myOrder}
-				AllOrder={AllOrder}
-			/>
-			<div className="w-full h-[650px] flex flex-col gap-10 px-60">
-				{!isEditing && id == user?.id && <UserTabBar />}
-				<div className="flex flex-row gap-10">
-					<Informatio
-						input={input}
-						handleChangeInput={handleChangeInput}
-						setInput={setInput}
-						profiles={profiles}
-						myOrder={myOrder}
-						AllOrder={AllOrder}
-					/>
-					<div className="flex flex-col   h-[650px]">
-						<div className="flex flex-col gap-[10px]">
-							<div className="text-[20px] text-[#224957] font-medium">
-								{id == user?.id && "My"} reviews ({AllOrder?.length})
-							</div>
+  return (
+    <div>
+      <Bio
+        totalPrice={totalPrice}
+        input={input}
+        handleChangeInput={handleChangeInput}
+        setInput={setInput}
+        profiles={profiles}
+        myOrder={myOrder}
+        AllOrder={AllOrder}
+      />
+      <div className="w-full h-[650px] flex flex-col gap-10 px-60">
+        {!isEditing && id == user?.id && <UserTabBar />}
+        <div className="flex flex-row gap-10">
+          <Informatio
+            input={input}
+            handleChangeInput={handleChangeInput}
+            setInput={setInput}
+            profiles={profiles}
+            myOrder={myOrder}
+            AllOrder={AllOrder}
+          />
+          <div className="flex flex-col   h-[650px]">
+            <div className="flex flex-col gap-[10px]">
+              <div className="text-[20px] text-[#224957] font-medium">
+                {id == user?.id && "My"} reviews ({AllOrder?.length})
+              </div>
 
-							<input
-								className="w-[375px] h-[30px] rounded-[20px] border-2 border-[#9AC0B5] pl-[20px] placeholder-[#C4C4C4]"
-								placeholder="Search here..."
-							/>
-							<div className="flex flex-row flex-wrap gap-6">
-								{AllOrder.map((item) => (
-									<ReviewCardByUser item={item} />
-								))}
-							</div>
+              <input
+                className="w-[375px] h-[30px] rounded-[20px] border-2 border-[#9AC0B5] pl-[20px] placeholder-[#C4C4C4]"
+                placeholder="Search here..."
+              />
+              <div className="flex flex-row flex-wrap gap-6">
+                {AllOrder.map((item) => (
+                  <ReviewCardByUser item={item} />
+                ))}
+              </div>
 
-							{isEditing ? (
-								<div
-									className="mx-auto mt-20 flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[140px] h-[60px]"
-									onClick={handleClickSave}
-								>
-									Save
-								</div>
-							) : (
-								""
-							)}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+              {isEditing ? (
+                <div
+                  className="mx-auto mt-20 flex flex-row justify-center items-center bg-[#9AC0B5] text-white font-bold rounded-[20px] w-[140px] h-[60px]"
+                  onClick={handleClickSave}
+                >
+                  Save
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default ProfilePage;

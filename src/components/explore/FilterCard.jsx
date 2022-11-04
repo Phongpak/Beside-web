@@ -75,7 +75,7 @@ function FilterCard({ handleFilter, price, ProvidersPrice }) {
       <div className="flex mt-4 font-medium  text-[#224957] text-xl ">
         Review Rating
       </div>
-      <div className="flex flex-row justify-between mt-4 ">
+      <div className="flex flex-row justify-start mt-4 gap-5 ">
         {stars.map((item, index) => (
           <FontAwesomeIcon
             onClick={() => {
@@ -85,7 +85,7 @@ function FilterCard({ handleFilter, price, ProvidersPrice }) {
             }}
             onMouseOver={() => handleMouseHover(index + 1)}
             onMouseLeave={handleMouseLeave}
-            className={`cursor-pointer text-[30px] text-${
+            className={`cursor-pointer text-[30px]  text-${
               (hoverValue || currentValue) > index ? "[#E6C3C1]" : "[#D9D9D9]"
             }`}
             icon={faStar}

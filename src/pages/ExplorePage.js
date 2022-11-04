@@ -63,20 +63,19 @@ function ExplorePage() {
       </div>
 
       <div className="flex justify-center gap-40 pt-10 w-full ">
-        <div className="flex flex-col gap-10 w-[30%]">
+        <div className="flex flex-col gap-10 w-[25%]">
           <div className=" gap-1 border-4 border-[#9AC0B5] rounded-[15px]  p-5">
             <p className=" text-[#224957] text-3xl font-extrabold">
               {book.location}
             </p>
             <p className="font-medium  text-[#224957] text-xl my-3">
-              Start date :{" "}
-              {moment(book.appointmentDate).format("dddd, MMMM D YYYY")}{" "}
-              {book.fromTime.slice(0, 5)}
+              Date : {moment(book.appointmentDate).format("dddd, MMMM D YYYY")}{" "}
+              {/* {book.fromTime.slice(0, 5)} */}
             </p>
             <p className="font-medium  text-[#224957] text-xl">
-              End date :{" "}
-              {moment(book.appointmentDate).format("dddd, MMMM D YYYY")}{" "}
-              {book.toTime.slice(0, 5)}
+              Time :{" "}
+              {/* {moment(book.appointmentDate).format("dddd, MMMM D YYYY")}{" "} */}
+              {book.fromTime.slice(0, 5)} -{book.toTime.slice(0, 5)}
             </p>
           </div>
           <FilterCard

@@ -11,7 +11,7 @@ function BookComponent() {
     handleBook,
     selected,
     setSelected,
-    handleSearchProvider,
+    handleSearchProvider
   } = useOrder();
   useEffect(() => {
     const calNewToTime = () => {
@@ -46,13 +46,17 @@ function BookComponent() {
               placeholder="Date"
               onChange={handleBook}
             />
-            <div>
-              <label htmlFor="fromTime">From: </label>
+            <div className="flex flex-row gap-5 my-auto">
+              <label htmlFor="fromTime" className="text-xl text-[#98ABA7]">
+                From:{" "}
+              </label>
               <TimeList name={"fromTime"} onChange={handleBook} />
             </div>
 
-            <div>
-              <label htmlFor="toTime">To: </label>
+            <div className="flex flex-row gap-5 my-auto">
+              <label htmlFor="toTime" className="text-xl text-[#98ABA7]">
+                To:{" "}
+              </label>
               <TimeList
                 name={"toTime"}
                 onChange={handleBook}
@@ -69,7 +73,7 @@ function BookComponent() {
             onChange={handleBook}
             name="description"
             id="description"
-            className="text-[#98ABA7] text-sm rounded-lg h-[20vh] w-full placeholder-[#98ABA7] bg-white"
+            className="text-[#98ABA7] text-xl rounded-lg h-[20vh] w-full placeholder-[#98ABA7] bg-white"
             placeholder="Description"
           />
         </div>

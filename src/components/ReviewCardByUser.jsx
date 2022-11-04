@@ -14,7 +14,7 @@ function ReviewCardByUser({ item }) {
     star.push(i);
   }
 
-  console.log(item.customer);
+  // console.log(item.customer);
   return (
     <div className="flex justify-center items-center w-96 h-56 border-2 border-[#9AC0B5] rounded-xl">
       <div className="flex justify-between flex-row w-[90%] h-[90%] gap-[10px]">
