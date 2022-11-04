@@ -15,7 +15,6 @@ const people = [
 export default function MyCombobox({ setSelected, selected }) {
   const [selectedPerson, setSelectedPerson] = useState(people[0]);
   const [query, setQuery] = useState("");
-
   const filteredPeople =
     query === ""
       ? people
@@ -32,14 +31,15 @@ export default function MyCombobox({ setSelected, selected }) {
     clearSuggestions,
   } = usePlacesAutocomplete();
   const handleSelect = async (address) => {
+    console.log(address);
     setValue(address, false);
     clearSuggestions();
 
     const results = await getGeocode({ address });
-    setBook({ ...book, location: address.split(",")[0] });
     const { lat, lng } = await getLatLng(results[0]);
-
     setSelected({ lat, lng });
+    setBook({ ...book, lat, lng, location: address.split(",")[0] });
+    console.log(book);
   };
 
   return (
