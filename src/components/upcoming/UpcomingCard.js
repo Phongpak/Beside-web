@@ -187,7 +187,7 @@ function UpcomingCard({ props, type }) {
 							</button>
 						</div>
 					) : (
-						<div className="flex justify-center items-center self-end font-medium text-[#224957] w-[265px] h-[40px]"></div>
+						<div className="flex justify-center items-center self-end font-medium text-[#224957] w-[280px] h-[40px]"></div>
 					)}
 				</div>
 			</div>
