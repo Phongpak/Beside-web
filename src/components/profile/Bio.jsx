@@ -187,7 +187,9 @@ function Bio({ input, handleChangeInput, profiles, AllOrder, totalPrice }) {
             </div>
           ) : user?.id !== profiles[0]?.id ? (
             <>
-              <div className="">{totalPrice} Bath</div>
+              <div className="text-[#224957] font-bold text-xl">
+                {totalPrice} THB
+              </div>
               <div
                 onClick={handleClickCreateOrder}
                 className="flex justify-around cursor-pointer items-center hover:border-none hover:bg-[#9AC0B5] hover:text-white text-white bg-[#9AC0B5] font-bold border-2 border-white w-[170px] h-[50px] rounded-[10px]"

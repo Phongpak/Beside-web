@@ -2,8 +2,21 @@ import booknow from "../images/booknow1.jpeg";
 import BookComponent from "../components/booknow/BookComponent";
 import Carousel from "../components/booknow/Carousel";
 import ReviewCard from "../components/ReviewCard";
+import { useEffect } from "react";
+import {
+  getBooking,
+  removeBooking,
+  removeSelected
+} from "../utilities/localStorage";
 
 function BooknowPage() {
+  useEffect(() => {
+    if (getBooking()) {
+      removeBooking();
+      removeSelected();
+    }
+  }, []);
+
   return (
     <>
       <div className="relative w-full ">
