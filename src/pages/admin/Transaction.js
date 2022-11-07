@@ -1,28 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AdminTabBar from "../../components/AdminTabBar";
 import TransactionCard from "../../components/transaction/TransactionCard";
-import * as adminService from "../../api/adminApi";
 import Loading from "../../context/Loading";
+import { useAuth } from "../../context/AuthContext";
 
 function Transaction() {
-	const [loadingg, setLoading] = useState(true);
-	const [transactions, setTransactions] = useState([]);
 	const [status, setStatus] = useState("");
 	const [search, setSearch] = useState("");
 	const [type, setType] = useState("");
-	useEffect(() => {
-		const fetch = async () => {
-			try {
-				await adminService
-					.getTransaction()
-					.then((res) => setTransactions(res.data.transactions));
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		fetch();
-		setLoading(false);
-	}, []);
+	const { loading, adminTransactions } = useAuth();
 
 	const openTopUp = () => {
 		setType("TOPUP");
@@ -35,9 +21,9 @@ function Transaction() {
 	const openWithdraw = () => {
 		setType("WITHDRAW");
 	};
-	if (loadingg) return <Loading />;
+	if (loading) return <Loading />;
 	return (
-		<div className="flex flex-col gap-[20px] w-full px-60">
+		<div className="flex flex-col gap-[20px] px-60">
 			<AdminTabBar />
 			<div className="flex flex-row gap-[10px]">
 				<input
@@ -90,7 +76,7 @@ function Transaction() {
 
 			<div className="text-[#C4C4C4]">Recents :</div>
 			<div className="flex flex-col gap-[20px] mb-[20px]">
-				{transactions
+				{adminTransactions
 					.filter((item) => {
 						if (!type) {
 							return item.status.includes(status) && item.task !== "ORDER";

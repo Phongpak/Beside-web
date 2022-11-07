@@ -71,10 +71,7 @@ function PendingCard({ item }) {
 								{item.fromTime.slice(0, 5)} - {item.toTime.slice(0, 5)}
 							</div>
 							<div>{item.location}</div>
-							<div>
-								{item.rentPriceTotal}
-								{""}THB
-							</div>
+							<div>{item.rentPriceTotal.toLocaleString()} THB</div>
 						</div>
 					</div>
 					<div className="flex justify-end self-end w-[280px]">

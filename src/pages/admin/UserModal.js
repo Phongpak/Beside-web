@@ -19,15 +19,15 @@ function UserModal({ isOpen, closeModal, user, accept, deny }) {
 							className="relative w-auto my-6 mx-auto max-w-3xl"
 						>
 							<div className="border-4 border-[#9AC0B5] rounded-lg w-[775px] h-[700px] px-[20px] shadow-lg relative flex flex-row justify-center items-center w-full bg-white outline-none focus:outline-none pt-[10px] pb-[20px]">
-								<div className="flex flex-col  min-w-[725px] h-[100%] gap-3">
+								<div className="flex flex-col  min-w-[725px] h-[100%] gap-3 justify-between">
 									<button className="self-end text-[30px] text-gray-400">
 										<FontAwesomeIcon icon={faXmark} onClick={closeModal} />
 									</button>
 									<div className="text-[40px] text-[#224957] text-center">
 										Identity Verification
 									</div>
-									<div className="w-full h-96 flex justify-center items-center  bg-slate-300  ">
-										<img className="w-2/3" src={user.idCardImage} />
+									<div className="w-full h-80 flex justify-center items-center bg-slate-300">
+										<img className="w-full h-full" src={user.idCardImage} />
 									</div>
 									<div className="flex flex-row gap-[40px] text-[#224957] mx-auto ">
 										<div className="flex flex-col justify-between  font-medium">

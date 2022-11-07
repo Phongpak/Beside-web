@@ -143,7 +143,7 @@ function UpcomingCard({ props, type }) {
 								{props.fromTime.slice(0, 5)} - {props.toTime.slice(0, 5)}
 							</div>
 							<div>{props.location}</div>
-							<div>{props.rentPriceTotal} THB</div>
+							<div>{props.rentPriceTotal.toLocaleString()} THB</div>
 						</div>
 					</div>
 					{timeDiffStart <= 24 ? (

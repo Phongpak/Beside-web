@@ -1,29 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AdminTabBar from "../../components/AdminTabBar";
 import AllUserDetail from "../../components/allUser/AllUserDetail";
-import * as adminService from "../../api/adminApi";
 import Loading from "../../context/Loading";
+import { useAuth } from "../../context/AuthContext";
 
 function UserDetails() {
-	const [loadingg, setLoading] = useState(true);
-	const [user, setUser] = useState([]);
 	const [status, setStatus] = useState("");
 	const [search, setSearch] = useState("");
-	useEffect(() => {
-		const fetch = async () => {
-			try {
-				await adminService.getUser().then((res) => setUser(res.data.users));
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		fetch();
-		setLoading(false);
-	}, []);
 
-	if (loadingg) return <Loading />;
+	const { loading, userDetails } = useAuth();
+
+	if (loading) return <Loading />;
 	return (
-		<div className="flex flex-col gap-[20px] w-[100vw] px-60">
+		<div className="flex flex-col gap-[20px] px-60">
 			<AdminTabBar />
 			<div className="flex flex-row gap-[10px]">
 				<input
@@ -44,7 +33,7 @@ function UserDetails() {
 
 			<div className="text-[#C4C4C4]">Recents :</div>
 			<div className="flex flex-col gap-[20px] mb-[20px]">
-				{user
+				{userDetails
 					.filter((item) => {
 						if (status == "false") {
 							return (

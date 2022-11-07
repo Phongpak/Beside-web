@@ -1,31 +1,18 @@
 import AdminTabBar from "../../components/AdminTabBar";
 import OrderItemCard from "../../components/orderItem/OrderItemCard";
-import * as adminService from "../../api/adminApi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 function OrderItem() {
-	const [orderItem, setOrderItem] = useState([]);
 	const [searchTerm, setSearchTerm] = useState("");
 	const changeSearchTerm = (text) => {
 		setSearchTerm(text);
 	};
 	const [searchStatus, setSearchStatus] = useState("");
-
-	useEffect(() => {
-		const fetch = async () => {
-			try {
-				await adminService
-					.getOrder()
-					.then((res) => setOrderItem(res.data.orders));
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		fetch();
-	}, []);
+	const { orderItem } = useAuth();
 
 	return (
-		<div className="flex flex-col gap-[20px] w-[100vw] px-60">
+		<div className="flex flex-col gap-[20px] px-60">
 			<AdminTabBar />
 			<div className="flex flex-row gap-[10px]">
 				<input

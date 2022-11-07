@@ -53,7 +53,6 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 			}
 		};
 		fetchPics();
-		setLoading(false);
 	}, [user?.id, showImgId]);
 
 	useEffect(() => {
@@ -69,11 +68,7 @@ function ProImgModal1({ isOpen, closeModal, getProfileImages }) {
 			}
 		};
 		fetchSelectedPic();
-		setLoading(false);
 	}, []);
-
-	const [loading, setLoading] = useState(true);
-	if (loading) return <div>Loading</div>;
 
 	return (
 		<>

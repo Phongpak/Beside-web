@@ -7,18 +7,18 @@ import Loading from "./context/Loading";
 import { useAuth } from "./context/AuthContext";
 
 function App() {
-  const { loading } = useLoading();
+	const { loading } = useLoading();
 
-  const { initialLoading } = useAuth();
+	const { initialLoading } = useAuth();
 
-  if (initialLoading) return <Loading />;
-  return (
-    <>
-      {loading && <Loading />}
+	if (initialLoading) return <Loading />;
+	return (
+		<>
+			{loading && <Loading />}
 
-      <Routers />
-    </>
-  );
+			<Routers />
+		</>
+	);
 }
 
 export default App;

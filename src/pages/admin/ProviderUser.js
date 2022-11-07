@@ -1,33 +1,17 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import AdminTabBar from "../../components/AdminTabBar";
 import UserProviderCard from "../../components/providerUser/UserProviderCard";
-import * as adminService from "../../api/adminApi";
 import Loading from "../../context/Loading";
-// import ProviderUserModal from "./UserProviderModal";
+import { useAuth } from "../../context/AuthContext";
 
 function ProviderUser() {
-	const [loadingg, setLoading] = useState(true);
-	const [providerUser, setProviderUser] = useState([]);
 	const [status, setStatus] = useState("");
 	const [search, setSearch] = useState("");
-	useEffect(() => {
-		const fetch = async () => {
-			try {
-				await adminService
-					.getUser()
-					.then((res) => setProviderUser(res.data.users));
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		fetch();
-		setLoading(false);
-	}, []);
+	const { loading, providerUser } = useAuth();
 
-	if (loadingg) return <Loading />;
+	if (loading) return <Loading />;
 	return (
-		<div className="flex flex-col gap-[20px] w-[100vw] px-60">
+		<div className="flex flex-col gap-[20px] px-60">
 			<AdminTabBar />
 			<div className="flex flex-row gap-[10px]">
 				<input

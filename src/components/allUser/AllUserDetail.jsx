@@ -56,7 +56,7 @@ function AllUserDetail({ user }) {
 							to={`/profile/${user.id}`}
 							className="flex flex-row justify-center items-center w-[100px] h-[40px] text-[#224957] hover:text-[#9AC0B5] transition delay-20 hover:border-0"
 						>
-							profile
+							Profile
 						</Link>
 						<button
 							className={`justify-center items-center w-[100px] h-[40px] text-[#224957] border-2 border- rounded-[20px] hover:bg-${
