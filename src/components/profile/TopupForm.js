@@ -63,19 +63,22 @@ function TopupForm() {
 							}
 						}}
 					/>
-					<div className="flex flex-row justify-center items-center">
-						<QRCodeSVG value={payload} size="300" />,
-						<span onClick={() => inputEl.current.click()}>
+					<div className="flex justify-between w-full ">
+						<QRCodeSVG value={payload} className=" w-1/2" size="300" />,
+						<div
+							className="h-[300px]  w-1/2 flex justify-center"
+							onClick={() => inputEl.current.click()}
+						>
 							<img
+								className="h-full"
 								src={
 									file
 										? URL.createObjectURL(file)
 										: "https://png.pngtree.com/element_our/20190601/ourlarge/pngtree-file-upload-icon-image_1344464.jpg"
 								}
-								width="300"
 								alt="slip"
 							/>
-						</span>
+						</div>
 					</div>
 				</div>
 				<div className="flex flex-row justify-center items-center gap-[15px]">

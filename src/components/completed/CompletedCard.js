@@ -153,8 +153,8 @@ function CompletedCard({ item }) {
 							{seeUser.id === item.customerId &&
 								item.providerReviewDescription && (
 									<div className="flex justify-end items-center self-end gap-[5px] font-medium text-[#E8D3D0] text-[20px] w-[140px]">
-										{star2.map(() => (
-											<FontAwesomeIcon icon={faStar} />
+										{star2.map((item, index) => (
+											<FontAwesomeIcon icon={faStar} key={index} />
 										))}
 									</div>
 								)}
@@ -164,8 +164,8 @@ function CompletedCard({ item }) {
 							{seeUser.id === item.providerId &&
 								item.customerReviewDescription && (
 									<div className="flex justify-end items-center self-end gap-[5px] font-medium text-[#E8D3D0] text-[20px] w-[140px]">
-										{star.map(() => (
-											<FontAwesomeIcon icon={faStar} />
+										{star.map((item, index) => (
+											<FontAwesomeIcon icon={faStar} key={index} />
 										))}
 									</div>
 								)}

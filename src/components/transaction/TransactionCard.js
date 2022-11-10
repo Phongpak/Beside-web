@@ -16,6 +16,7 @@ function TransactionCard({ transaction }) {
 	const closeModal = () => {
 		setIsOpen(false);
 	};
+
 	return transaction.status === "PENDING" ? (
 		<>
 			<div className="flex flex-row justify-center items-center min-w-[1056px] h-[150px] border-4 border-[#98ADC0] rounded-[15px]">
@@ -32,10 +33,26 @@ function TransactionCard({ transaction }) {
 							<div>Mobile:</div>
 						</div>
 						<div className="flex flex-col justify-between w-[200px] font-medium">
-							<div>{transaction.receiver.penName ?? "none"}</div>
-							<div>{transaction.receiver.firstName}</div>
-							<div>{transaction.receiver.email}</div>
-							<div>{transaction.receiver.mobile}</div>
+							<div>
+								{transaction.task === "WITHDRAW"
+									? transaction.sender.penName ?? "none"
+									: transaction.receiver.penName ?? "none"}
+							</div>
+							<div>
+								{transaction.task === "WITHDRAW"
+									? transaction.sender.firstName
+									: transaction.receiver.firstName}
+							</div>
+							<div>
+								{transaction.task === "WITHDRAW"
+									? transaction.sender.email
+									: transaction.receiver.email}
+							</div>
+							<div>
+								{transaction.task === "WITHDRAW"
+									? transaction.sender.mobile
+									: transaction.receiver.mobile}
+							</div>
 						</div>
 
 						<div className="flex flex-col justify-between w-[100px] font-medium">
@@ -52,12 +69,7 @@ function TransactionCard({ transaction }) {
 								{dayjs(transaction.createdAt).locale("th").format("HH:mm:ss")}
 							</div>
 							<div>{transaction.task}</div>
-							<div>
-								{transaction.amount.toLocaleString("en-US", {
-									style: "currency",
-									currency: "THB"
-								})}
-							</div>
+							<div>{transaction.amount.toLocaleString()} THB</div>
 						</div>
 					</div>
 					<button
@@ -143,10 +155,26 @@ function TransactionCard({ transaction }) {
 						<div>Mobile:</div>
 					</div>
 					<div className="flex flex-col justify-between w-[200px] font-medium">
-						<div>{transaction.receiver.penName ?? "none"}</div>
-						<div>{transaction.receiver.firstName}</div>
-						<div>{transaction.receiver.email}</div>
-						<div>{transaction.receiver.mobile}</div>
+						<div>
+							{transaction.task === "WITHDRAW"
+								? transaction.sender.penName
+								: transaction.receiver.penName ?? "none"}
+						</div>
+						<div>
+							{transaction.task === "WITHDRAW"
+								? transaction.sender.firstName
+								: transaction.receiver.firstName}
+						</div>
+						<div>
+							{transaction.task === "WITHDRAW"
+								? transaction.sender.email
+								: transaction.receiver.email}
+						</div>
+						<div>
+							{transaction.task === "WITHDRAW"
+								? transaction.sender.mobile
+								: transaction.receiver.mobile}
+						</div>
 					</div>
 					<div className="flex flex-col justify-between w-[100px] font-medium">
 						<div>Date:</div>
@@ -161,12 +189,7 @@ function TransactionCard({ transaction }) {
 							{dayjs(transaction.createdAt).locale("th").format("HH:mm:ss")}
 						</div>
 						<div>{transaction.task}</div>
-						<div>
-							{transaction.amount.toLocaleString("en-US", {
-								style: "currency",
-								currency: "THB"
-							})}
-						</div>
+						<div>{transaction.amount.toLocaleString()} THB</div>
 					</div>
 				</div>
 				<div className="flex justify-center items-center self-end font-medium text-[#224957] w-[100px] h-[40px] bg-[#9AC0B5] rounded-[15px]">

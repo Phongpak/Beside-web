@@ -69,31 +69,31 @@ function Upcoming() {
 				</div>
 				<div className="text-[#C4C4C4]">Recents :</div>
 				{type === "all"
-					? orders.map((item) => {
+					? orders.map((item, index) => {
 							if (
 								item.status === "INPROGRESS" &&
 								item.rentPriceTotal.toString().includes(searchTerm)
 							) {
-								return <UpcomingCard props={item} type={type} />; // show all
+								return <UpcomingCard props={item} type={type} key={index} />; // show all
 							}
 					  })
 					: type === "provider"
-					? orders.map((item) => {
+					? orders.map((item, index) => {
 							if (
 								item.customerId === user.id &&
 								item.status === "INPROGRESS" &&
 								item.rentPriceTotal.toString().includes(searchTerm)
 							) {
-								return <UpcomingCard props={item} type={type} />; // show provider ของ customer
+								return <UpcomingCard props={item} type={type} key={index} />; // show provider ของ customer
 							}
 					  })
-					: orders.map((item) => {
+					: orders.map((item, index) => {
 							if (
 								item.providerId === user.id &&
 								item.status === "INPROGRESS" &&
 								item.rentPriceTotal.toString().includes(searchTerm)
 							) {
-								return <UpcomingCard props={item} type={type} />; // show customer ของ provider
+								return <UpcomingCard props={item} type={type} key={index} />; // show customer ของ provider
 							}
 					  })}
 			</div>

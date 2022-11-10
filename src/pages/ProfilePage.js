@@ -68,7 +68,6 @@ function ProfilePage() {
 		+book?.toTime?.split(":")[0] - book?.fromTime?.split(":")[0];
 
 	const xid = providers.findIndex((el) => el.id === +id);
-	console.log(xid);
 
 	const totalPrice = multiplier * providers[xid]?.rate;
 
@@ -121,8 +120,8 @@ function ProfilePage() {
 								placeholder="Search here..."
 							/>
 							<div className="flex flex-row flex-wrap gap-6">
-								{AllOrder.map((item) => (
-									<ReviewCardByUser item={item} />
+								{AllOrder.map((item, index) => (
+									<ReviewCardByUser item={item} key={index} />
 								))}
 							</div>
 

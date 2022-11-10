@@ -79,7 +79,7 @@ function PriceCard({ provider, multiplier }) {
 			<div className=" flex flex-col gap-2 border-2 border-[#9AC0B5] rounded-xl py-8 px-4 text-center w-36">
 				<p className="font-medium  text-[#224957]">Price</p>
 				<p className=" text-[#224957] text-3xl  font-bold">
-					{+provider.rate * multiplier}
+					{(+provider.rate * multiplier).toLocaleString()}
 				</p>
 				<p className="font-medium  text-[#224957]">THB</p>
 

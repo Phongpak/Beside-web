@@ -102,7 +102,7 @@ function WalletHistory() {
 						item.task === "ORDER" ? (
 							""
 						) : (
-							<WalletHistoryCard item={item} index={index} />
+							<WalletHistoryCard item={item} index={index} key={index} />
 						)
 					)}
 			</div>

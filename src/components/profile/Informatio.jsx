@@ -10,7 +10,7 @@ import {
 	faMoneyCheckDollar
 } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../context/AuthContext";
-import GoogleMapContainerLocation from "../GoogleMapContainerLocation";
+import GoogleMapContainer from "../../components/GoogleMapContainer";
 import { useParams } from "react-router-dom";
 
 function Informatio({
@@ -42,7 +42,7 @@ function Informatio({
 	const fullBirthDate = dateFormat(birthDate || "02/02/32", " d mmmm yyyy ");
 
 	return (
-		<div className="flex flex-col w-[350px] h-[900px] gap-[12px] text-[#224957]">
+		<div className="flex flex-col w-[350px] gap-[12px] text-[#224957]">
 			<div className="flex flex-row justify-center items-center w-[350px] h-[150px] border-2 border-[#224957] rounded-[10px]">
 				<div className="flex flex-col w-[90%] h-[90%] gap-[10px]">
 					<div className="text-[20px] font-medium">Information</div>
@@ -132,32 +132,7 @@ function Informatio({
 					</div>
 				</div>
 			</div>
-			{user.id == id && (
-				<div className="flex flex-row justify-center items-center w-[350px]  border-2 border-[#224957] rounded-[10px]">
-					<div className="flex flex-col w-[90%] h-[90%] gap-[10px]">
-						<div className="text-[20px] font-medium">Location</div>
-						<div
-							className={`flex flex-col ${
-								isEditing ? "h-60" : "h-20"
-							}   gap-[15px] text-sm`}
-						>
-							{!isEditing ? (
-								<div>
-									{user?.id == id
-										? user?.location
-										: profiles[0]?.location || "-"}
-								</div>
-							) : (
-								<GoogleMapContainerLocation
-									setInput={setInput}
-									input={input}
-									profiles={profiles}
-								/>
-							)}
-						</div>
-					</div>
-				</div>
-			)}
+
 			<div className="flex flex-row justify-center items-center w-[350px] h-[90px] border-2 border-[#224957] rounded-[10px]">
 				<div className="flex flex-col w-[90%] h-[90%] gap-[10px]">
 					<div className="text-[20px] font-medium">Language</div>
@@ -199,6 +174,44 @@ function Informatio({
 					</div>
 				</div>
 			</div>
+
+			{!isEditing ? (
+				<div className="  flex flex-row justify-center items-center w-[350px]  border-2 border-[#224957] rounded-[10px]">
+					<div className="flex flex-col w-[90%] h-[90%] gap-[10px]">
+						<div className="text-[20px] font-medium">Location</div>
+						<div
+							className={`flex flex-col ${
+								isEditing ? "h-60" : "h-20"
+							}   gap-[15px] text-sm`}
+						>
+							<div>
+								{user?.id === id
+									? user?.location
+									: profiles[0]?.location || "-"}
+							</div>
+						</div>
+					</div>
+				</div>
+			) : (
+				<div className=" h-[400px] flex flex-row justify-center items-center w-[350px]  border-2 border-[#224957] rounded-[10px]">
+					<div className="flex flex-col w-[90%] h-[90%] gap-[10px]">
+						<div className="text-[20px] font-medium">Location</div>
+						<div
+							className={`flex flex-col ${
+								isEditing ? "h-60" : "h-20"
+							}   gap-[15px] text-sm`}
+						>
+							<div className="h-full">
+								<GoogleMapContainer
+									setInput={setInput}
+									input={input}
+									profiles={profiles}
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

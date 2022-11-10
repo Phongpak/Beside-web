@@ -63,7 +63,6 @@ function OrderContextProvider({ children }) {
 			}
 		};
 		fetchProvider();
-		console.log(book);
 	}, [book.location]);
 
 	const handleSearchProvider = () => {

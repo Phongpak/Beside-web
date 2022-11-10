@@ -66,7 +66,6 @@ function AuthContextProvider({ children }) {
 	};
 
 	const [pics, setPics] = useState([]);
-	const [providerPics, setProviderPics] = useState([]);
 
 	useEffect(() => {
 		const fetchPics = async () => {
@@ -80,20 +79,7 @@ function AuthContextProvider({ children }) {
 		fetchPics();
 	}, [user?.id]);
 
-	useEffect(() => {
-		const fetchProviderPics = async () => {
-			try {
-				const res = await getProfileImages(id);
-				setProviderPics(res.data.profileImages);
-			} catch (err) {
-				console.log(err);
-			}
-		};
-		fetchProviderPics();
-	}, [id]);
-
 	const myOrderImages = pics.sort((a, b) => b.isShow - a.isShow);
-	const otherOrderImages = providerPics.sort((a, b) => b.isShow - a.isShow);
 
 	const toggleEditing = () => {
 		setIsEditing((prevIsEditing) => !prevIsEditing);
@@ -232,9 +218,7 @@ function AuthContextProvider({ children }) {
 				isEditing,
 				setIsEditing,
 				pics,
-				providerPics,
 				myOrderImages,
-				otherOrderImages,
 				getTransactionByUserId,
 				initialLoading,
 				orders,

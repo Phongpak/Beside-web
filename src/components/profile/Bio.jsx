@@ -81,6 +81,8 @@ function Bio({ input, handleChangeInput, profiles, AllOrder, totalPrice }) {
 		}
 	};
 
+	console.log("profiles", profiles);
+
 	return (
 		<div className="flex items-center bg-[#F4F2F2]  h-[300px] px-60">
 			<div className="flex items-center justify-between h-[250px] ">
@@ -178,16 +180,17 @@ function Bio({ input, handleChangeInput, profiles, AllOrder, totalPrice }) {
 							/>
 							THB/hr
 						</div>
-					) : !profiles ? (
-						<div className="flex justify-around items-center text-[#224957] bg-white border-2 border-[#9AC0B5] w-[170px] h-[30px] rounded-[50px]">
-							rate:
-							<div className="text-center">{user?.rate?.toLocaleString()}</div>
-							THB/hr
-						</div>
-					) : user?.id !== profiles[0]?.id ? (
+					) : // : !profiles ? (
+					// 	<div className="flex justify-around items-center text-[#224957] bg-white border-2 border-[#9AC0B5] w-[170px] h-[30px] rounded-[50px]">
+					// 		rate:
+					// 		<div className="text-center">{user?.rate?.toLocaleString()}</div>
+					// 		THB/hr
+					// 	</div>
+					// )
+					user?.id !== profiles?.[0]?.id && pathname === `/profile/${id}` ? (
 						<>
 							<div className="text-[#224957] font-bold text-xl">
-								{totalPrice} THB
+								{totalPrice.toLocaleString()} THB
 							</div>
 							<div
 								onClick={handleClickCreateOrder}
@@ -196,12 +199,14 @@ function Bio({ input, handleChangeInput, profiles, AllOrder, totalPrice }) {
 								Book now
 							</div>
 						</>
-					) : (
+					) : user?.providerRequestStatus === "SUCCESS" ? (
 						<div className="flex justify-around items-center text-[#224957] bg-white border-2 border-[#9AC0B5] w-[170px] h-[30px] rounded-[50px]">
 							rate:
 							<div className="text-center">{user?.rate?.toLocaleString()}</div>
 							THB/hr
 						</div>
+					) : (
+						""
 					)}
 					<div className="flex flex-row gap-[20px]">
 						{pathname == `/profile/${user?.id}` ? (

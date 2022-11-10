@@ -13,19 +13,13 @@ import ProfilePic from "../../image/profileImg.png";
 import { useLocation, useParams } from "react-router-dom";
 
 function ProfileImg() {
-	const {
-		input,
-		user,
-		pics,
-		getProfileImages,
-		providerPics,
-		myOrderImages,
-		otherOrderImages
-	} = useAuth();
+	const [providerPics, setProviderPics] = useState([]);
+	const [isOpen, setIsOpen] = useState(false);
+	const { input, user, pics, getProfileImages, myOrderImages } = useAuth();
 	const { id } = useParams();
 	const { pathname } = useLocation();
 
-	const [isOpen, setIsOpen] = useState(false);
+	const otherOrderImages = providerPics.sort((a, b) => b.isShow - a.isShow);
 
 	const openModal = () => {
 		setIsOpen(true);
@@ -34,6 +28,18 @@ function ProfileImg() {
 	const closeModal = () => {
 		setIsOpen(false);
 	};
+
+	useEffect(() => {
+		const fetchProviderPics = async () => {
+			try {
+				const res = await getProfileImages(id);
+				setProviderPics(res.data.profileImages);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		fetchProviderPics();
+	}, [id]);
 
 	return (
 		<>

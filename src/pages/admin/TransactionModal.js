@@ -18,6 +18,8 @@ function TransactionModal({ isOpen, closeModal, transaction }) {
 		window.location.reload();
 		closeModal();
 	};
+
+	console.log("transaction", transaction);
 	return (
 		<>
 			{isOpen ? (
@@ -42,7 +44,7 @@ function TransactionModal({ isOpen, closeModal, transaction }) {
 											</div>
 											<div className="w-full h-96 flex justify-center items-center bg-slate-300">
 												<img
-													className="w-[350px]"
+													className="w-[215px]"
 													src={transaction.slipImage}
 												/>
 											</div>
@@ -112,7 +114,7 @@ function TransactionModal({ isOpen, closeModal, transaction }) {
 											</div>
 											<div className="w-full h-96 flex justify-center items-center bg-slate-300">
 												<img
-													className="w-[350px]"
+													className="w-[75%]"
 													src={transaction.sender.bookBankImage}
 												/>
 											</div>
@@ -124,8 +126,10 @@ function TransactionModal({ isOpen, closeModal, transaction }) {
 													<div>Amount:</div>
 												</div>
 												<div className="flex flex-col justify-between w-[200px] font-medium text-[#224957]">
-													<div>{transaction.bankName ?? "none"}</div>
-													<div>{transaction.bookAccountNumber ?? "none"}</div>
+													<div>{transaction.sender.bankName ?? "none"}</div>
+													<div>
+														{transaction.sender.bookAccountNumber ?? "none"}
+													</div>
 													<div>{transaction.task}</div>
 													<div>
 														{transaction.amount.toLocaleString("en-US", {

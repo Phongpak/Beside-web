@@ -229,8 +229,10 @@ function DayUnavailable() {
 								>
 									{toTimes
 										.filter((item) => item.value > fromTime)
-										.map((item) => (
-											<option value={item.value}>{item.name}</option>
+										.map((item, index) => (
+											<option value={item.value} key={index}>
+												{item.name}
+											</option>
 										))}
 								</select>
 							</div>

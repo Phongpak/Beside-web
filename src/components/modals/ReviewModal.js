@@ -68,14 +68,14 @@ function ReviewModal({ isOpenReview, closeReviewModal, seeUser, item }) {
 
 									{seeUser.id === item.customerId ? (
 										<div className="flex justify-center items-center gap-[5px] font-medium text-[#E8D3D0] text-[40px] w-[175px]">
-											{star2.map(() => (
-												<FontAwesomeIcon icon={faStar} />
+											{star2.map((item, index) => (
+												<FontAwesomeIcon icon={faStar} key={index} />
 											))}
 										</div>
 									) : (
 										<div className="flex justify-center items-center  gap-[5px] font-medium text-[#E8D3D0] text-[40px] w-[175px]">
-											{star.map(() => (
-												<FontAwesomeIcon icon={faStar} />
+											{star.map((item, index) => (
+												<FontAwesomeIcon icon={faStar} key={index} />
 											))}
 										</div>
 									)}
